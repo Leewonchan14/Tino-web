@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import arrow_drop_down from "../assets/arrow_drop_down.png";
+import GameController from "../api/game.controller";
 
 const MenuItem = ({option, handleOptionClick}) => {
     return (
@@ -23,10 +24,21 @@ const MenuItems = ({handleOptionClick, options}) => {
     );
 }
 
-const SortMenuList = (props) => {
+const SortMenuList = ({setSortState, initScroll}) => {
+    let sortMapper = {
+        조회순: GameController.SORT.VIEW_COUNT,
+        최신순: GameController.SORT.RECENT,
+        댓글순: GameController.SORT.REVIEW_COUNT,
+        인기순: GameController.SORT.LOG_COUNT,
+    }
+
     const [isOpen, setIsOpen] = useState(false);
-    const options = ['조회순', '최신순', '댓글순', '추천순'];
+    const options = ['조회순', '인기순', '댓글순', '최신순'];
     const [selectedOption, setSelectedOption] = useState(options[0]);
+    useEffect(() => {
+        initScroll();
+        setSortState(sortMapper[selectedOption]);
+    }, [selectedOption]);
     const toggleButton = useRef();
 
 
@@ -39,11 +51,11 @@ const SortMenuList = (props) => {
         });
     }, []);
 
-
     const toggleDropdown = () => setIsOpen(!isOpen);
 
     const handleOptionClick = (option) => {
         setSelectedOption(option);
+        setSortState(sortMapper[option]);
         setIsOpen(false);
     };
 

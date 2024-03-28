@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 
-export const useInfiniteScroll = (state, callback, callbackArg) => {
+export const useInfiniteScroll = (state, setState, callback, callbackArg) => {
     const isFetching = useRef(false);
     const page = useRef(0);
     const loadingComp = useRef(null);
@@ -16,6 +16,12 @@ export const useInfiniteScroll = (state, callback, callbackArg) => {
         if (response.length === 0) {
             setIsLast(true);
         }
+    }
+
+    const initScroll = async () => {
+        page.current = 0;
+        setIsLast(false);
+        setState([]);
     }
 
     useEffect(() => {
@@ -40,5 +46,5 @@ export const useInfiniteScroll = (state, callback, callbackArg) => {
         return () => observer.disconnect();
     }, [state]);
 
-    return [loadingComp, isLast];
+    return [loadingComp, isLast, initScroll];
 }

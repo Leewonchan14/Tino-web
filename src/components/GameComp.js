@@ -1,17 +1,18 @@
-import React from 'react';
+import React, {useState} from 'react';
 import viewcount_icon from "../assets/viewcount_icon.png";
 import {useNavigate} from "react-router-dom";
 import SortMenuList from "./SortMenuList";
 import {useGetGames} from "../hooks/useGetGames";
-import GameController from "../api/game.controller";
 import {useInfiniteScroll} from "../hooks/useInfiniteScroll";
 
 export function GameCompList({...rest}) {
     let [gameState, setGameState, findAllGame] = useGetGames();
-    let [loadingComp, isLast] = useInfiniteScroll(
+    const [sortState, setSortState] = useState();
+    let [loadingComp, isLast, initScroll] = useInfiniteScroll(
         gameState,
+        setGameState,
         findAllGame,
-        {size: 3, sort: GameController.SORT.VIEW_COUNT},
+        {size: 9, sort: sortState},
     )
     return (
         <>
@@ -19,7 +20,7 @@ export function GameCompList({...rest}) {
                 <span className={"text-blue-600"}> {gameState.length} 개</span>
             </h1>
             <div className={"flex justify-end"}>
-                <SortMenuList/>
+                <SortMenuList setSortState={setSortState} initScroll={initScroll}/>
             </div>
             <div className={"grid grid-cols-3 gap-6 w-full"}>
                 {gameState.map((game, index) => {
