@@ -2,10 +2,30 @@ import React, {useEffect, useRef, useState} from 'react';
 import viewcount_icon from "../assets/viewcount_icon.png";
 import {useNavigate} from "react-router-dom";
 import SortMenuList from "./SortMenuList";
+import GameController from "../api/game.controller";
 
-export function GameCompList({gameState, ...rest}) {
+export function GameCompList({...rest}) {
+    const [gameState, setGameState] = useState([])
+
+    const findAllGame = async () => {
+        const response = await GameController.findAll({
+            page: 0,
+            size: 10,
+            sort: GameController.SORT.VIEW_COUNT
+        });
+        setGameState(response.data)
+    }
+
+
+    useEffect(() => {
+        findAllGame();
+    }, []);
+
     return (
         <>
+            <h1 className={"text-2xl font-bold"}>전체 게임
+                <span className={"text-blue-600"}> {gameState.length} 개</span>
+            </h1>
             <div className={"flex justify-end"}>
                 <SortMenuList/>
             </div>
