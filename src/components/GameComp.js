@@ -1,26 +1,18 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React from 'react';
 import viewcount_icon from "../assets/viewcount_icon.png";
 import {useNavigate} from "react-router-dom";
 import SortMenuList from "./SortMenuList";
+import {useGetGames} from "../hooks/useGetGames";
 import GameController from "../api/game.controller";
+import {useInfiniteScroll} from "../hooks/useInfiniteScroll";
 
 export function GameCompList({...rest}) {
-    const [gameState, setGameState] = useState([])
-
-    const findAllGame = async () => {
-        const response = await GameController.findAll({
-            page: 0,
-            size: 10,
-            sort: GameController.SORT.VIEW_COUNT
-        });
-        setGameState(response.data)
-    }
-
-
-    useEffect(() => {
-        findAllGame();
-    }, []);
-
+    let [gameState, setGameState, findAllGame] = useGetGames();
+    let [loadingComp, isLast] = useInfiniteScroll(
+        gameState,
+        findAllGame,
+        {size: 3, sort: GameController.SORT.VIEW_COUNT},
+    )
     return (
         <>
             <h1 className={"text-2xl font-bold"}>전체 게임
@@ -34,6 +26,7 @@ export function GameCompList({...rest}) {
                     return <GameComp key={index} game={game}/>
                 })}
             </div>
+            {!isLast && <div ref={loadingComp} className={"w-full h-0"} id={"loadingComp"}/>}
         </>
     );
 }
