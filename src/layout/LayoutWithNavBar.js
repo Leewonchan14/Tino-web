@@ -5,11 +5,9 @@ import Footer from "../components/Footer";
 
 function LayoutWithNavBar(props) {
     return (
-        <div className={"px-64 py-6"}>
+        <div className={"h-full px-64 py-6"}>
             <NavBar/>
             <Outlet/>
-            <div className={"border-2 mt-24"}></div>
-            <Footer/>
         </div>
     );
 }
