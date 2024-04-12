@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LayoutWithNavBar from "./layout/LayoutWithNavBar";
 import Home from "./pages/Home";
 import GameDetailPage from "./pages/GameDetailPage";
 import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -15,8 +15,9 @@ root.render(
         <Routes>
             <Route exact path="/" element={<LayoutWithNavBar/>}>
                 <Route exact path="/" element={<Home/>}/>
-                <Route exact path="/login" element={<Login/>}/>
                 <Route exact path="/games/:gameId" element={<GameDetailPage/>}/>
+                <Route exact path="/login" element={<Login/>}/>
+                <Route exact path="/signup" element={<SignUp/>}/>
             </Route>
         </Routes>
     </BrowserRouter>

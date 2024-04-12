@@ -3,7 +3,7 @@ import TinoIcon from "../assets/tino_icon.png";
 import {useNavigate} from "react-router-dom";
 
 function MenuBar({...rest}) {
-    const MenuButton = ({menu,  ...rest}) => {
+    const MenuButton = ({menu, ...rest}) => {
         return (
             <div
                 className="cursor-pointer">
@@ -33,13 +33,11 @@ function NavBar({...rest}) {
     }
 
     return (
-        <div className={"h-28 flex py-4 items-center relative"}>
-            {/* 홈 아이콘 (tino) */}
+        <div className={"h-28 flex py-4 mb-6 items-center relative"}>
             <div onClick={goHome} className={"rounded-full bg-white h-full mr-4 " +
-                "shadow-lg shadow-gray-300 z-10 cursor-pointer"}>
+                "shadow-lg shadow-gray-300 z-10 cursor-pointer "}>
                 <img src={TinoIcon} alt={"logo"} className={"w-20 object-cover"}/>
             </div>
-
             {/* 게임, 랭킹, 메뉴 버튼 */}
             <div className={"absolute flex-1 flex justify-center items-center w-full h-full"}>
                 <MenuBar/>
