@@ -14,6 +14,10 @@ class GameController extends Api {
         return await this.get(`/games?page=${page}&size=${size}&sort=${sort}`);
     };
 
+    findOneGame = async ({gameId}) => {
+        return await this.get(`/game/${gameId}`);
+    }
+
 
     // //일기 작성
     // writeDiary = async (diaryData) => {
