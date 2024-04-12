@@ -36,7 +36,7 @@ function NavBar({...rest}) {
         <div className={"h-28 flex py-4 items-center relative"}>
             {/* 홈 아이콘 (tino) */}
             <div onClick={goHome} className={"rounded-full bg-white h-full mr-4 " +
-                "shadow-lg shadow-gray-300"}>
+                "shadow-lg shadow-gray-300 z-10 cursor-pointer"}>
                 <img src={TinoIcon} alt={"logo"} className={"w-20 object-cover"}/>
             </div>
 
@@ -48,7 +48,7 @@ function NavBar({...rest}) {
             {/* size box */}
             <div className={"flex-1"}></div>
             {/* 로그인 버튼 */}
-            <div>로그인</div>
+            <div onClick={onLogin} className={"cursor-pointer z-0"}>로그인</div>
         </div>
     );
 }
