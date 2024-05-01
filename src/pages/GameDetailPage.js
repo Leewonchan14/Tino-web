@@ -38,7 +38,7 @@ function GameDetailPage(props) {
 
             <div className={"mt-10 text-3xl mb-4"}>Top 10</div>
             <div className={"border-2 w-full h-96 rounded-3xl mb-4 flex"}>
-                <div className={"w-52 flex justify-center items-center flex-1"}>
+                <div className={"w-52 flex justify-center items-center"}>
                     <OwnLogCardComp />
                 </div>
                 <LogCompListIntGameDetailPage gameId={gameId}/>
