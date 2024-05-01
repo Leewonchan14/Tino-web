@@ -1,24 +1,11 @@
 import React, {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import TinoIcon from "../assets/tino_icon.png";
-import {useGatOneGame} from "../hooks/useGatOneGame";
-import {useGetLogsByGameId} from "../hooks/useGetLogsByGameId";
-import LogComp, {LogCardComp, LogCompListIntGameDetailPage, OwnLogCardComp} from "../components/LogComp";
+import {useGetOneGame} from "../hooks/./useGetOneGame";
+import {LogCompListIntGameDetailPage, OwnLogCardComp} from "../components/LogComp";
 
 function GameDetailPage(props) {
-    let [gameState, setGameState, findGameById] = useGatOneGame({
-        "gameId": 0,
-        "gameName": "string",
-        "userId": "string",
-        "imageUrl": "string",
-        "gameUrl": "string",
-        "targetScore": 0,
-        "scoreType": "INFINITE",
-        "description": "string",
-        "viewCount": 0,
-        "createdAt": "2024-04-12T06:13:37.054Z",
-        "star": 0
-    });
+    let [gameState, _, findGameById] = useGetOneGame({});
     let {gameId} = useParams();
 
     useEffect(() => {
@@ -39,7 +26,7 @@ function GameDetailPage(props) {
             <div className={"mt-10 text-3xl mb-4"}>Top 10</div>
             <div className={"border-2 w-full h-96 rounded-3xl mb-4 flex"}>
                 <div className={"w-52 flex justify-center items-center"}>
-                    <OwnLogCardComp />
+                    <OwnLogCardComp gameId={gameId} userId={1}/>
                 </div>
                 <LogCompListIntGameDetailPage gameId={gameId}/>
             </div>

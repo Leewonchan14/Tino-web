@@ -1,41 +1,45 @@
-import React, {useState} from 'react';
-import TinoIcon from "../assets/tino_icon.png";
+import React, {useEffect} from 'react';
 import {useGetLogsByGameId} from "../hooks/useGetLogsByGameId";
 import {useInfiniteScroll} from "../hooks/useInfiniteScroll";
 import Spinner from "../assets/Spinner.gif";
+import {useGetOwnLog} from "../hooks/useGetOwnLog";
 
 
-const OwnLogCardComp = () => {
-    const [ownLog, _] = useState({
-        "logId": 6414,
-        "gameId": 51,
-        "gameScore": 66,
-        "createdAt": "2024-01-16T02:36:14.612",
+const OwnLogCardComp = ({gameId, userId}) => {
+    let [ownLogState, _, isExist, isFetching, findBestLogByGameId] = useGetOwnLog({
         "user": {
-            "userId": "1",
-            "nickname": "nick 1",
-            "email": "test1@test.com",
-            "profileImageURL": "https://tinos-images-storage.s3.ap-northeast-2.amazonaws.com/default_user_image.png",
-            "parentMajor": "컴퓨터공학부",
-            "major": "컴퓨터공학과"
-        },
-        "ranking": 1
-    })
+            "profileImageURL": "",
+            "nickname": ""
+        }
+    });
+    useEffect(() => {
+        findBestLogByGameId(gameId, userId);
+    }, []);
     return (
         <>
-            <div className={"mx-1 flex w-44 flex-col justify-center items-center h-full "}>
-                <div className={"text-3xl"}>{ownLog.ranking + 1}등</div>
-                <div className={"rounded-full border-2 my-4"}>
-                    <img className={"h-20"} src={TinoIcon} alt=""/>
-                </div>
-                <div className={"text-2xl font-bold"}>{ownLog.userId}</div>
-                <div className={"ml-auto text-2xl"}>{ownLog.score}</div>
-                <div>{ownLog.user.nickname}</div>
-            </div>
+            {isFetching && <div className={""}>
+                <img src={Spinner} alt=""/>
+            </div>}
+
+            {!isFetching && isExist &&
+                <div className={"mx-1 flex w-44 flex-col justify-center items-center h-full "}>
+                    <div className={"text-3xl"}>{ownLogState.ranking}등</div>
+                    <div className={"rounded-full border-2 my-4"}>
+                        <img className={"h-20"} src={ownLogState.user.profileImageURL} alt=""/>
+                    </div>
+                    <div className={"text-2xl font-bold"}>{ownLogState.userId}</div>
+                    <div className={"ml-auto text-2xl"}>{ownLogState.score}</div>
+                    <div>{ownLogState.user.nickname}</div>
+                </div>}
+
+            {!isFetching && !isExist &&
+                <div className={"mx-1 flex w-44 flex-col justify-center items-center h-full "}>
+                    <div className={"text-3xl text-center"}>게임기록이 <br/> 없습니다.</div>
+                </div>}
+
             <div className={"border-2 h-full"}></div>
         </>
     )
-    // <LogCardComp log={ownLog} index={ownLog.ranking} className={"!w-full border-none"}/>
 }
 
 
@@ -45,7 +49,7 @@ function LogCardComp({log, index, className}) {
             <div className={"mx-1 py-2 flex justify-center items-center w-[90%]"}>
                 <div className={"text-3xl"}>{index + 1}등</div>
                 <div className={"rounded-full border-2"}>
-                    <img className={"h-16"} src={TinoIcon} alt=""/>
+                    <img className={"h-16"} src={log.user.profileImageURL} alt=""/>
                 </div>
                 <div className={"text-2xl font-bold"}>{log.userId}</div>
                 <div>{log.user.nickname}</div>
