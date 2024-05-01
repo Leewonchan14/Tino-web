@@ -34,7 +34,7 @@ const OwnLogCardComp = ({gameId, userId}) => {
 
             {!isFetching && !isExist &&
                 <div className={"mx-1 flex w-44 flex-col justify-center items-center h-full "}>
-                    <div className={"text-3xl text-center"}>게임기록이 <br/> 없습니다.</div>
+                    <div style={{fontFamily: "GmarketSans"}} className={"text-3xl text-center"}>게임기록이 <br/> 없습니다.</div>
                 </div>}
 
             <div className={"border-2 h-full"}></div>
