@@ -53,9 +53,10 @@ export const useSignUp = () => {
 
     const [rePassword, setRePassword] = useState("");
 
-    const onSubmit = () => {
-        setIsValid((state) => {
-                let newState = {
+    const CheckValid = async () => {
+        return new Promise((resolve, reject) => {
+            setIsValid((stat) => {
+                let newData = {
                     ...isValid,
                     email: regs.email.test(signupFormState.email),
                     email_blank: regs.notBlank.test(signupFormState.email),
@@ -65,18 +66,27 @@ export const useSignUp = () => {
                     code: regs.code.test(signupFormState.code),
                 }
 
+                resolve(newData);
 
-                const allValid = Object.entries(newState).every(([key, value]) => {
-                    return value
-                });
+                return newData;
+            });
+        });
+    }
 
-                if (!allValid) {
-                    console.log("입력값이 올바르지 않습니다.")
-                }
-                console.log("회원가입 요청")
-                return newState
-            }
-        )
+    const onSubmit = async () => {
+        let validState = await CheckValid();
+
+        const allValid = Object.entries(validState).every(([key, value]) => {
+            return value
+        });
+
+        if (!allValid) {
+            console.log("입력값이 올바르지 않습니다.")
+            return
+        }
+
+
+        console.log("회원가입 요청")
     }
 
 
