@@ -3,23 +3,19 @@ import {useNavigate} from "react-router-dom";
 import {InputComp} from "../components/InputComp";
 import ButtonComp from "../components/ButtonComp";
 import {EMAIL_PAGE_PATH} from "./EmailCode";
+import {useLogin} from "../hooks/useLogin";
 
 const LOGIN_PATH = "/login";
 
 function Login(...rest) {
     let navigate = useNavigate();
 
-    const [inputState, setInputState] = useState({
-        inputUserId: "",
-        inputPassword: ""
-    })
+    let {
+        loginState,
 
-    const onInputChange = (e) => {
-        setInputState({
-            ...inputState,
-            [e.target.name]: e.target.value
-        })
-    }
+        onChange
+    } = useLogin();
+
 
     const goSignUp = () => {
         navigate(EMAIL_PAGE_PATH);
@@ -32,9 +28,13 @@ function Login(...rest) {
                     style={{fontFamily: "GmarketSans"}}>로그인
                 </h1>
                 <div className={"w-full flex-col"}>
-                    <InputComp value={inputState.inputUserId} onChange={onInputChange} name={"inputUserId"} placeholder={"E-mail 을 입력하세요"}/>
-                    <InputComp value={inputState.inputPassword} onChange={onInputChange} name={"inputPassword"} placeholder={"비밀번호를 입력하세요"}/>
-                    <ButtonComp text={"로그인"} onClick={() => {console.log("로그인 하기")}}/>
+                    <InputComp value={loginState.userId} onChange={onChange} name={"inputUserId"}
+                               placeholder={"E-mail 을 입력하세요"}/>
+                    <InputComp value={loginState.password} onChange={onChange} name={"inputPassword"}
+                               placeholder={"비밀번호를 입력하세요"}/>
+                    <ButtonComp text={"로그인"} onClick={() => {
+                        console.log("로그인 하기")
+                    }}/>
                     <div className={"mt-4 w-full flex justify-center"}>
                         계정이 없으신가요?
                         <button onClick={goSignUp} className={"ml-4 text-blue-600"}>회원가입 하러 가기</button>
