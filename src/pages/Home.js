@@ -2,6 +2,8 @@ import React from 'react';
 import {GameCompList} from "../components/GameComp";
 import Footer from "../components/Footer";
 
+const HOME_PATH = "/";
+
 function Home(props) {
 
     return (
@@ -16,4 +18,4 @@ function Home(props) {
     );
 }
 
-export default Home;
+export {Home, HOME_PATH};

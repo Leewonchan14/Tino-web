@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import IdPasswordComp from "../components/IdPasswordComp";
+import {InputComp} from "../components/InputComp";
 import ButtonComp from "../components/ButtonComp";
+import {EMAIL_PAGE_PATH} from "./EmailCode";
+
+const LOGIN_PATH = "/login";
 
 function Login(...rest) {
     let navigate = useNavigate();
@@ -19,7 +22,7 @@ function Login(...rest) {
     }
 
     const goSignUp = () => {
-        navigate("/signup");
+        navigate(EMAIL_PAGE_PATH);
     }
 
     return (
@@ -29,8 +32,8 @@ function Login(...rest) {
                     style={{fontFamily: "GmarketSans"}}>로그인
                 </h1>
                 <div className={"w-full flex-col"}>
-                    <IdPasswordComp value={inputState.inputUserId} onChange={onInputChange} name={"inputUserId"} placeholder={"E-mail 을 입력하세요"}/>
-                    <IdPasswordComp value={inputState.inputPassword} onChange={onInputChange} name={"inputPassword"} placeholder={"비밀번호를 입력하세요"}/>
+                    <InputComp value={inputState.inputUserId} onChange={onInputChange} name={"inputUserId"} placeholder={"E-mail 을 입력하세요"}/>
+                    <InputComp value={inputState.inputPassword} onChange={onInputChange} name={"inputPassword"} placeholder={"비밀번호를 입력하세요"}/>
                     <ButtonComp text={"로그인"} onClick={() => {console.log("로그인 하기")}}/>
                     <div className={"mt-4 w-full flex justify-center"}>
                         계정이 없으신가요?
@@ -43,4 +46,4 @@ function Login(...rest) {
     );
 }
 
-export default Login;
+export {Login, LOGIN_PATH};

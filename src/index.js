@@ -4,20 +4,22 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LayoutWithNavBar from "./layout/LayoutWithNavBar";
-import Home from "./pages/Home";
+import {Home, HOME_PATH} from "./pages/Home";
 import GameDetailPage from "./pages/GameDetailPage";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
+import {Login, LOGIN_PATH} from "./pages/Login";
+import {SignUp, SIGNUP_PATH} from "./pages/SignUp";
+import {EmailCode, EMAIL_PAGE_PATH} from "./pages/EmailCode";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <BrowserRouter>
         <Routes>
             <Route exact path="/" element={<LayoutWithNavBar/>}>
-                <Route exact path="/" element={<Home/>}/>
+                <Route exact path={HOME_PATH} element={<Home/>}/>
                 <Route exact path="/games/:gameId" element={<GameDetailPage/>}/>
-                <Route exact path="/login" element={<Login/>}/>
-                <Route exact path="/signup" element={<SignUp/>}/>
+                <Route exact path={LOGIN_PATH} element={<Login/>}/>
+                <Route exact path={EMAIL_PAGE_PATH} element={<EmailCode/>}/>
+                <Route exact path={SIGNUP_PATH} element={<SignUp/>}/>
             </Route>
         </Routes>
     </BrowserRouter>

@@ -1,6 +1,8 @@
 import React from 'react';
 import TinoIcon from "../assets/tino_icon.png";
 import {useNavigate} from "react-router-dom";
+import {HOME_PATH} from "../pages/Home";
+import {LOGIN_PATH} from "../pages/Login";
 
 function MenuBar({...rest}) {
     const MenuButton = ({menu, ...rest}) => {
@@ -26,10 +28,10 @@ function NavBar({...rest}) {
     let navigate = useNavigate();
 
     const onLogin = () => {
-        navigate("/login");
+        navigate(LOGIN_PATH);
     }
     const goHome = () => {
-        navigate("/");
+        navigate(HOME_PATH);
     }
 
     return (
