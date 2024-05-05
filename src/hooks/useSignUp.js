@@ -46,7 +46,7 @@ export const useSignUp = () => {
 
     const regs = {
         email: /^[a-zA-Z0-9._%+-]+@tukorea.ac.kr$/,
-        password: /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,}$/,
+        password: /^.{8,}$/,
         notBlank: /^.+$/,
         code: /^[0-9]{6}$/
     }

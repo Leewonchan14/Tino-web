@@ -12,8 +12,9 @@ function Login(...rest) {
 
     let {
         loginState,
-
-        onChange
+        isValid,
+        onChange,
+        onSubmit
     } = useLogin();
 
 
@@ -28,13 +29,16 @@ function Login(...rest) {
                     style={{fontFamily: "GmarketSans"}}>로그인
                 </h1>
                 <div className={"w-full flex-col"}>
-                    <InputComp value={loginState.userId} onChange={onChange} name={"inputUserId"}
+                    <InputComp value={loginState.email} onChange={onChange} name={"email"}
                                placeholder={"E-mail 을 입력하세요"}/>
-                    <InputComp value={loginState.password} onChange={onChange} name={"inputPassword"}
+                    <span style={{color: "red"}}>{!isValid.email && "이메일 형식이 올바르지 않습니다."}</span>
+                    <span style={{color: "red"}}>{!isValid.email_blank && "이메일을 입력해주세요."}</span>
+
+                    <InputComp value={loginState.password} onChange={onChange} name={"password"}
                                placeholder={"비밀번호를 입력하세요"}/>
-                    <ButtonComp text={"로그인"} onClick={() => {
-                        console.log("로그인 하기")
-                    }}/>
+                    <span style={{color: "red"}}>{!isValid.password && "비밀번호는 8자리 이상 이어야 합니다."}</span>
+
+                    <ButtonComp text={"로그인"} onClick={onSubmit}/>
                     <div className={"mt-4 w-full flex justify-center"}>
                         계정이 없으신가요?
                         <button onClick={goSignUp} className={"ml-4 text-blue-600"}>회원가입 하러 가기</button>
