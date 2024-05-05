@@ -4,7 +4,7 @@ function ButtonComp({text, onClick, className}) {
     const inputStyle = {
         border: "1px solid #000000",
         width: "100%",
-        height: "4rem",
+        height: "3.5rem",
         borderRadius: "5px",
         padding: "5px",
         margin: "10px 0",
