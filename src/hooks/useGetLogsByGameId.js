@@ -1,5 +1,5 @@
 import {useState} from "react";
-import GameController from "../api/game.controller";
+import {GameController} from "../api/game.controller";
 import LogController from "../api/log.controller";
 
 export const useGetLogsByGameId = () => {

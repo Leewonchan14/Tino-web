@@ -1,13 +1,14 @@
 import {Api} from "./common.controller";
 
-class GameController extends Api {
+const GAME_SORT = {
+    VIEW_COUNT: "VIEW_COUNT",
+    LOG_COUNT: "LOG_COUNT",
+    RECENT: "RECENT",
+    REVIEW_COUNT: "REVIEW_COUNT",
+}
 
-    SORT = {
-        VIEW_COUNT: "VIEW_COUNT",
-        LOG_COUNT: "LOG_COUNT",
-        RECENT: "RECENT",
-        REVIEW_COUNT: "REVIEW_COUNT",
-    }
+
+class game_controller extends Api {
 
     // 게임 페이징 조회
     findAll = async ({page, size, sort}) => {
@@ -33,4 +34,6 @@ class GameController extends Api {
     // };
 }
 
-export default new GameController();
+const GameController = new game_controller()
+
+export {GameController, GAME_SORT};

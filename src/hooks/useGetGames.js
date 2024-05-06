@@ -1,5 +1,5 @@
 import {useState} from "react";
-import GameController from "../api/game.controller";
+import {GameController} from "../api/game.controller";
 
 export const useGetGames = () => {
     const [gameState, setGameState] = useState([])

@@ -6,7 +6,6 @@ import {G_MARKET_FONT} from "../constant/FontFamily";
 const HOME_PATH = "/";
 
 function Home(props) {
-
     return (
         <>
             <h1 className={"text-6xl mt-28 font-bold"} style={{fontFamily: G_MARKET_FONT}}>티노 게임즈</h1>
