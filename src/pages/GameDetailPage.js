@@ -1,8 +1,10 @@
 import React, {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import TinoIcon from "../assets/tino_icon.png";
-import {useGetOneGame} from "../hooks/./useGetOneGame";
+import {useGetOneGame} from "../hooks/useGetOneGame";
 import {LogCompListIntGameDetailPage, OwnLogCardComp} from "../components/LogComp";
+
+const GAME_PATH = "/games/:gameId";
 
 function GameDetailPage(props) {
     let [gameState, _, findGameById] = useGetOneGame({});
@@ -48,4 +50,4 @@ function GameDetailPage(props) {
     );
 }
 
-export default GameDetailPage;
+export {GameDetailPage, GAME_PATH};

@@ -3,23 +3,28 @@ import TinoIcon from "../assets/tino_icon.png";
 import {useNavigate} from "react-router-dom";
 import {HOME_PATH} from "../pages/Home";
 import {LOGIN_PATH} from "../pages/Login";
+import {menuList, useNavMenu} from "../hooks/useNavMenu";
 
 function MenuBar({...rest}) {
+
+    let {menuState, onClickMenu} = useNavMenu();
+
     const MenuButton = ({menu, ...rest}) => {
         return (
-            <div
-                className="cursor-pointer">
+            <div onClick={onClickMenu}
+                 className={"cursor-pointer h-full flex-1 flex justify-center items-center overflow-hidden rounded-full"
+                     + (menuState === menu ? " text-white bg-blue-600" : " ")}>
                 {menu}
             </div>
         );
     }
 
     return (
-        <div className="flex justify-evenly items-center gap-2 py-2 w-48 rounded-full shadow-gray-400 shadow-2xl
+        <div className="flex items-center h-12 w-56 rounded-full shadow-gray-400 shadow-2xl
         box-border border-[1px] border-gray-200 ">
-            <MenuButton menu={"게임"}/>
-            <MenuButton menu={"랭킹"}/>
-            <MenuButton menu={"메뉴"}/>
+            {menuList.map((item, index) => {
+                return <MenuButton key={index} menu={item}/>
+            })}
         </div>
     );
 }
