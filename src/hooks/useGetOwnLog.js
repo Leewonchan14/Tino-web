@@ -21,5 +21,5 @@ export const useGetOwnLog = (initState) => {
             setError(err.response ? err.response.data : 'An unknown error occurred')
         }
     }
-    return [ownLogState, setOwnLogState, isExist, isFetching, findBestLogByGameId];
+    return {ownLogState, setOwnLogState, isExist, isFetching, findBestLogByGameId};
 }

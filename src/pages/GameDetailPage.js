@@ -7,29 +7,28 @@ import {G_MARKET_FONT} from "../constant/FontFamily";
 
 const GAME_PATH = "/games/:gameId";
 
-function GameDetailPage(props) {
-    let [gameState, _, findGameById] = useGetOneGame({});
-    let {gameId} = useParams();
+function LoadingTextComp({isFetching}) {
+    return (
+        <span>{isFetching && "게임을 기다리는중..."}</span>
+    );
+}
 
-    const [loading, setLoading] = useState(true);
+function GameDetailPage(props) {
+    let {isFetching, gameState, findGameById} = useGetOneGame({});
+    let {gameId} = useParams();
     useEffect(() => {
         findGameById(gameId);
-        setTimeout(() => {
-            setLoading(false);
-        }, 1000);
     }, []);
-
-
-
 
     return (
         <div className={"px-14 pb-8"}>
-            <div className={"w-full h-[100vh] rounded-3xl flex justify-center items-center relative"}>
-                {loading && <span className={"absolute top-10 z-0"}>게임을 기다리는중...</span>}
+            <div className={"w-full h-[80vh] rounded-3xl flex justify-center items-center relative border-2"}>
+                {isFetching && <span className={"absolute top-1/2 z-0"}>게임을 기다리는중...</span>}
                 <iframe className={"w-full h-full z-30"} src={gameState.gameUrl} title={gameState.gameName}/>
             </div>
             <div className={"mt-10 text-3xl mb-4"}>게임 설명</div>
-            <div style={{fontFamily : G_MARKET_FONT}} className={"bg-gray-100 w-full h-48 rounded-3xl p-10"}>
+            <div style={{fontFamily: G_MARKET_FONT}} className={"bg-gray-100 w-full h-48 rounded-3xl p-10 text-lg"}>
+                <LoadingTextComp isFetching={isFetching}/>
                 {gameState.description}
             </div>
 
@@ -58,4 +57,6 @@ function GameDetailPage(props) {
     );
 }
 
-export {GameDetailPage, GAME_PATH};
+export {
+    GameDetailPage, GAME_PATH
+};
