@@ -4,6 +4,7 @@ import {useNavigate} from "react-router-dom";
 import SortMenuList from "./SortMenuList";
 import {useGetGames} from "../hooks/useGetGames";
 import {useInfiniteScroll} from "../hooks/useInfiniteScroll";
+import Spinner from "../assets/Spinner.gif";
 
 export function GameCompList({...rest}) {
     let [gameState, setGameState, findAllGame] = useGetGames();
@@ -27,7 +28,11 @@ export function GameCompList({...rest}) {
                     return <GameComp key={index} game={game}/>
                 })}
             </div>
-            {!isLast && <div ref={loadingComp} className={"w-full h-0"} id={"loadingComp"}/>}
+
+            {!isLast && <div ref={loadingComp} className={"flex w-full justify-center"}>
+                <img src={Spinner} alt=""/>
+            </div>}
+
         </>
     );
 }
