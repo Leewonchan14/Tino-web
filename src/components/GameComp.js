@@ -5,6 +5,7 @@ import SortMenuList from "./SortMenuList";
 import {useGetGames} from "../hooks/useGetGames";
 import {useInfiniteScroll} from "../hooks/useInfiniteScroll";
 import Spinner from "../assets/Spinner.gif";
+import {G_MARKET_FONT} from "../constant/FontFamily";
 
 export function GameCompList({...rest}) {
     let [gameState, setGameState, findAllGame] = useGetGames();
@@ -52,7 +53,7 @@ export function GameComp({game}) {
                      src={game.gameImage} alt=""/>
             </div>
             <div className={"h-40 p-6 w-full flex-col flex"}>
-                <h1 className={"text-xl"} style={{fontFamily: "GmarketSans"}}>
+                <h1 className={"text-xl"} style={{fontFamily: G_MARKET_FONT}}>
                     {game.gameName}
                 </h1>
                 <div className={"w-full mt-2 text-gray-600 flex-col flex"}>

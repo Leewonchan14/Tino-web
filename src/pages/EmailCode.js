@@ -1,13 +1,14 @@
 import React from 'react';
 import {InputComp} from "../components/InputComp";
 import {useSendEmail} from "../hooks/useSendEmail";
+import {G_MARKET_FONT} from "../constant/FontFamily";
 
 const EMAIL_PAGE_PATH = "/email/auth";
 
 
 function SignUpButton({isFetching, text, onClick}) {
     return (
-        <button disabled={isFetching} style={{fontFamily: "GmarketSans"}}
+        <button disabled={isFetching} style={{fontFamily: G_MARKET_FONT}}
                 className={"w-full h-[3.5rem] p-[5px] my-[10px] bg-blue-600 text-white font-bold text-xl border-1 rounded-xl"}
                 onClick={onClick}>
             {!isFetching && text}
@@ -24,7 +25,7 @@ function EmailCode(props) {
         <div className={"h-[70%] flex justify-center"}>
             <div className={"w-[50%] "}>
                 <h1 className={"text-6xl my-12 font-bold flex justify-center"}
-                    style={{fontFamily: "GmarketSans"}}>이메일 인증
+                    style={{fontFamily: G_MARKET_FONT}}>이메일 인증
                 </h1>
                 <span className={"flex justify-center"}>@tukorea.ac.kr 인 도메인만 사용 가능합니다.</span>
                 <div className={"flex"}>
@@ -37,7 +38,7 @@ function EmailCode(props) {
                     </div>
                 </div>
 
-                <div style={{fontFamily: "GmarketSans"}}
+                <div style={{fontFamily: G_MARKET_FONT}}
                      className={"text-red-600 text-center"}>
                     {message}
                 </div>

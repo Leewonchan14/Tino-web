@@ -3,6 +3,7 @@ import {useGetLogsByGameId} from "../hooks/useGetLogsByGameId";
 import {useInfiniteScroll} from "../hooks/useInfiniteScroll";
 import Spinner from "../assets/Spinner.gif";
 import {useGetOwnLog} from "../hooks/useGetOwnLog";
+import {G_MARKET_FONT} from "../constant/FontFamily";
 
 
 const OwnLogCardComp = ({gameId, userId}) => {
@@ -34,7 +35,7 @@ const OwnLogCardComp = ({gameId, userId}) => {
 
             {!isFetching && !isExist &&
                 <div className={"mx-1 flex w-44 flex-col justify-center items-center h-full "}>
-                    <div style={{fontFamily: "GmarketSans"}} className={"text-3xl text-center"}>게임기록이 <br/> 없습니다.</div>
+                    <div style={{fontFamily: G_MARKET_FONT}} className={"text-3xl text-center"}>게임기록이 <br/> 없습니다.</div>
                 </div>}
 
             <div className={"border-2 h-full"}></div>

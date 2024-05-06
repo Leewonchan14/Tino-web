@@ -1,4 +1,5 @@
 import React from 'react';
+import {G_MARKET_FONT} from "../constant/FontFamily";
 
 const inputStyle = {
     border: "1px solid #000000",
@@ -7,7 +8,7 @@ const inputStyle = {
     borderRadius: "5px",
     padding: "5px",
     margin: "10px 0",
-    fontFamily: "GmarketSans"
+    fontFamily: G_MARKET_FONT
 }
 
 function InputComp({onChange, value, placeholder, name = "inputUserId"}) {

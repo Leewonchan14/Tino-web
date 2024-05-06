@@ -1,4 +1,5 @@
 import React from 'react';
+import {G_MARKET_FONT} from "../constant/FontFamily";
 
 function ButtonComp({text, onClick, className}) {
     const inputStyle = {
@@ -8,7 +9,7 @@ function ButtonComp({text, onClick, className}) {
         borderRadius: "5px",
         padding: "5px",
         margin: "10px 0",
-        fontFamily: "GmarketSans"
+        fontFamily: G_MARKET_FONT
     }
     return (
         <button style={inputStyle}

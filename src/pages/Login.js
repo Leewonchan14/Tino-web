@@ -4,6 +4,7 @@ import {InputComp} from "../components/InputComp";
 import ButtonComp from "../components/ButtonComp";
 import {EMAIL_PAGE_PATH} from "./EmailCode";
 import {useLogin} from "../hooks/useLogin";
+import {G_MARKET_FONT} from "../constant/FontFamily";
 
 const LOGIN_PATH = "/login";
 
@@ -26,7 +27,7 @@ function Login(...rest) {
         <div className={"h-[70%] flex justify-center"}>
             <div className={"w-[50%] "}>
                 <h1 className={"text-6xl my-12 font-bold flex justify-center"}
-                    style={{fontFamily: "GmarketSans"}}>로그인
+                    style={{fontFamily: G_MARKET_FONT}}>로그인
                 </h1>
                 <div className={"w-full flex-col"}>
                     <InputComp value={loginState.email} onChange={onChange} name={"email"}

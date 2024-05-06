@@ -2,6 +2,7 @@ import React from 'react';
 import {ComboBox, InputComp} from "../components/InputComp";
 import ButtonComp from "../components/ButtonComp";
 import {useSignUp} from "../hooks/useSignUp";
+import {G_MARKET_FONT} from "../constant/FontFamily";
 
 const SIGNUP_PATH = "/signup";
 
@@ -21,7 +22,7 @@ function SignUp(props) {
         <div className={"h-[70%] flex justify-center"}>
             <div className={"w-[50%] "}>
                 <h1 className={"text-6xl my-5 font-bold flex justify-center"}
-                    style={{fontFamily: "GmarketSans"}}>회원 가입
+                    style={{fontFamily: G_MARKET_FONT}}>회원 가입
                 </h1>
                 <div className={"flex-col"}>
                     <InputComp value={signupFormState.email} name={"email"} onChange={onChange}
