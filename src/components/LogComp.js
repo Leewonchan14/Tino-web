@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useGetLogsByGameId} from "../hooks/useGetLogsByGameId";
 import {useInfiniteScroll} from "../hooks/useInfiniteScroll";
 import Spinner from "../assets/Spinner.gif";
 import {useGetOwnLog} from "../hooks/useGetOwnLog";
+import TinoIcon from "../assets/tino_icon.png";
 import {G_MARKET_FONT} from "../constant/FontFamily";
 
 
@@ -66,7 +67,8 @@ function LogCardComp({log, index, className}) {
                 <div className={"text-3xl"}>{index + 1}등</div>
                 <div className={"rounded-full border-2"}>
                     <img className={"h-16"}
-                         src={"https://tinos-images-storage.s3.ap-northeast-2.amazonaws.com/default_user_image.png"}
+                        // src={"https://tinos-images-storage.s3.ap-northeast-2.amazonaws.com/default_user_image.png"}
+                         src={TinoIcon}
                          alt=""/>
                 </div>
                 <div className={"text-2xl font-bold"}>{log.userId}</div>

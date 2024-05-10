@@ -137,7 +137,7 @@ const CommentListComp = ({...rest}) => {
     return (
         <>
             <div className={"mt-10 text-3xl mb-4"}>댓글</div>
-            <div className={"w-full h-96 rounded-3xl mb-12"}>
+            <div className={"w-full rounded-3xl"}>
                 <OwnComment/>
                 <CommentInputComp/>
                 <CommentList commentState={commentState}/>
