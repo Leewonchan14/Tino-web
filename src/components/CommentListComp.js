@@ -8,7 +8,7 @@ const CommentInputComp = () => {
     return (
         <div className={"flex h-20 mb-4"}>
             <InputComp placeholder={"댓글을 입력하세요"} className={"!h-full !m-0"}/>
-            <BlueButton className={"h-full w-32 text-xl font-bold"}>입력</BlueButton>
+            <BlueButton className={"h-full w-32 text-xl font-bold !m-0 !ml-4"}>입력</BlueButton>
         </div>
     )
 }
@@ -34,7 +34,8 @@ const RatingComp = ({score}) => {
             <div className={"flex"}>
                 {[1, 2, 3, 4, 5].map((star, index) => {
                     return (
-                        <svg key={index} className={"h-6 w-6 fill-current text-yellow-500"} xmlns="http://www.w3.org/2000/svg"
+                        <svg key={index} className={"h-6 w-6 fill-current text-yellow-500"}
+                             xmlns="http://www.w3.org/2000/svg"
                              viewBox="0 0 24 24">
                             <path
                                 className={star <= score ? "text-yellow-500" : "text-gray-300"}
@@ -43,7 +44,6 @@ const RatingComp = ({score}) => {
                     )
                 })}
             </div>
-            {/*<div>{score}</div>*/}
         </div>
     )
 }

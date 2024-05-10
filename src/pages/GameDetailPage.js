@@ -1,10 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useParams} from 'react-router-dom';
 import {useGetOneGame} from "../hooks/useGetOneGame";
 import {LogComp} from "../components/LogComp";
 import {CommentListComp} from "../components/CommentListComp";
 import {GameDescriptionComp} from "../components/GameDescriptionComp";
-import {GameController} from "../api/game.controller";
 
 const GAME_PATH = "/games/:gameId";
 
