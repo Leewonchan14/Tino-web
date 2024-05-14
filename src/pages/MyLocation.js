@@ -15,7 +15,21 @@ const MyLocation = () =>{
             console.log("경도:", longitude);
         },
         onError: (error) => {
-            console.error("Error occurred while fetching position:", error);
+            console.error("Error occurred while fetching position:", error.message);
+            switch (error.code) {
+                case 1:
+                    console.error("Error: Permission denied.");
+                    break;
+                case 2:
+                    console.error("Error: Position unavailable.");
+                    break;
+                case 3:
+                    console.error("Error: Timeout.");
+                    break;
+                default:
+                    console.error("Error: Unknown error.");
+                    break;
+            }
         },
     });
 }
