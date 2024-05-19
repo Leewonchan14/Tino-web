@@ -10,7 +10,7 @@ import {Login, LOGIN_PATH} from "./pages/Login";
 import {SignUp, SIGNUP_PATH} from "./pages/SignUp";
 import {EmailCode, EMAIL_PAGE_PATH} from "./pages/EmailCode";
 import {Ranking, RANKING_PATH} from "./pages/Ranking";
-import {MENU_PAGE_PATH, MenuPage} from "./pages/MenuPage";
+import {FRIEND_PAGE_PATH, FriendPage} from "./pages/FriendPage";
 import ScrollToTop from "./hooks/useScrollToTop";
 import MyLocation, {MY_LOCATION_PATH} from "./pages/MyLocation";
 
@@ -27,7 +27,7 @@ root.render(
                     <Route exact path={EMAIL_PAGE_PATH} element={<EmailCode/>}/>
                     <Route exact path={SIGNUP_PATH} element={<SignUp/>}/>
                     <Route exact path={RANKING_PATH} element={<Ranking/>}/>
-                    <Route exact path={MENU_PAGE_PATH} element={<MenuPage/>}/>
+                    <Route exact path={FRIEND_PAGE_PATH} element={<FriendPage/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

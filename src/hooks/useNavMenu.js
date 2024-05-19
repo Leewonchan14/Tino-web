@@ -2,18 +2,18 @@ import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {HOME_PATH} from "../pages/Home";
 import {RANKING_PATH} from "../pages/Ranking";
-import {MENU_PAGE_PATH} from "../pages/MenuPage";
+import {FRIEND_PAGE_PATH} from "../pages/FriendPage";
 
 const menuList = [
     "게임",
     "랭킹",
-    "메뉴",
+    "친구",
 ];
 
 const menuPath = {
     [menuList[0]]: HOME_PATH,
     [menuList[1]]: RANKING_PATH,
-    [menuList[2]]: MENU_PAGE_PATH,
+    [menuList[2]]: FRIEND_PAGE_PATH,
 };
 
 const useNavMenu = () => {
@@ -33,7 +33,7 @@ const useNavMenu = () => {
             setMenuState(menuList[1]);
         }
 
-        if (location.pathname === MENU_PAGE_PATH) {
+        if (location.pathname === FRIEND_PAGE_PATH) {
             setMenuState(menuList[2]);
         }
     }, [location]);
