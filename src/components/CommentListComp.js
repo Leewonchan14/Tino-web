@@ -49,9 +49,38 @@ const timeConverter = (dateTime) => {
         hours = hours - 12;
     }
 
-    // return date.getFullYear() + "년 " + (date.getMonth() + 1) + "월" + date.getDate() + "일 " + hours + "시" + date.getMinutes() + "분";
-    // hours + "시" + date.getMinutes() + "분";
-    return "두달 전"
+    const now = new Date();
+    const gap_sec = (now - date) / 1000;
+
+    // 만약 현재 시간과 1분 이내라면
+    if (gap_sec < 60) {
+        return "방금 전"
+    }
+
+    // 1시간 이내라면
+    if (gap_sec < 60 * 60) {
+        return Math.floor(gap_sec / 60) + "분 전"
+    }
+
+    // 1일 이내라면
+    if (gap_sec < 60 * 60 * 24) {
+        return Math.floor(gap_sec / (60 * 60)) + "시간 전"
+    }
+
+    // 1달 이내라면
+    if (gap_sec < 60 * 60 * 24 * 30) {
+        return Math.floor(gap_sec / (60 * 60 * 24)) + "일 전"
+    }
+
+    // 1년 이하라면 (~개월 전)
+    if (gap_sec < 60 * 60 * 24 * 365) {
+        return Math.floor(gap_sec / (60 * 60 * 24 * 30)) + "개월 전"
+    }
+
+    // 1년 이상이라면 (~년 전)
+    if (gap_sec >= 60 * 60 * 24 * 365 * 1000) {
+        return Math.floor(gap_sec / (60 * 60 * 24 * 365)) + "년 전"
+    }
 }
 
 
@@ -93,47 +122,46 @@ const HelpfulHeartButton = ({isHelpful, onClick, score}) => {
 
 const OwnComment = () => {
     return (
-        <div className={"border-2 w-full rounded-3xl mb-4 p-8 relative"}>
-            <div className={"flex"}>
-                <span style={{fontFamily: G_MARKET_FONT}} className={"text-2xl text-blue-500"}>내 댓글</span>
-                <div className={"text-gray-400 text-right ml-auto"}>{timeConverter("2024-01-14T17:48:05.414")}</div>
-            </div>
-            <div className={"flex items-center mt-4"}>
-                <div className={"rounded-full bg-gray-400 mr-4"}>
-                    <img className={"h-14"} src={TinoIcon} alt=""/>
-                </div>
-                <div className={"flex-col"}>
-                    <div style={{fontFamily: G_MARKET_FONT}} className={"text-xl"}>내 이름</div>
-                    <RatingComp score={1.5}/>
-                    <HelpfulHeartButton isHelpful={false} score={3}/>
-                </div>
-            </div>
-            <div>이 게임이 똥망이 이유...</div>
-            {/*<div className={"text-gray-300 text-right ml-auto"}>{timeConverter("2024-01-14T17:48:05.414")}</div>*/}
-        </div>
+        <Comment comment={{
+            "reviewId": 224,
+            "reviewContent": "이 게임이 똥망이 이유...",
+            "star": 0,
+            "helpful": 0,
+            "dateTime": "2024-01-14T17:48:05.414",
+            "user": {
+                "userId": "1",
+                "nickname": "내 이름",
+                "email": "",
+            }
+        }}
+                 containerStyle={"bg-indigo-100"}
+                 nicknameStyle={"text-indigo-600"}
+        />
     )
 }
 
 
-const Comment = ({comment}) => {
+const Comment = ({comment, containerStyle, nicknameStyle}) => {
     return (
-        <div className={"border-2 w-full rounded-3xl mb-4 p-8"}>
-
-            <div className={"flex items-center"}>
-                <div className={"rounded-full bg-gray-400 mr-4"}>
+        <container className={"block border-2 w-full rounded-3xl mb-4 p-8 " + containerStyle}>
+            <profile className={"flex items-center"}>
+                <image_container className={"block rounded-full bg-gray-400 mr-4"}>
                     <img className={"h-14"} src={TinoIcon} alt=""/>
-                </div>
-                <div className={"flex-col w-full"}>
+                </image_container>
+                <userinfo className={"flex-col w-full"}>
                     <div className={"flex"}>
-                        <div style={{fontFamily: G_MARKET_FONT}} className={"text-xl"}>{comment.user.nickname}</div>
-                        <div className={"text-gray-400 ml-auto"}>{timeConverter("2024-01-14T17:48:05.414")}</div>
+                        <nickname style={{fontFamily: G_MARKET_FONT}}
+                                  className={"text-xl " + nicknameStyle}>
+                            {comment.user.nickname}
+                        </nickname>
+                        <time className={"text-gray-400 ml-auto"}>{timeConverter("2024-01-14T17:48:05.414")}</time>
                     </div>
                     <RatingComp score={comment.star}/>
                     <HelpfulHeartButton isHelpful={false} score={comment.helpful}/>
-                </div>
-            </div>
-            <div>{comment.reviewContent}</div>
-        </div>
+                </userinfo>
+            </profile>
+            <context className={"block mt-2"}>{comment.reviewContent}</context>
+        </container>
     );
 }
 
