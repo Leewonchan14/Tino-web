@@ -21,13 +21,13 @@ const OwnLogCardComp = ({gameId, userId}) => {
     const OwnLogComp = () => {
         return (
             <div className={"mx-1 flex w-44 flex-col justify-center items-center h-full "}>
-                <div className={"text-3xl"}>{ownLogState.ranking}등</div>
+                <div className={"text-3xl"}>1등</div>
                 <div className={"rounded-full border-2 my-4"}>
-                    <img className={"h-20"} src={ownLogState.user.profileImageURL} alt=""/>
+                    <img className={"h-20"} src={TinoIcon} alt=""/>
                 </div>
-                <div className={"text-2xl font-bold"}>{ownLogState.userId}</div>
-                <div className={"ml-auto text-2xl"}>{ownLogState.score}</div>
-                <div>{ownLogState.user.nickname}</div>
+                {/*<div className={"text-2xl font-bold"}>유저 아이디</div>*/}
+                <div>유저 닉네임</div>
+                <div className={"text-2xl text-center"}>30</div>
             </div>
         )
     }
@@ -46,13 +46,14 @@ const OwnLogCardComp = ({gameId, userId}) => {
         <>
             {isFetching && <LoadingSpinner/>}
 
-            {!isFetching && isExist &&
-                <OwnLogComp/>
-            }
+            <OwnLogComp/>
+            {/*{!isFetching && isExist &&*/}
+            {/*    <OwnLogComp/>*/}
+            {/*}*/}
 
-            {!isFetching && !isExist &&
-                <NotExistComp/>
-            }
+            {/*{!isFetching && !isExist &&*/}
+            {/*    <NotExistComp/>*/}
+            {/*}*/}
 
             <div className={"border-2 h-full"}></div>
         </>
@@ -64,16 +65,16 @@ function LogCardComp({log, index, className}) {
     return (
         <>
             <div className={"mx-1 py-2 flex justify-center items-center w-[90%]"}>
-                <div className={"text-3xl"}>{index + 1}등</div>
-                <div className={"rounded-full border-2"}>
+                <div className={"text-3xl w-20 text-center"}>{index + 1}등</div>
+                <div className={"rounded-full border-2 mx-3"}>
                     <img className={"h-16"}
-                        // src={"https://tinos-images-storage.s3.ap-northeast-2.amazonaws.com/default_user_image.png"}
-                         src={TinoIcon}
+                        src={"https://tinos-images-storage.s3.ap-northeast-2.amazonaws.com/default_user_image.png"}
+                         // src={TinoIcon}
                          alt=""/>
                 </div>
                 <div className={"text-2xl font-bold"}>{log.userId}</div>
                 <div>{log.user.nickname}</div>
-                <div className={"text-2xl flex-1 text-center"}>{log.gameScore}</div>
+                <div className={"text-2xl flex-1 text-center"}>{log.gameScore}점</div>
             </div>
             <div className={"border-2"}></div>
         </>
@@ -107,7 +108,7 @@ const LogComp = ({gameId, userId}) => {
     return (
         <>
             <div className={"mt-10 text-3xl mb-4"}>Top 10</div>
-            <div className={"border-2 w-full h-96 rounded-3xl mb-4 flex"}>
+            <div className={"border-2 w-full h-80 rounded-3xl mb-4 flex"}>
                 <div className={"w-52 flex justify-center items-center"}>
                     <OwnLogCardComp gameId={gameId} userId={userId}/>
                 </div>
