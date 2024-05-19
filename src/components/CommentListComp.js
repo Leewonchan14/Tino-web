@@ -4,6 +4,31 @@ import BlueButton from "./BlueButton";
 import TinoIcon from "../assets/tino_icon.png";
 import {G_MARKET_FONT} from "../constant/FontFamily";
 
+const ratingArray = [1, 2, 3, 4, 5];
+
+const StartInputRadioComp = () => {
+    const [star, setStar] = useState(5)
+    return (
+        <div className={"flex mb-4"}>
+            게임을 평가 하세요 : ({star}점)
+            {ratingArray.map((value, starIndex) => (
+                <div key={starIndex} className={"flex items-center mr-4"}
+                     onClick={() => setStar(value)}>
+                    {Array.from({length: value}, (_,) => (
+                        <svg className={"h-6 w-6 fill-current text-yellow-500"}
+                             xmlns="http://www.w3.org/2000/svg"
+                             viewBox="0 0 24 24">
+                            <path
+                                className={star === value ? "text-yellow-500" : "text-gray-300"}
+                                d="M12 2l2.5 6.5h6L15.5 12l1 6-5-2-5 2 1-6-4-3.5h6L12 2z"/>
+                        </svg>
+                    ))}
+                </div>
+            ))}
+        </div>
+    )
+}
+
 const CommentInputComp = () => {
     return (
         <div className={"flex h-20 mb-4"}>
@@ -24,7 +49,9 @@ const timeConverter = (dateTime) => {
         hours = hours - 12;
     }
 
-    return date.getFullYear() + "년 " + (date.getMonth() + 1) + "월" + date.getDate() + "일 " + hours + "시" + date.getMinutes() + "분";
+    // return date.getFullYear() + "년 " + (date.getMonth() + 1) + "월" + date.getDate() + "일 " + hours + "시" + date.getMinutes() + "분";
+    // hours + "시" + date.getMinutes() + "분";
+    return "두달 전"
 }
 
 
@@ -66,10 +93,12 @@ const HelpfulHeartButton = ({isHelpful, onClick, score}) => {
 
 const OwnComment = () => {
     return (
-        <div className={"border-2 w-full rounded-3xl mb-4 p-8"}>
-            <span style={{fontFamily: G_MARKET_FONT}} className={"text-2xl text-blue-500"}>내 댓글</span>
-            <div className={""}>{timeConverter("2024-01-14T17:48:05.414")}</div>
-            <div className={"flex items-center my-4"}>
+        <div className={"border-2 w-full rounded-3xl mb-4 p-8 relative"}>
+            <div className={"flex"}>
+                <span style={{fontFamily: G_MARKET_FONT}} className={"text-2xl text-blue-500"}>내 댓글</span>
+                <div className={"text-gray-400 text-right ml-auto"}>{timeConverter("2024-01-14T17:48:05.414")}</div>
+            </div>
+            <div className={"flex items-center mt-4"}>
                 <div className={"rounded-full bg-gray-400 mr-4"}>
                     <img className={"h-14"} src={TinoIcon} alt=""/>
                 </div>
@@ -80,6 +109,7 @@ const OwnComment = () => {
                 </div>
             </div>
             <div>이 게임이 똥망이 이유...</div>
+            {/*<div className={"text-gray-300 text-right ml-auto"}>{timeConverter("2024-01-14T17:48:05.414")}</div>*/}
         </div>
     )
 }
@@ -88,13 +118,16 @@ const OwnComment = () => {
 const Comment = ({comment}) => {
     return (
         <div className={"border-2 w-full rounded-3xl mb-4 p-8"}>
-            <div className={""}>{timeConverter("2024-01-14T17:48:05.414")}</div>
-            <div className={"flex items-center my-4"}>
+
+            <div className={"flex items-center"}>
                 <div className={"rounded-full bg-gray-400 mr-4"}>
                     <img className={"h-14"} src={TinoIcon} alt=""/>
                 </div>
-                <div className={"flex-col"}>
-                    <div style={{fontFamily: G_MARKET_FONT}} className={"text-xl"}>{comment.user.nickname}</div>
+                <div className={"flex-col w-full"}>
+                    <div className={"flex"}>
+                        <div style={{fontFamily: G_MARKET_FONT}} className={"text-xl"}>{comment.user.nickname}</div>
+                        <div className={"text-gray-400 ml-auto"}>{timeConverter("2024-01-14T17:48:05.414")}</div>
+                    </div>
                     <RatingComp score={comment.star}/>
                     <HelpfulHeartButton isHelpful={false} score={comment.helpful}/>
                 </div>
@@ -107,7 +140,6 @@ const Comment = ({comment}) => {
 const CommentList = ({commentState = []}) => {
     return (
         commentState.map((comment, index) => {
-            console.log(comment)
             return (
                 <Comment key={index} comment={comment}/>
             )
@@ -139,6 +171,7 @@ const CommentListComp = ({...rest}) => {
             <div className={"mt-10 text-3xl mb-4"}>댓글</div>
             <div className={"w-full rounded-3xl"}>
                 <OwnComment/>
+                <StartInputRadioComp/>
                 <CommentInputComp/>
                 <CommentList commentState={commentState}/>
             </div>
