@@ -11,9 +11,9 @@ const inputStyle = {
     fontFamily: G_MARKET_FONT
 }
 
-function InputComp({onChange, value, placeholder, name = "inputUserId", className}) {
+function InputComp({onChange, value, placeholder, name = "inputUserId", className, type="text"}) {
     return (
-        <input style={inputStyle} onChange={onChange} name={name} type="text" className={className}
+        <input style={inputStyle} onChange={onChange} name={name} type={type} className={className}
                value={value} placeholder={placeholder}/>
     );
 }

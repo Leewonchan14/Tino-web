@@ -36,7 +36,7 @@ function Login(...rest) {
                     <span style={{color: "red"}}>{!isValid.email_blank && "이메일을 입력해주세요."}</span>
 
                     <InputComp value={loginState.password} onChange={onChange} name={"password"}
-                               placeholder={"비밀번호를 입력하세요"}/>
+                               placeholder={"비밀번호를 입력하세요"} type={"password"}/>
                     <span style={{color: "red"}}>{!isValid.password && "비밀번호는 8자리 이상 이어야 합니다."}</span>
 
                     <ButtonComp text={"로그인"} onClick={onSubmit}/>

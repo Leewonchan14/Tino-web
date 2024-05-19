@@ -1,6 +1,11 @@
 import {useState} from "react";
+import UserController from "../api/user.controller";
+import {useNavigate} from "react-router-dom";
+import {HOME_PATH} from "../pages/Home";
 
 const useLogin = () => {
+
+    let navigate = useNavigate();
 
     const [loginState, setLoginState] = useState({
         email: "",
@@ -52,7 +57,21 @@ const useLogin = () => {
             return
         }
 
-        console.log("로그인 요청")
+        try {
+            const response = await UserController.login({...loginState});
+
+            const {userId} = response.data;
+            const {accessToken, refreshToken} = response.data.token;
+
+            localStorage.setItem("accessToken", accessToken);
+            localStorage.setItem("refreshToken", refreshToken);
+            localStorage.setItem("userId", userId);
+
+
+            navigate(HOME_PATH);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     return {loginState, isValid, onChange, onSubmit}

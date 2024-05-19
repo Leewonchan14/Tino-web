@@ -37,13 +37,13 @@ function SignUp(props) {
 
 
                     <InputComp value={signupFormState.password} name={"password"} onChange={onChange}
-                               placeholder={"비밀번호를 입력하세요"}/>
+                               placeholder={"비밀번호를 입력하세요"} type={"password"}/>
                     <span style={{color: "red"}}>{!isValid.password && "비밀번호는 8자리 이상 이여야 합니다."}</span>
                     <span style={{color: "red"}}>{!isValid.password_blank && "비밀번호를 입력해주세요."}</span>
 
 
                     <InputComp value={rePassword} name={"rePassword"} onChange={onChange}
-                               placeholder={"비밀번호를 다시 입력하세요"}/>
+                               placeholder={"비밀번호를 다시 입력하세요"} type={"password"}/>
                     {!isValid.rePassword && <span style={{color: "red"}}>비밀번호가 일치하지 않습니다.</span>}
 
 
