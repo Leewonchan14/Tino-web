@@ -11,7 +11,8 @@ const GameIframeComp = ({gameState, isFetching}) => {
     return (
         <div className={"w-full h-[80vh] rounded-3xl flex justify-center items-center relative border-2"}>
             <span className={"absolute top-1/2 z-0"}>{isFetching && "게임을 기다리는중..."}</span>
-            <iframe className={"w-full h-full z-30"} src={gameState.gameUrl} title={gameState.gameName}/>
+            {!isFetching &&
+                <iframe className={"w-full h-full z-30"} src={gameState.gameUrl} title={gameState.gameName}/>}
         </div>
     )
 }
