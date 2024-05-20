@@ -14,15 +14,17 @@ const StartInputRadioComp = () => {
             {ratingArray.map((value, starIndex) => (
                 <div key={starIndex} className={"flex items-center mr-4"}
                      onClick={() => setStar(value)}>
-                    {Array.from({length: value}, (_,) => (
-                        <svg className={"h-6 w-6 fill-current text-yellow-500"}
-                             xmlns="http://www.w3.org/2000/svg"
-                             viewBox="0 0 24 24">
-                            <path
-                                className={star === value ? "text-yellow-500" : "text-gray-300"}
-                                d="M12 2l2.5 6.5h6L15.5 12l1 6-5-2-5 2 1-6-4-3.5h6L12 2z"/>
-                        </svg>
-                    ))}
+                    {Array.from({length: value}, (_, index) => {
+                        return (
+                            <svg key={starIndex * 1000 + index} className={"h-6 w-6 fill-current text-yellow-500"}
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 viewBox="0 0 24 24">
+                                <path
+                                    className={star === value ? "text-yellow-500" : "text-gray-300"}
+                                    d="M12 2l2.5 6.5h6L15.5 12l1 6-5-2-5 2 1-6-4-3.5h6L12 2z"/>
+                            </svg>
+                        )
+                    })}
                 </div>
             ))}
         </div>
@@ -141,27 +143,27 @@ const OwnComment = () => {
 }
 
 
-const Comment = ({comment, containerStyle, nicknameStyle}) => {
+const Comment = ({comment, index, containerStyle, nicknameStyle}) => {
     return (
-        <container className={"block border-2 w-full rounded-3xl mb-4 p-8 " + containerStyle}>
-            <profile className={"flex items-center"}>
-                <image_container className={"block rounded-full bg-gray-400 mr-4"}>
+        <article key={index} className={"block border-2 w-full rounded-3xl mb-4 p-8 " + containerStyle}>
+            <div className={"flex items-center"}>
+                <section className={"block rounded-full bg-gray-400 mr-4"}>
                     <img className={"h-14"} src={TinoIcon} alt=""/>
-                </image_container>
-                <userinfo className={"flex-col w-full"}>
+                </section>
+                <section className={"flex-col w-full"}>
                     <div className={"flex"}>
-                        <nickname style={{fontFamily: G_MARKET_FONT}}
-                                  className={"text-xl " + nicknameStyle}>
+                        <span style={{fontFamily: G_MARKET_FONT}}
+                              className={"text-xl " + nicknameStyle}>
                             {comment.user.nickname}
-                        </nickname>
+                        </span>
                         <time className={"text-gray-400 ml-auto"}>{timeConverter("2024-01-14T17:48:05.414")}</time>
                     </div>
                     <RatingComp score={comment.star}/>
                     <HelpfulHeartButton isHelpful={false} score={comment.helpful}/>
-                </userinfo>
-            </profile>
-            <context className={"block mt-2"}>{comment.reviewContent}</context>
-        </container>
+                </section>
+            </div>
+            <span className={"block mt-2"}>{comment.reviewContent}</span>
+        </article>
     );
 }
 
@@ -169,7 +171,7 @@ const CommentList = ({commentState = []}) => {
     return (
         commentState.map((comment, index) => {
             return (
-                <Comment key={index} comment={comment}/>
+                <Comment key={index} comment={comment} index={index}/>
             )
         })
     )
