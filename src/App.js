@@ -21,7 +21,7 @@ function App() {
             <Routes>
                 <Route exact path="/" element={<LayoutWithNavBar/>}>
                     <Route exact path={HOME_PATH} element={<Home/>}/>
-                    <Route exact path={MY_LOCATION_PATH} element={<MyLocation/>}/>
+                    {/*<Route exact path={MY_LOCATION_PATH} element={<MyLocation/>}/>*/}
                     <Route exact path={GAME_PATH} element={<GameDetailPage/>}/>
                     <Route exact path={LOGIN_PATH} element={<Login/>}/>
                     <Route exact path={EMAIL_PAGE_PATH} element={<EmailCode/>}/>

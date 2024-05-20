@@ -1,10 +1,12 @@
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import UserController from "../api/user.controller";
-import {HOME_PATH} from "../pages/Home";
 
 const useAutoLogin = () => {
+
+    const {prePath} = useLocation();
     let navigate = useNavigate();
+
 
     let preAccessToken = localStorage.getItem("AccessToken");
     let preRefreshToken = localStorage.getItem("RefreshToken");
@@ -15,16 +17,16 @@ const useAutoLogin = () => {
     const autoLogin = async () => {
         setLoading(true);
 
-        const GO_HOME_PAGE = () => {
+        const GO_PRE_PAGE = () => {
             localStorage.removeItem("accessToken");
             localStorage.removeItem("refreshToken");
             localStorage.removeItem("userId");
             setLoading(false);
-            navigate(HOME_PATH);
+            navigate(prePath);
         };
 
         if (!preUserId || !preAccessToken || !preRefreshToken) {
-            GO_HOME_PAGE();
+            GO_PRE_PAGE();
             return;
         }
 
@@ -36,7 +38,7 @@ const useAutoLogin = () => {
                 refreshToken: preRefreshToken
             });
         } catch (error) {
-            GO_HOME_PAGE();
+            GO_PRE_PAGE();
             return;
         }
 
@@ -45,7 +47,7 @@ const useAutoLogin = () => {
 
         // 로그인 페이지로 이동
         if (!isSuccess) {
-            GO_HOME_PAGE();
+            GO_PRE_PAGE();
             return;
         }
 
