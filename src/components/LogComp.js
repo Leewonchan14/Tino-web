@@ -46,14 +46,14 @@ const OwnLogCardComp = ({gameId, userId}) => {
         <>
             {isFetching && <LoadingSpinner/>}
 
-            <OwnLogComp/>
-            {/*{!isFetching && isExist &&*/}
-            {/*    <OwnLogComp/>*/}
-            {/*}*/}
+            {/*<OwnLogComp/>*/}
+            {!isFetching && isExist &&
+                <OwnLogComp/>
+            }
 
-            {/*{!isFetching && !isExist &&*/}
-            {/*    <NotExistComp/>*/}
-            {/*}*/}
+            {!isFetching && !isExist &&
+                <NotExistComp/>
+            }
 
             <div className={"border-2 h-full"}></div>
         </>

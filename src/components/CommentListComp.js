@@ -144,24 +144,38 @@ const OwnComment = () => {
 
 
 const Comment = ({comment, index, containerStyle, nicknameStyle}) => {
-    return (
-        <article key={index} className={"block border-2 w-full rounded-3xl mb-4 p-8 " + containerStyle}>
-            <div className={"flex items-center"}>
-                <section className={"block rounded-full bg-gray-400 mr-4"}>
-                    <img className={"h-14"} src={TinoIcon} alt=""/>
-                </section>
+    function IconImage({src}) {
+        return (
+            <section className={"block rounded-full bg-gray-400 mr-4"}>
+                <img className={"h-14"} src={src} alt=""/>
+            </section>
+        )
+    }
+
+    function UserProfile({user}) {
+        return (
+            <div className={"flex items-center flex-1"}>
                 <section className={"flex-col w-full"}>
-                    <div className={"flex"}>
+                    <div className={"flex relative"}>
                         <span style={{fontFamily: G_MARKET_FONT}}
                               className={"text-xl " + nicknameStyle}>
-                            {comment.user.nickname}
+                            {user.nickname}
                         </span>
-                        <time className={"text-gray-400 ml-auto"}>{timeConverter("2024-01-14T17:48:05.414")}</time>
+                        <time className={"absolute text-gray-400 ml-auto right-0"}>{timeConverter("2024-01-14T17:48:05.414")}</time>
                     </div>
                     <RatingComp score={comment.star}/>
                     <HelpfulHeartButton isHelpful={false} score={comment.helpful}/>
                 </section>
             </div>
+        )
+    }
+
+    return (
+        <article key={index} className={"block border-2 w-full rounded-3xl mb-4 p-8 " + containerStyle}>
+            <section className={"flex items-center w-full"}>
+                <IconImage src={TinoIcon}/>
+                <UserProfile user={comment.user} />
+            </section>
             <span className={"block mt-2"}>{comment.reviewContent}</span>
         </article>
     );
@@ -209,5 +223,4 @@ const CommentListComp = ({...rest}) => {
     )
 }
 
-let MemoCommentListComp = React.memo(CommentListComp);
-export {MemoCommentListComp as CommentListComp};
+export default CommentListComp;
