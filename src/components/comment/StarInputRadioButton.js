@@ -4,7 +4,7 @@ const ratingArray = [1, 2, 3, 4, 5];
 
 const StarInputRadioButton = ({star, setStar}) => {
     return (
-        <div className={"flex mb-4"}>
+        <div className={"flex"}>
             게임을 평가 하세요 :
             {ratingArray.map((value, starIndex) => (
                 <div key={starIndex} className={"flex items-center mr-4 cursor-pointer"}

@@ -1,10 +1,10 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 import {useGetOneGame} from "../hooks/game/useGetOneGame";
-import CommentList from "../components/comment/CommentList";
 import GameDescription from "../components/game/GameDescription";
 import GameIframe from "../components/game/GameIframe";
 import LogSectionInGame from "../components/log/LogSectionInGame";
+import CommentSectionInGame from "../components/comment/CommentSectionInGame";
 
 const GAME_PATH = "/games/:gameId";
 const GAME_PATH_WITHOUT_PARAM = "/games/";
@@ -24,7 +24,7 @@ function Game(props) {
             <LogSectionInGame gameId={gameId} userId={112}/>
 
             {/*댓글 목록*/}
-            <CommentList/>
+            <CommentSectionInGame gameId={gameId}/>
         </div>
     );
 }
