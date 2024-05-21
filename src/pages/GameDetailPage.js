@@ -22,7 +22,7 @@ function GameDetailPage(props) {
     let {gameId} = useParams();
     let {gameState, isFetching} = useGetOneGame({gameId});
     return (
-        <div className={"px-14 pb-20"}>
+        <div className={"pb-20"}>
             {/*게임 화면*/}
             <GameIframeComp gameState={gameState} isFetching={isFetching}/>
 
