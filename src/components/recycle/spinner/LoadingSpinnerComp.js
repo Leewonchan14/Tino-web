@@ -1,4 +1,4 @@
-import Spinner from "../../assets/Spinner.gif";
+import Spinner from "../../../assets/Spinner.gif";
 import React from "react";
 
 const LoadingSpinnerComp = ({loadingComp, isFetching, className}) => {

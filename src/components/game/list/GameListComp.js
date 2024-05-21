@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import useGetGames from "../../../hooks/game/useGetGames";
 import useReactQueryInfiniteScroll from "../../../hooks/recycle/useReactQueryInfiniteScroll";
 import SortMenuList from "../../header/SortMenuList";
-import LoadingSpinnerComp from "../../recycle/LoadingSpinnerComp";
+import LoadingSpinnerComp from "../../recycle/spinner/LoadingSpinnerComp";
 import GameComp from "./GameComp";
 
 const GameCompList = ({...rest}) => {

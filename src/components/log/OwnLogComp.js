@@ -2,7 +2,7 @@ import {useGetOwnLog} from "../../hooks/log/useGetOwnLog";
 import TinoIcon from "../../assets/tino_icon.png";
 import {G_MARKET_FONT} from "../../constant/FontFamily";
 import React from "react";
-import LoadingSpinnerComp from "../recycle/LoadingSpinnerComp";
+import LoadingSpinnerComp from "../recycle/spinner/LoadingSpinnerComp";
 
 const OwnLogComp = () => {
     return (

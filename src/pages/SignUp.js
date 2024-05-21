@@ -1,6 +1,6 @@
 import React from 'react';
-import {ComboBox, InputComp} from "../components/recycle/InputComp";
-import ButtonComp from "../components/recycle/ButtonComp";
+import {ComboBox, InputComp} from "../components/recycle/input/InputComp";
+import ButtonComp from "../components/recycle/button/ButtonComp";
 import {useSignUp} from "../hooks/login/useSignUp";
 import {G_MARKET_FONT} from "../constant/FontFamily";
 

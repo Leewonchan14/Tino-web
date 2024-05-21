@@ -1,6 +1,6 @@
 import React from 'react';
 import {useGetLogsByGameId} from "../../hooks/log/useGetLogsByGameId";
-import LoadingSpinnerComp from "../recycle/LoadingSpinnerComp";
+import LoadingSpinnerComp from "../recycle/spinner/LoadingSpinnerComp";
 import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfiniteScroll";
 import OwnLogCardComp from "./OwnLogComp";
 

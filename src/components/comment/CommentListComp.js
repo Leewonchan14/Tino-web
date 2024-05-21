@@ -1,6 +1,6 @@
-import {InputComp} from "../recycle/InputComp";
+import {InputComp} from "../recycle/input/InputComp";
 import React, {memo, useState} from "react";
-import BlueButton from "../recycle/BlueButton";
+import BlueButton from "../recycle/button/BlueButton";
 import TinoIcon from "../../assets/tino_icon.png";
 import {G_MARKET_FONT} from "../../constant/FontFamily";
 
