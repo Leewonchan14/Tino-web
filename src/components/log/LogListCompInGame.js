@@ -1,6 +1,6 @@
 import React from 'react';
 import {useGetLogsByGameId} from "../../hooks/log/useGetLogsByGameId";
-import LoadingSpinnerComp from "../common/spinner/LoadingSpinnerComp";
+import LoadingSpinner from "../common/spinner/LoadingSpinner";
 import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfiniteScroll";
 import OwnLogCardComp from "./OwnLogComp";
 
@@ -45,7 +45,7 @@ function LogCompListInGame({gameId}) {
                                                              index={pageIndex * pageSize + logIndex}/>)
                 )
             )}
-            <LoadingSpinnerComp loadingComp={loadingComp} isFetching={isFetching}/>
+            <LoadingSpinner loadingComp={loadingComp} isFetching={isFetching}/>
         </div>
     )
 

@@ -1,30 +1,10 @@
 import React, {useEffect, useRef, useState} from "react";
 import arrow_drop_down from "../../assets/arrow_drop_down.png";
-import {GameController, GAME_SORT} from "../../api/game.controller";
+import {GAME_SORT} from "../../api/game.controller";
+import GameSortMenuItemList from "./atoms/GameSortMenuItemList";
 
-const MenuItem = ({option, handleOptionClick}) => {
-    return (
-        <button
-            onClick={() => handleOptionClick(option)}
-            className="text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-blue-500 hover:text-white">
-            {option}
-        </button>
-    );
-}
 
-const MenuItems = ({handleOptionClick, options}) => {
-    return (
-        <div className="absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white">
-            <div className="py-1">
-                {options.map((option) => (
-                    <MenuItem key={option} option={option} handleOptionClick={handleOptionClick}/>
-                ))}
-            </div>
-        </div>
-    );
-}
-
-const SortMenuList = ({setSortState, initScroll, className}) => {
+const GameSortMenu = ({setSortState, initScroll, className}) => {
     let sortMapper = {
         조회순: GAME_SORT.VIEW_COUNT,
         최신순: GAME_SORT.RECENT,
@@ -70,10 +50,10 @@ const SortMenuList = ({setSortState, initScroll, className}) => {
                 </div>
             </button>
             {isOpen && (
-                <MenuItems handleOptionClick={handleOptionClick} options={options}/>
+                <GameSortMenuItemList handleOptionClick={handleOptionClick} options={options}/>
             )}
         </div>
     );
 }
 
-export default SortMenuList;
+export default GameSortMenu;

@@ -1,6 +1,6 @@
 import React from "react";
 
-const GameIframeComp = ({gameState, isFetching}) => {
+const GameIframe = ({gameState, isFetching}) => {
     return (
         <div className={"w-full h-[80vh] rounded-3xl flex justify-center items-center relative border-2"}>
             <span className={"absolute top-1/2 z-0"}>{isFetching && "게임을 기다리는중..."}</span>
@@ -10,4 +10,4 @@ const GameIframeComp = ({gameState, isFetching}) => {
     )
 }
 
-export default GameIframeComp;
+export default GameIframe;

@@ -2,7 +2,7 @@ import {useGetOwnLog} from "../../hooks/log/useGetOwnLog";
 import TinoIcon from "../../assets/tino_icon.png";
 import {G_MARKET_FONT} from "../../constant/FontFamily";
 import React from "react";
-import LoadingSpinnerComp from "../common/spinner/LoadingSpinnerComp";
+import LoadingSpinner from "../common/spinner/LoadingSpinner";
 
 const OwnLogComp = () => {
     return (
@@ -35,7 +35,7 @@ const OwnLogCardComp = ({gameId, userId}) => {
 
     return (
         <div className={"w-52 flex justify-center items-center"}>
-            {isFetching && <LoadingSpinnerComp isFetching={true} className={""}/>}
+            {isFetching && <LoadingSpinner isFetching={true} className={""}/>}
 
             {!isFetching && isExist &&
                 <OwnLogComp/>

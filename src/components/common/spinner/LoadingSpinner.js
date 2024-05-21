@@ -1,7 +1,7 @@
 import Spinner from "../../../assets/Spinner.gif";
 import React from "react";
 
-const LoadingSpinnerComp = ({loadingComp, isFetching, className}) => {
+const LoadingSpinner = ({loadingComp, isFetching, className}) => {
     return (
         <div ref={loadingComp} className={"flex w-full justify-center " + className}>
             {isFetching && <img src={Spinner} alt=""/>}
@@ -9,4 +9,4 @@ const LoadingSpinnerComp = ({loadingComp, isFetching, className}) => {
     )
 }
 
-export default LoadingSpinnerComp;
+export default LoadingSpinner;

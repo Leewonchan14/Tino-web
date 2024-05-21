@@ -1,14 +1,15 @@
 import React from 'react';
-import viewcount_icon from "../../../assets/viewcount_icon.png";
+import viewcount_icon from "../../assets/viewcount_icon.png";
 import {useNavigate} from "react-router-dom";
-import {G_MARKET_FONT} from "../../../constant/FontFamily";
+import {G_MARKET_FONT} from "../../constant/FontFamily";
+import {GAME_PATH_WITHOUT_PARAM} from "../../pages/Game";
 
 
-const GameComp = ({game}) => {
+const GameCard = ({game}) => {
     let navigate = useNavigate();
 
     const onClick = () => {
-        navigate(`/games/${game.gameId}`);
+        navigate(`${GAME_PATH_WITHOUT_PARAM}${game.gameId}`);
     }
 
     return (
@@ -36,4 +37,4 @@ const GameComp = ({game}) => {
     );
 };
 
-export default GameComp;
+export default GameCard;
