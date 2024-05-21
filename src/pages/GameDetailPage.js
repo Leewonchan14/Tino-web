@@ -2,7 +2,7 @@ import React from 'react';
 import {useParams} from 'react-router-dom';
 import {useGetOneGame} from "../hooks/game/useGetOneGame";
 import LogListCompInGameDetail from "../components/log/LogListCompInGameDetail";
-import CommentSection from "../components/comment/CommentSection";
+import CommentSection from "../components/comment/body/CommentSection";
 import GameDescriptionComp from "../components/game/page/GameDescriptionComp";
 import GameIframeComp from "../components/game/page/GameIframeComp";
 

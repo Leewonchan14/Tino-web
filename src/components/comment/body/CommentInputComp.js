@@ -1,5 +1,5 @@
-import InputComp from "../recycle/input/InputComp";
-import BlueButton from "../recycle/button/BlueButton";
+import InputComp from "../../recycle/input/InputComp";
+import BlueButton from "../../recycle/button/BlueButton";
 import React from "react";
 
 const CommentInputComp = () => {
