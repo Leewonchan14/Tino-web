@@ -1,7 +1,7 @@
 import {useState} from "react";
-import EmailController from "../api/email.controller";
+import EmailController from "../../api/email.controller";
 import {useNavigate} from "react-router-dom";
-import {SIGNUP_PATH} from "../pages/SignUp";
+import {SIGNUP_PATH} from "../../pages/SignUp";
 
 export const useSendEmail = (initState) => {
 

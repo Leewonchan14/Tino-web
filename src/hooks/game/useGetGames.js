@@ -1,7 +1,7 @@
 import {useState} from "react";
-import {GameController} from "../api/game.controller";
+import {GameController} from "../../api/game.controller";
 import {useInfiniteQuery} from "@tanstack/react-query";
-import useReactQueryInfiniteScroll from "./useReactQueryInfiniteScroll";
+import useReactQueryInfiniteScroll from "../recycle/useReactQueryInfiniteScroll";
 
 const MINUTE = 60 * 1000;
 const SECOND = 1000;

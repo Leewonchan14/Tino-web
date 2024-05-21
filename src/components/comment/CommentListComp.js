@@ -1,8 +1,8 @@
-import {InputComp} from "./InputComp";
+import {InputComp} from "../recycle/InputComp";
 import React, {memo, useState} from "react";
-import BlueButton from "./BlueButton";
-import TinoIcon from "../assets/tino_icon.png";
-import {G_MARKET_FONT} from "../constant/FontFamily";
+import BlueButton from "../recycle/BlueButton";
+import TinoIcon from "../../assets/tino_icon.png";
+import {G_MARKET_FONT} from "../../constant/FontFamily";
 
 const ratingArray = [1, 2, 3, 4, 5];
 

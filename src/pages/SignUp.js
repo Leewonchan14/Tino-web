@@ -1,7 +1,7 @@
 import React from 'react';
-import {ComboBox, InputComp} from "../components/InputComp";
-import ButtonComp from "../components/ButtonComp";
-import {useSignUp} from "../hooks/useSignUp";
+import {ComboBox, InputComp} from "../components/recycle/InputComp";
+import ButtonComp from "../components/recycle/ButtonComp";
+import {useSignUp} from "../hooks/login/useSignUp";
 import {G_MARKET_FONT} from "../constant/FontFamily";
 
 const SIGNUP_PATH = "/signup";

@@ -1,9 +1,9 @@
 import React from 'react';
-import TinoIcon from "../assets/tino_icon.png";
+import TinoIcon from "../../assets/tino_icon.png";
 import {useNavigate} from "react-router-dom";
-import {HOME_PATH} from "../pages/Home";
-import {LOGIN_PATH} from "../pages/Login";
-import {menuList, useNavMenu} from "../hooks/useNavMenu";
+import {HOME_PATH} from "../../pages/Home";
+import {LOGIN_PATH} from "../../pages/Login";
+import {menuList, useNavMenu} from "../../hooks/header/useNavMenu";
 
 function MenuBar({...rest}) {
 

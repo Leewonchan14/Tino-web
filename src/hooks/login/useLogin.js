@@ -1,7 +1,7 @@
 import {useState} from "react";
-import UserController from "../api/user.controller";
+import UserController from "../../api/user.controller";
 import {useNavigate} from "react-router-dom";
-import {HOME_PATH} from "../pages/Home";
+import {HOME_PATH} from "../../pages/Home";
 
 const useLogin = () => {
 

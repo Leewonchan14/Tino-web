@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {InputComp} from "../components/InputComp";
-import ButtonComp from "../components/ButtonComp";
+import {InputComp} from "../components/recycle/InputComp";
+import ButtonComp from "../components/recycle/ButtonComp";
 import {EMAIL_PAGE_PATH} from "./EmailCode";
-import {useLogin} from "../hooks/useLogin";
+import {useLogin} from "../hooks/login/useLogin";
 import {G_MARKET_FONT} from "../constant/FontFamily";
 
 const LOGIN_PATH = "/login";

@@ -1,5 +1,5 @@
 import './App.css';
-import ScrollToTop from "./hooks/useScrollToTop";
+import ScrollToTop from "./hooks/recycle/useScrollToTop";
 import AutoLogin from "./pages/AutoLogin";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LayoutWithNavBar from "./layout/LayoutWithNavBar";

@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
-import arrow_drop_down from "../assets/arrow_drop_down.png";
-import {GameController, GAME_SORT} from "../api/game.controller";
+import arrow_drop_down from "../../assets/arrow_drop_down.png";
+import {GameController, GAME_SORT} from "../../api/game.controller";
 
 const MenuItem = ({option, handleOptionClick}) => {
     return (

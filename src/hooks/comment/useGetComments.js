@@ -1,4 +1,4 @@
-import CommentController from "../api/comment.controller";
+import CommentController from "../../api/comment.controller";
 import {useState} from "react";
 
 const useGetComments = ({gameId}) => {

@@ -1,7 +1,7 @@
 import React from 'react';
-import {GameCompList} from "../components/GameComp";
-import Footer from "../components/Footer";
+import Footer from "../components/footer/Footer";
 import {G_MARKET_FONT} from "../constant/FontFamily";
+import GameCompList from "../components/game/list/GameListComp";
 
 const HOME_PATH = "/";
 

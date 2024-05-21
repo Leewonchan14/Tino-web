@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
-import {HOME_PATH} from "../pages/Home";
-import {RANKING_PATH} from "../pages/Ranking";
-import {FRIEND_PAGE_PATH} from "../pages/FriendPage";
+import {HOME_PATH} from "../../pages/Home";
+import {RANKING_PATH} from "../../pages/Ranking";
+import {FRIEND_PAGE_PATH} from "../../pages/FriendPage";
 
 const menuList = [
     "게임",

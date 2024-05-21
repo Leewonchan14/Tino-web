@@ -1,4 +1,4 @@
-import LogController from "../api/log.controller";
+import LogController from "../../api/log.controller";
 import {useInfiniteQuery} from "@tanstack/react-query";
 
 const SECOND = 1000;
