@@ -1,7 +1,7 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 import {useGetOneGame} from "../hooks/game/useGetOneGame";
-import LogListCompInGame from "../components/log/LogListCompInGame";
+import LogListInGame from "../components/log/LogListInGame";
 import CommentList from "../components/comment/CommentList";
 import GameDescription from "../components/game/GameDescription";
 import GameIframe from "../components/game/GameIframe";
@@ -21,7 +21,7 @@ function Game(props) {
             <GameDescription gameState={gameState} isFetching={isFetching}/>
 
             {/*게임 기록*/}
-            <LogListCompInGame gameId={gameId} userId={112}/>
+            <LogListInGame gameId={gameId} userId={112}/>
 
             {/*댓글 목록*/}
             <CommentList/>

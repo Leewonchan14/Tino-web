@@ -2,7 +2,7 @@ import React from 'react';
 import {useGetLogsByGameId} from "../../hooks/log/useGetLogsByGameId";
 import LoadingSpinner from "../common/spinner/LoadingSpinner";
 import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfiniteScroll";
-import OwnLogCardComp from "./OwnLogComp";
+import OwnLog from "./OwnLog";
 
 
 function LogCardComp({log, index, className}) {
@@ -52,16 +52,16 @@ function LogCompListInGame({gameId}) {
 }
 
 
-const LogListCompInGame = ({gameId, userId}) => {
+const LogListInGame = ({gameId, userId}) => {
     return (
         <>
             <div className={"mt-10 text-3xl mb-4"}>Top 10</div>
             <div className={"border-2 w-full h-80 rounded-3xl mb-4 flex"}>
-                <OwnLogCardComp gameId={gameId} userId={userId}/>
+                <OwnLog gameId={gameId} userId={userId}/>
                 <LogCompListInGame gameId={gameId}/>
             </div>
         </>
     )
 }
 
-export default LogListCompInGame;
+export default LogListInGame;
