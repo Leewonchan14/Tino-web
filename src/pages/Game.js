@@ -1,10 +1,10 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 import {useGetOneGame} from "../hooks/game/useGetOneGame";
-import LogListInGame from "../components/log/LogListInGame";
 import CommentList from "../components/comment/CommentList";
 import GameDescription from "../components/game/GameDescription";
 import GameIframe from "../components/game/GameIframe";
+import LogSectionInGame from "../components/log/LogSectionInGame";
 
 const GAME_PATH = "/games/:gameId";
 const GAME_PATH_WITHOUT_PARAM = "/games/";
@@ -21,7 +21,7 @@ function Game(props) {
             <GameDescription gameState={gameState} isFetching={isFetching}/>
 
             {/*게임 기록*/}
-            <LogListInGame gameId={gameId} userId={112}/>
+            <LogSectionInGame gameId={gameId} userId={112}/>
 
             {/*댓글 목록*/}
             <CommentList/>
