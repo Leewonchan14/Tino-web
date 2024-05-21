@@ -2,7 +2,7 @@ import React from 'react';
 import {useParams} from 'react-router-dom';
 import {useGetOneGame} from "../hooks/game/useGetOneGame";
 import LogListCompInGameDetail from "../components/log/LogListCompInGameDetail";
-import CommentListComp from "../components/comment/CommentListComp";
+import CommentSection from "../components/comment/CommentSection";
 import GameDescriptionComp from "../components/game/page/GameDescriptionComp";
 import GameIframeComp from "../components/game/page/GameIframeComp";
 
@@ -23,7 +23,7 @@ function GameDetailPage(props) {
             <LogListCompInGameDetail gameId={gameId} userId={112}/>
 
             {/*댓글 목록*/}
-            <CommentListComp/>
+            <CommentSection/>
         </div>
     );
 }

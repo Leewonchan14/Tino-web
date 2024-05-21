@@ -18,16 +18,4 @@ function InputComp({onChange, value, placeholder, name = "inputUserId", classNam
     );
 }
 
-function ComboBox({onChange, value, placeholder, options}) {
-    return (
-        <select style={inputStyle} onChange={onChange} name={"inputUserId"} value={value}>
-            {
-                options.map(({value}, index) => {
-                    return <option key={index} value={value}>{value}</option>
-                })
-            }
-        </select>
-    );
-}
-
-export {InputComp, ComboBox};
+export default InputComp;

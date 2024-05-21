@@ -1,5 +1,5 @@
 import React from 'react';
-import {InputComp} from "../components/recycle/input/InputComp";
+import InputComp from "../components/recycle/input/InputComp";
 import {useSendEmail} from "../hooks/login/useSendEmail";
 import {G_MARKET_FONT} from "../constant/FontFamily";
 

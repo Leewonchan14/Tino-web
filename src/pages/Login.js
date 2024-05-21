@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {InputComp} from "../components/recycle/input/InputComp";
+import InputComp from "../components/recycle/input/InputComp";
 import ButtonComp from "../components/recycle/button/ButtonComp";
 import {EMAIL_PAGE_PATH} from "./EmailCode";
 import {useLogin} from "../hooks/login/useLogin";
