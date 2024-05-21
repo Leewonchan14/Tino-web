@@ -1,9 +1,9 @@
 import React from 'react';
-import InputComp from "../components/recycle/input/InputComp";
+import InputComp from "../components/common/input/InputComp";
 import {useSendEmail} from "../hooks/login/useSendEmail";
 import {G_MARKET_FONT} from "../constant/FontFamily";
 
-const EMAIL_PAGE_PATH = "/email/auth";
+const AUTH_EMAIL_PAGE_PATH = "/email/auth";
 
 
 function SignUpButton({isFetching, text, onClick, className}) {
@@ -19,7 +19,7 @@ function SignUpButton({isFetching, text, onClick, className}) {
 }
 
 
-function EmailCode(props) {
+function AuthEmailCode(props) {
     const [email, onChangeEmail, isFetching, message, onClickSendEmail, GoSignUpForm] = useSendEmail("");
 
     return (
@@ -51,4 +51,4 @@ function EmailCode(props) {
     );
 }
 
-export {EmailCode, EMAIL_PAGE_PATH};
+export {AuthEmailCode, AUTH_EMAIL_PAGE_PATH};

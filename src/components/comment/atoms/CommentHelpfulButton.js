@@ -1,6 +1,6 @@
 import React from "react";
 
-const HelpfulHeartButton = ({isHelpful, onClick, score}) => {
+const CommentHelpfulButton = ({isHelpful, onClick, score}) => {
     return (
         <div onClick={onClick} className={"flex items-center cursor-pointer"}>
             <svg className={"h-6 w-6 fill-current text-red-500"} xmlns="http://www.w3.org/2000/svg"
@@ -14,4 +14,4 @@ const HelpfulHeartButton = ({isHelpful, onClick, score}) => {
     )
 }
 
-export default HelpfulHeartButton;
+export default CommentHelpfulButton;

@@ -1,5 +1,5 @@
 import React from "react";
-import Comment from "./CommentComp";
+import Comment from "./Comment";
 
 const OwnComment = () => {
     return (

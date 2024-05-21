@@ -1,6 +1,6 @@
 import React from 'react';
 import {useGetLogsByGameId} from "../../hooks/log/useGetLogsByGameId";
-import LoadingSpinnerComp from "../recycle/spinner/LoadingSpinnerComp";
+import LoadingSpinnerComp from "../common/spinner/LoadingSpinnerComp";
 import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfiniteScroll";
 import OwnLogCardComp from "./OwnLogComp";
 
@@ -25,7 +25,7 @@ function LogCardComp({log, index, className}) {
     );
 }
 
-function LogCompListInGameDetailPage({gameId}) {
+function LogCompListInGame({gameId}) {
     const pageSize = 10;
 
     let {isSuccess, isFetching, logState, fetchNextPage} = useGetLogsByGameId({
@@ -52,16 +52,16 @@ function LogCompListInGameDetailPage({gameId}) {
 }
 
 
-const LogListCompInGameDetail = ({gameId, userId}) => {
+const LogListCompInGame = ({gameId, userId}) => {
     return (
         <>
             <div className={"mt-10 text-3xl mb-4"}>Top 10</div>
             <div className={"border-2 w-full h-80 rounded-3xl mb-4 flex"}>
                 <OwnLogCardComp gameId={gameId} userId={userId}/>
-                <LogCompListInGameDetailPage gameId={gameId}/>
+                <LogCompListInGame gameId={gameId}/>
             </div>
         </>
     )
 }
 
-export default LogListCompInGameDetail;
+export default LogListCompInGame;

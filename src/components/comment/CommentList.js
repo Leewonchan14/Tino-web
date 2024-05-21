@@ -1,11 +1,10 @@
 import React, {useState} from "react";
-import Comment from "./CommentComp";
-import OwnComment from "./OwnCommentComp";
+import OwnComment from "./OwnComment";
 import StarInputRadioButton from "./StarInputRadioButton";
-import CommentInputComp from "./CommentInputComp";
-import CommentList from "./CommentList";
+import CommentInput from "./CommentInput";
+import Comment from "./Comment";
 
-const CommentSection = ({...rest}) => {
+const CommentList = ({...rest}) => {
 
     const [star, setStar] = useState(5)
     const [commentState, setCommentState] = useState([{
@@ -29,13 +28,25 @@ const CommentSection = ({...rest}) => {
         <>
             <h2 className={"mt-10 text-3xl mb-4"}>댓글</h2>
             <section className={"w-full rounded-3xl"}>
+
+                {/*자신의 댓글 컴포넌트*/}
                 <OwnComment/>
+
+                {/*별점 입력 컴포넌트*/}
                 <StarInputRadioButton setStar={setStar} star={star}/>
-                <CommentInputComp/>
-                <CommentList commentState={commentState}/>
+
+                {/*댓글 입력 컴포넌트*/}
+                <CommentInput/>
+
+                {/*게임의 달린 댓글 목록*/}
+                {commentState.map((comment, index) => {
+                    return (
+                        <Comment key={index} comment={comment} index={index}/>
+                    )
+                })}
             </section>
         </>
     )
 }
 
-export default CommentSection;
+export default CommentList;

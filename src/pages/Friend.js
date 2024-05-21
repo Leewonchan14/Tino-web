@@ -1,6 +1,6 @@
 const FRIEND_PAGE_PATH = "/menu";
 
-const FriendPage = () => {
+const Friend = () => {
     return (
         <>
             <h1>This is Friends Page</h1>
@@ -8,4 +8,4 @@ const FriendPage = () => {
     );
 }
 
-export {FriendPage, FRIEND_PAGE_PATH};
+export {Friend, FRIEND_PAGE_PATH};

@@ -1,6 +1,6 @@
 import React from "react";
 
-const RatingComp = ({score}) => {
+const CommentRatingStar = ({score}) => {
     return (
         <div className={"flex items-center"}>
             <div className={"flex"}>
@@ -20,4 +20,4 @@ const RatingComp = ({score}) => {
     )
 }
 
-export default RatingComp;
+export default CommentRatingStar;

@@ -1,14 +1,14 @@
 import React from 'react';
 import {useParams} from 'react-router-dom';
 import {useGetOneGame} from "../hooks/game/useGetOneGame";
-import LogListCompInGameDetail from "../components/log/LogListCompInGameDetail";
-import CommentSection from "../components/comment/body/CommentSection";
+import LogListCompInGame from "../components/log/LogListCompInGame";
+import CommentList from "../components/comment/CommentList";
 import GameDescriptionComp from "../components/game/page/GameDescriptionComp";
 import GameIframeComp from "../components/game/page/GameIframeComp";
 
 const GAME_PATH = "/games/:gameId";
 
-function GameDetailPage(props) {
+function Game(props) {
     let {gameId} = useParams();
     let {gameState, isFetching} = useGetOneGame({gameId});
     return (
@@ -20,14 +20,14 @@ function GameDetailPage(props) {
             <GameDescriptionComp gameState={gameState} isFetching={isFetching}/>
 
             {/*게임 기록*/}
-            <LogListCompInGameDetail gameId={gameId} userId={112}/>
+            <LogListCompInGame gameId={gameId} userId={112}/>
 
             {/*댓글 목록*/}
-            <CommentSection/>
+            <CommentList/>
         </div>
     );
 }
 
 export {
-    GameDetailPage, GAME_PATH
+    Game, GAME_PATH
 };

@@ -1,8 +1,8 @@
-import InputComp from "../../recycle/input/InputComp";
-import BlueButton from "../../recycle/button/BlueButton";
+import InputComp from "../common/input/InputComp";
+import BlueButton from "../common/button/BlueButton";
 import React from "react";
 
-const CommentInputComp = () => {
+const CommentInput = () => {
     return (
         <div className={"flex h-20 mb-4"}>
             <InputComp placeholder={"댓글을 입력하세요"} className={"!h-full !m-0 !p-6 !whitespace-normal"}/>
@@ -11,4 +11,4 @@ const CommentInputComp = () => {
     )
 }
 
-export default CommentInputComp;
+export default CommentInput;

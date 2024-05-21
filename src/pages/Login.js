@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import InputComp from "../components/recycle/input/InputComp";
-import ButtonComp from "../components/recycle/button/ButtonComp";
-import {EMAIL_PAGE_PATH} from "./EmailCode";
+import InputComp from "../components/common/input/InputComp";
+import ButtonComp from "../components/common/button/ButtonComp";
+import {AUTH_EMAIL_PAGE_PATH} from "./AuthEmailCode";
 import {useLogin} from "../hooks/login/useLogin";
 import {G_MARKET_FONT} from "../constant/FontFamily";
 
@@ -20,7 +20,7 @@ function Login(...rest) {
 
 
     const goSignUp = () => {
-        navigate(EMAIL_PAGE_PATH);
+        navigate(AUTH_EMAIL_PAGE_PATH);
     }
 
     return (
