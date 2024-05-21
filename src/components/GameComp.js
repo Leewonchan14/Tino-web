@@ -5,11 +5,13 @@ import SortMenuList from "./SortMenuList";
 import Spinner from "../assets/Spinner.gif";
 import {G_MARKET_FONT} from "../constant/FontFamily";
 import {GameController} from "../api/game.controller";
+import useReactQueryInfiniteScroll from "../hooks/useReactQueryInfiniteScroll";
+import {useInfiniteQuery} from "@tanstack/react-query";
 
-const LoadingComp = ({loadingComp}) => {
+const LoadingComp = ({loadingComp, isFetching}) => {
     return (
         <div ref={loadingComp} className={"flex w-full justify-center"}>
-            <img src={Spinner} alt=""/>
+            {isFetching && <img src={Spinner} alt=""/>}
         </div>
     )
 }
@@ -24,27 +26,46 @@ export function GameCompList({...rest}) {
         return response.data;
     }
 
+    let {
+        data: gameState,
+        isFetching,
+        fetchNextPage,
+        status
+    } = useInfiniteQuery({
+        queryKey: ['games', {sort: sortState}],
+        queryFn: async (args) => {
+            return await findAllGame({page: args.pageParam, size: 3, sort: sortState})
+        },
+        initialPageParam: 0,
+        getNextPageParam: (lastPage, allPages, lastPageParam) => {
+            if (lastPage.length === 0) return undefined;
 
-    // let [loadingComp, isLast, initScroll] = useInfiniteScroll(
-    //     gameState,
-    //     setGameState,
-    //     findAllGame,
-    //     {size: 9, sort: sortState},
-    // )
+            return lastPageParam + 1;
+        },
+        enabled: false,
+    })
+
+
+    let {loadingComp} = useReactQueryInfiniteScroll({
+        fetchData: fetchNextPage,
+        isFetching
+    });
+
+
     return (
         <>
             <h1 className={"text-2xl font-bold mb-6"}>
-                전체 게임 {"gameState.length"} 개
+                전체 게임 {3} 개
             </h1>
             <SortMenuList setSortState={setSortState} className={""} initScroll={() => {
             }}/>
             <section className={"grid grid-cols-3 gap-6 w-full"}>
-                {/*{gameState.map((game, index) => {*/}
-                {/*    return <GameComp key={index} game={game}/>*/}
-                {/*})}*/}
+                {status === "success" && gameState.pages.map((page, index) => {
+                    return  page.map((game) => <GameComp key={index} game={game}/>)
+                })}
             </section>
 
-            <LoadingComp/>
+            <LoadingComp loadingComp={loadingComp} isFetching={isFetching}/>
 
         </>
     );
@@ -60,7 +81,7 @@ export function GameComp({game}) {
     return (
         <article onClick={onClick}
                  className={"border-2 border-gray-100 relative overflow-clip w-full rounded-2xl cursor-pointer bg-gray-50 flex-col"}>
-            <picture className={"h-44 w-full"}>
+            <picture className={"block h-44 w-full"}>
                 <img className={"bg-gray-100 h-full w-full object-cover"}
                      src={game.gameImage} alt=""/>
             </picture>
