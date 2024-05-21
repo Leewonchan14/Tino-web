@@ -14,7 +14,7 @@ const MenuItem = ({option, handleOptionClick}) => {
 
 const MenuItems = ({handleOptionClick, options}) => {
     return (
-        <div className=" absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white">
+        <div className="absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white">
             <div className="py-1">
                 {options.map((option) => (
                     <MenuItem key={option} option={option} handleOptionClick={handleOptionClick}/>
@@ -24,7 +24,7 @@ const MenuItems = ({handleOptionClick, options}) => {
     );
 }
 
-const SortMenuList = ({setSortState, initScroll}) => {
+const SortMenuList = ({setSortState, initScroll, className}) => {
     let sortMapper = {
         조회순: GAME_SORT.VIEW_COUNT,
         최신순: GAME_SORT.RECENT,
@@ -60,7 +60,7 @@ const SortMenuList = ({setSortState, initScroll}) => {
     };
 
     return (
-        <div ref={toggleButton} className="relative inline-block text-left mb-12 z-10">
+        <div ref={toggleButton} className={"relative inline-block text-left mb-12 z-10 " + className}>
             <button
                 onClick={toggleDropdown}
                 className="inline-flex w-40 justify-between rounded-md border border-gray-300 bg-white px-4 py-2 shadow-sm h-10">
