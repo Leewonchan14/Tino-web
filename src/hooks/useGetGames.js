@@ -18,7 +18,7 @@ export const useGetGames = ({sortState}) => {
         data: gameState,
         isFetching,
         fetchNextPage,
-        status
+        isSuccess
     } = useInfiniteQuery({
         queryKey: ['games', {sort: sortState}],
         queryFn: async (args) => {
@@ -36,7 +36,7 @@ export const useGetGames = ({sortState}) => {
     })
 
 
-    return {status, isFetching, gameState, fetchNextPage};
+    return {isSuccess, isFetching, gameState, fetchNextPage};
 }
 
 export default useGetGames;

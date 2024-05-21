@@ -1,11 +1,11 @@
 import React from 'react';
 import {useGetLogsByGameId} from "../hooks/useGetLogsByGameId";
-import {useInfiniteScroll} from "../hooks/useInfiniteScroll";
 import Spinner from "../assets/Spinner.gif";
 import {useGetOwnLog} from "../hooks/useGetOwnLog";
 import TinoIcon from "../assets/tino_icon.png";
 import {G_MARKET_FONT} from "../constant/FontFamily";
-
+import LoadingComp from "./LoadingComp";
+import useReactQueryInfiniteScroll from "../hooks/useReactQueryInfiniteScroll";
 
 const OwnLogCardComp = ({gameId, userId}) => {
     let {ownLogState, isExist, isFetching} = useGetOwnLog({gameId, userId});
@@ -81,23 +81,27 @@ function LogCardComp({log, index, className}) {
     );
 }
 
-function LogCompListIntGameDetailPage({gameId}) {
-    let [logState, setLogState, findLogsByGameId] = useGetLogsByGameId([]);
+function LogCompListInGameDetailPage({gameId}) {
+    const pageSize = 10;
 
-    let [loadingComp, isLast] =
-        useInfiniteScroll(logState, setLogState, findLogsByGameId, {
-            gameId,
-            size: 10
-        });
+    let {isSuccess, isFetching, logState, fetchNextPage} = useGetLogsByGameId({
+        gameId,
+        pageSize
+    });
+
+    let {loadingComp} = useReactQueryInfiniteScroll({
+        fetchData: fetchNextPage,
+        isFetching
+    })
 
     return (
         <div className={"flex-col h-full flex-1 justify-center overflow-y-scroll"}>
-            {logState.map((log, index) =>
-                <LogCardComp log={log} key={log.logId} index={index}/>
+            {isSuccess && logState.pages.map((page, pageIndex) => (
+                    page.map((log, logIndex) => <LogCardComp log={log} key={log.logId}
+                                                             index={pageIndex * pageSize + logIndex}/>)
+                )
             )}
-            {!isLast && <div id={"loadingComp"} ref={loadingComp} className={"flex flex-1 justify-center"}>
-                <img className={"w-20"} src={Spinner} alt=""/>
-            </div>}
+            <LoadingComp loadingComp={loadingComp} isFetching={isFetching}/>
         </div>
     )
 
@@ -110,7 +114,7 @@ const LogComp = ({gameId, userId}) => {
             <div className={"mt-10 text-3xl mb-4"}>Top 10</div>
             <div className={"border-2 w-full h-80 rounded-3xl mb-4 flex"}>
                 <OwnLogCardComp gameId={gameId} userId={userId}/>
-                <LogCompListIntGameDetailPage gameId={gameId}/>
+                <LogCompListInGameDetailPage gameId={gameId}/>
             </div>
         </>
     )

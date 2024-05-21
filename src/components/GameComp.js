@@ -2,17 +2,17 @@ import React, {useState} from 'react';
 import viewcount_icon from "../assets/viewcount_icon.png";
 import {useNavigate} from "react-router-dom";
 import SortMenuList from "./SortMenuList";
-import Spinner from "../assets/Spinner.gif";
 import {G_MARKET_FONT} from "../constant/FontFamily";
 import useReactQueryInfiniteScroll from "../hooks/useReactQueryInfiniteScroll";
 import useGetGames from "../hooks/useGetGames";
+import LoadingComp from "./LoadingComp";
 
 
 export function GameCompList({...rest}) {
     const [sortState, setSortState] = useState();
 
     let {
-        status, isFetching, gameState, fetchNextPage
+        isSuccess, isFetching, gameState, fetchNextPage
     } = useGetGames({sortState});
 
     let {loadingComp} =
@@ -29,7 +29,7 @@ export function GameCompList({...rest}) {
             <SortMenuList setSortState={setSortState} className={""} initScroll={() => {
             }}/>
             <section className={"grid grid-cols-3 gap-6 w-full"}>
-                {status === "success" && gameState.pages.map((page, index) => (
+                {isSuccess && gameState.pages.map((page, index) => (
                     page.map((game) => <GameComp key={index} game={game}/>)
                 ))}
             </section>
@@ -38,14 +38,6 @@ export function GameCompList({...rest}) {
 
         </>
     );
-}
-
-const LoadingComp = ({loadingComp, isFetching}) => {
-    return (
-        <div ref={loadingComp} className={"flex w-full justify-center"}>
-            {isFetching && <img src={Spinner} alt=""/>}
-        </div>
-    )
 }
 
 export function GameComp({game}) {
