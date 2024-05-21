@@ -3,31 +3,7 @@ import TinoIcon from "../../assets/tino_icon.png";
 import {useNavigate} from "react-router-dom";
 import {HOME_PATH} from "../../pages/Home";
 import {LOGIN_PATH} from "../../pages/Login";
-import {menuList, useNavMenu} from "../../hooks/header/useNavMenu";
-
-function MenuBar({...rest}) {
-
-    let {menuState, onClickMenu} = useNavMenu();
-
-    const MenuButton = ({menu, ...rest}) => {
-        return (
-            <div onClick={onClickMenu}
-                 className={"cursor-pointer h-full flex-1 flex justify-center items-center overflow-hidden rounded-full"
-                     + (menuState === menu ? " text-white bg-blue-600" : " ")}>
-                {menu}
-            </div>
-        );
-    }
-
-    return (
-        <div className="flex items-center h-12 w-56 rounded-full shadow-gray-400 shadow-2xl
-        box-border border-[1px] border-gray-200 ">
-            {menuList.map((item, index) => {
-                return <MenuButton key={index} menu={item}/>
-            })}
-        </div>
-    );
-}
+import MenuBar from "./MenuBar";
 
 function NavBar({...rest}) {
     let navigate = useNavigate();
@@ -41,14 +17,12 @@ function NavBar({...rest}) {
 
     return (
         <div className={"h-28 flex py-4 mb-6 items-center relative"}>
-            <div onClick={goHome} className={"rounded-full bg-white h-full mr-4 " +
+            <picture onClick={goHome} className={"block rounded-full bg-white h-full mr-4 " +
                 "shadow-lg shadow-gray-300 z-10 cursor-pointer "}>
-                <img src={TinoIcon} alt={"logo"} className={"w-20 object-cover"}/>
-            </div>
+                <img draggable={false} src={TinoIcon} alt={"logo"} className={"w-20 object-cover"}/>
+            </picture>
             {/* 게임, 랭킹, 메뉴 버튼 */}
-            <div className={"absolute flex-1 flex justify-center items-center w-full h-full"}>
-                <MenuBar/>
-            </div>
+            <MenuBar />
 
             {/* size box */}
             <div className={"flex-1"}></div>

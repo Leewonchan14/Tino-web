@@ -1,4 +1,4 @@
-const FRIEND_PAGE_PATH = "/menu";
+const FRIEND_PAGE_PATH = "/friends";
 
 const Friend = () => {
     return (
