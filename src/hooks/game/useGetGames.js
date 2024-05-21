@@ -6,7 +6,7 @@ import useReactQueryInfiniteScroll from "../recycle/useReactQueryInfiniteScroll"
 const MINUTE = 60 * 1000;
 const SECOND = 1000;
 
-export const useGetGames = ({sortState}) => {
+export const useGetGames = ({sortState, pageSize}) => {
     const findAllGame = async ({page, size, sort}) => {
         const response = await GameController.findAll({
             page, size, sort
@@ -22,7 +22,7 @@ export const useGetGames = ({sortState}) => {
     } = useInfiniteQuery({
         queryKey: ['games', {sort: sortState}],
         queryFn: async (args) => {
-            return await findAllGame({page: args.pageParam, size: 3, sort: sortState})
+            return await findAllGame({page: args.pageParam, size: pageSize, sort: sortState})
         },
         initialPageParam: 0,
         getNextPageParam: (lastPage, allPages, lastPageParam) => {

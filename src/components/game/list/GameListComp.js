@@ -10,7 +10,7 @@ const GameCompList = ({...rest}) => {
 
     let {
         isSuccess, isFetching, gameState, fetchNextPage
-    } = useGetGames({sortState});
+    } = useGetGames({sortState, pageSize: 6});
 
     let {loadingComp} =
         useReactQueryInfiniteScroll({
