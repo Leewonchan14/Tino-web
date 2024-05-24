@@ -4,6 +4,7 @@ import ButtonComp from "../components/common/button/ButtonComp";
 import {useSignUp} from "../hooks/login/useSignUp";
 import {G_MARKET_FONT} from "../constants/FontFamily";
 import ComboBox from "../components/common/input/ComboBox";
+import {MAJOR} from "../constants/Major";
 
 const SIGNUP_PATH = "/signup";
 
@@ -12,11 +13,10 @@ function SignUp(props) {
     const {
         signupFormState,
         rePassword,
-        MAJOR,
         isValid,
         onChange,
+        onChangeMajor,
         onSubmit
-
     } = useSignUp();
 
     return (
@@ -52,7 +52,7 @@ function SignUp(props) {
                 <span style={{color: "red"}}>{!isValid.nickname_blank && "이름을 입력해주세요."}</span>
 
 
-                <ComboBox value={signupFormState.major} onChange={onChange} options={MAJOR}/>
+                <ComboBox value={signupFormState.major} onChange={onChangeMajor} options={MAJOR}/>
                 <ButtonComp text={"회원가입"} onClick={onSubmit} className={"!mb-20"}/>
             </div>
         </div>

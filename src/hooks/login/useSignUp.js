@@ -89,5 +89,12 @@ export const useSignUp = () => {
         }
     }
 
-    return {signupFormState, rePassword, MAJOR, isValid, onChange, onSubmit};
+    const onChangeMajor = (e) => {
+        setSignupFormState({
+            ...signupFormState,
+            major: e.target.value
+        })
+    }
+
+    return {signupFormState, rePassword, onChangeMajor, isValid, onChange, onSubmit};
 }
