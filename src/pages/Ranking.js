@@ -11,7 +11,7 @@ const SELECT_COLOR = "bg-blue-500 text-white";
 const RankingMenuItem = ({menu, onClickMenu, selectedMenu}) => {
     return (
         <span style={{fontFamily: G_MARKET_FONT}} key={menu.name} onClick={onClickMenu}
-              className={"flex flex-1 justify-center cursor-pointer border-2 rounded text-xl "
+              className={"flex flex-1 justify-center cursor-pointer border-2 rounded text-xl sm:text-sm "
                   + ((selectedMenu === menu) && SELECT_COLOR)}>
             {menu.name}
         </span>

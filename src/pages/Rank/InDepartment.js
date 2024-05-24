@@ -8,7 +8,9 @@ export const IN_DEPARTMENT_PATH = "/rank/inDepartment";
 function InDepartmentRankOption({selectMajor, onChange}) {
     return (
         <ComboBox options={MAJOR} value={selectMajor.value} onChange={onChange}
-                  className={"!w-[30%] !mx-auto !block !my-6"}/>
+                  className={"!mx-auto !block !my-6"}
+                  textClass={"!sm:text-sm"}
+        />
     );
 }
 

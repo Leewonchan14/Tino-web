@@ -11,12 +11,12 @@ const inputStyle = {
     fontFamily: G_MARKET_FONT
 }
 
-function ComboBox({onChange, value, placeholder, options, className}) {
+function ComboBox({onChange, value, placeholder, options, className, textClass}) {
     return (
-        <select style={inputStyle} onChange={onChange} name={"inputUserId"} value={value} className={className}>
+        <select style={inputStyle} onChange={onChange} name={"inputUserId"} value={value} className={"!lg:w-[60%]" + className}>
             {
                 options.map((option, index) => {
-                    return <option className={"text-center"} key={index} value={option.value}>{option.name}</option>
+                    return <option className={"text-center " + textClass} key={index} value={option.value}>{option.name}</option>
                 })
             }
         </select>

@@ -16,16 +16,15 @@ function NavBar({...rest}) {
     }
 
     return (
-        <div className={"h-28 flex py-4 mb-6 items-center relative"}>
-            <picture onClick={goHome} className={"block rounded-full bg-white h-full mr-4 " +
+        <div className={"h-28 flex justify-between py-4 px-4 mb-6 items-center"}>
+            <picture onClick={goHome} className={"block rounded-full bg-white w-20 sm:w-14 " +
                 "shadow-lg shadow-gray-300 z-10 cursor-pointer "}>
-                <img draggable={false} src={TinoIcon} alt={"logo"} className={"w-20 object-cover"}/>
+                <img draggable={false} src={TinoIcon} alt={"logo"} className={"w-full object-cover"}/>
             </picture>
+
             {/* 게임, 랭킹, 메뉴 버튼 */}
             <MenuBar />
 
-            {/* size box */}
-            <div className={"flex-1"}></div>
             {/* 로그인 버튼 */}
             <div onClick={onLogin} className={"cursor-pointer z-0"}>로그인</div>
         </div>
