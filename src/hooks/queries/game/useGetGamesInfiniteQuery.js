@@ -27,7 +27,6 @@ export const useGetGamesInfiniteQuery = ({sortMenu, pageSize}) => {
 
                 return lastPageParam + 1;
             },
-            enabled: false,
             staleTime: 30 * SECOND,
             gcTime: 30 * SECOND
         }

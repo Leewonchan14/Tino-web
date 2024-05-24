@@ -17,8 +17,7 @@ const InDepartment = () => {
     const [selectMajor, setSelectMajor] = useState(MAJOR[0])
 
     const onChange = (e) => {
-        console.log(e.target.value);
-        setSelectMajor(MAJOR.find((major) => major.name === e.target.value))
+        setSelectMajor(MAJOR.find((major) => major.value === e.target.value))
     }
 
     return (

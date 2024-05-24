@@ -31,7 +31,6 @@ const InDepartmentRankList = ({selectMajor}) => {
             if (lastPage.length === 0) return undefined;
             return lastPageParam + 1;
         },
-        enabled: false,
         staleTime: MINUTE,
         gcTime: 5 * MINUTE
     })
