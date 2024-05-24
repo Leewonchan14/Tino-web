@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import arrow_drop_down from "../../assets/arrow_drop_down.png";
-import GameSortMenuItemList from "./atoms/GameSortMenuItemList";
+import GameSortMenuList from "./atoms/GameSortMenuList";
 
 const GameSortMenu = ({sortMenu, setSortMenu, className}) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -37,7 +37,7 @@ const GameSortMenu = ({sortMenu, setSortMenu, className}) => {
                 </div>
             </button>
             {isOpen && (
-                <GameSortMenuItemList onSortOptionClick={onSortOptionClick}/>
+                <GameSortMenuList onSortOptionClick={onSortOptionClick}/>
             )}
         </div>
     );

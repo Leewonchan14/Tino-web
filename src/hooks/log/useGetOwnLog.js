@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import LogController from "../../api/log.controller";
+import LogController from "../../apis/log.controller";
 
 export const useGetOwnLog = ({gameId, userId}) => {
     const [ownLogState, setOwnLogState] = useState({})

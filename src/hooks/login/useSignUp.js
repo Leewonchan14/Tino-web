@@ -1,28 +1,5 @@
 import {useState} from "react";
-
-const MAJOR = [
-    {value: "소프트웨어학과"},
-    {value: "컴퓨터공학과"},
-    {value: "인공지능학과"},
-    {value: "게임공학과"},
-    {value: "산업경영학과"},
-    {value: "IT경영학과"},
-    {value: "데이터사이언스경영학과"},
-    {value: "글로벌융합공학과"},
-    {value: "기계공학과"},
-    {value: "기계설계공학과"},
-    {value: "나노반도체공학과"},
-    {value: "메카트로닉스학과"},
-    {value: "AI로봇학과"},
-    {value: "산업디자인공학과"},
-    {value: "미디어디자인학과"},
-    {value: "생명화학공학과"},
-    {value: "신소재공학과"},
-    {value: "에너지전기공학과"},
-    {value: "지식융합학과"},
-    {value: "전자공학과"},
-    {value: "임베디드시스템학과"},
-];
+import {MAJOR} from "../../constants/Major";
 
 export const useSignUp = () => {
     const [signupFormState, setSignupFormState] = useState({

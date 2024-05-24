@@ -1,6 +1,6 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import UserController from "../../api/user.controller";
+import UserController from "../../apis/user.controller";
 
 const useAutoLogin = () => {
 

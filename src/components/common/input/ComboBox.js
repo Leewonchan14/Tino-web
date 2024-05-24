@@ -1,5 +1,5 @@
 import React from "react";
-import {G_MARKET_FONT} from "../../../constant/FontFamily";
+import {G_MARKET_FONT} from "../../../constants/FontFamily";
 
 const inputStyle = {
     border: "1px solid #000000",
@@ -11,12 +11,12 @@ const inputStyle = {
     fontFamily: G_MARKET_FONT
 }
 
-function ComboBox({onChange, value, placeholder, options}) {
+function ComboBox({onChange, value, placeholder, options, className}) {
     return (
-        <select style={inputStyle} onChange={onChange} name={"inputUserId"} value={value}>
+        <select style={inputStyle} onChange={onChange} name={"inputUserId"} value={value} className={className}>
             {
-                options.map(({value}, index) => {
-                    return <option key={index} value={value}>{value}</option>
+                options.map((option, index) => {
+                    return <option className={"text-center"} key={index} value={option.value}>{option.name}</option>
                 })
             }
         </select>

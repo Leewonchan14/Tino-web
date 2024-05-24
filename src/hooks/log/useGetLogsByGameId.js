@@ -1,7 +1,6 @@
-import LogController from "../../api/log.controller";
+import LogController from "../../apis/log.controller";
 import {useInfiniteQuery} from "@tanstack/react-query";
-
-const SECOND = 1000;
+import {SECOND} from "../../utils/timeConverter";
 
 export const useGetLogsByGameId = ({gameId, pageSize}) => {
     const findLogsByGameId = async ({gameId, page, size}) => {

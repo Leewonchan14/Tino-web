@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import Footer from "../components/footer/Footer";
-import {G_MARKET_FONT} from "../constant/FontFamily";
+import {G_MARKET_FONT} from "../constants/FontFamily";
 import GameGrid from "../components/game/GameGrid";
 import GameSortMenu from "../components/game/GameSortMenu";
 import LoadingSpinner from "../components/common/spinner/LoadingSpinner";
-import useGetGamesQuery from "../hooks/queries/game/useGetGamesQuery";
+import useGetGamesInfiniteQuery from "../hooks/queries/game/useGetGamesInfiniteQuery";
 import useReactQueryInfiniteScroll from "../hooks/recycle/useReactQueryInfiniteScroll";
-import {GAME_SORT_MENU} from "../api/game.controller";
+import {GAME_SORT_MENU} from "../constants/Game";
 
 const HOME_PATH = "/";
 
@@ -15,7 +15,7 @@ function Home(props) {
 
     let {
         isSuccess, isFetching, gameState, fetchNextPage
-    } = useGetGamesQuery({sortMenu: sortMenu.value , pageSize: 6});
+    } = useGetGamesInfiniteQuery({sortMenu: sortMenu.value , pageSize: 6});
 
     let {loadingComp} =
         useReactQueryInfiniteScroll({
@@ -31,9 +31,9 @@ function Home(props) {
                 이 문구는 웹사이트 dinogmaes-bugo.s3 한국공학대학교 입니다.
             </h1>
 
-            <h1 className={"text-2xl font-bold mb-6"}>
-                전체 게임 {3} 개
-            </h1>
+            {/*<h1 className={"text-2xl font-bold mb-6"}>*/}
+            {/*    전체 게임 {3} 개*/}
+            {/*</h1>*/}
 
             <GameSortMenu sortMenu={sortMenu} setSortMenu={setSortMenu} className={""}/>
 

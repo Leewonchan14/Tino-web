@@ -1,4 +1,4 @@
-import {G_MARKET_FONT} from "../../constant/FontFamily";
+import {G_MARKET_FONT} from "../../constants/FontFamily";
 import React from "react";
 
 const GameDescription = ({gameState, isFetching}) => {

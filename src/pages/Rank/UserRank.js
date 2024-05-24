@@ -1,9 +1,11 @@
+import UserRankList from "../../components/ranking/UserRankList";
+
 export const USER_RANK_PATH = "/rank/user";
 
 const UserRank = () => {
     return (
         <>
-            <h1 className={""}>UserRank</h1>
+            <UserRankList />
         </>
     );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import viewcount_icon from "../../assets/viewcount_icon.png";
 import {useNavigate} from "react-router-dom";
-import {G_MARKET_FONT} from "../../constant/FontFamily";
+import {G_MARKET_FONT} from "../../constants/FontFamily";
 import {GAME_PATH_WITHOUT_PARAM} from "../../pages/Game";
 
 

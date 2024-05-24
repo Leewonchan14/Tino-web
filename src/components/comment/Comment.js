@@ -1,6 +1,6 @@
 import TinoIcon from "../../assets/tino_icon.png";
 import React from "react";
-import {G_MARKET_FONT} from "../../constant/FontFamily";
+import {G_MARKET_FONT} from "../../constants/FontFamily";
 import timeConverter from "../../utils/timeConverter";
 
 const Comment = ({comment, index, containerStyle, nicknameStyle}) => {

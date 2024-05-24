@@ -1,5 +1,5 @@
 import React from "react";
-import {GAME_SORT_MENU} from "../../../api/game.controller";
+import {GAME_SORT_MENU} from "../../../constants/Game";
 
 const MenuItem = ({menu, onSortOptionClick}) => {
     return (
@@ -11,7 +11,7 @@ const MenuItem = ({menu, onSortOptionClick}) => {
     );
 }
 
-const GameSortMenuItemList = ({onSortOptionClick}) => {
+const GameSortMenuList = ({onSortOptionClick}) => {
     return (
         <div className="absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white">
             <div className="py-1">
@@ -23,4 +23,4 @@ const GameSortMenuItemList = ({onSortOptionClick}) => {
     );
 }
 
-export default GameSortMenuItemList;
+export default GameSortMenuList;

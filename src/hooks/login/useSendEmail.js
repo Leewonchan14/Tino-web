@@ -1,5 +1,5 @@
 import {useState} from "react";
-import EmailController from "../../api/email.controller";
+import EmailController from "../../apis/email.controller";
 import {useNavigate} from "react-router-dom";
 import {SIGNUP_PATH} from "../../pages/SignUp";
 

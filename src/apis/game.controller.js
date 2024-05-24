@@ -1,13 +1,5 @@
 import {Api} from "./common.controller";
 
-export const GAME_SORT_MENU = [
-    {name: '조회순', value: "VIEW_COUNT", text: "조회순"},
-    {name: '인기순', value: "LOG_COUNT", text: "인기순"},
-    {name: '댓글순', value: "RECENT", text: "댓글순"},
-    {name: '최신순', value: "REVIEW_COUNT", text: "최신순"},
-]
-
-
 class GameController extends Api {
 
     // 게임 페이징 조회

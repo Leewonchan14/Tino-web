@@ -1,5 +1,5 @@
 import React from 'react';
-import {G_MARKET_FONT} from "../../../constant/FontFamily";
+import {G_MARKET_FONT} from "../../../constants/FontFamily";
 
 const inputStyle = {
     border: "1px solid #000000",

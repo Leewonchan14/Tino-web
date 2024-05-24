@@ -1,8 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
-import GameController from "../../api/game.controller";
-
-const MINUTE = 60 * 1000;
-const SECOND = 1000;
+import GameController from "../../apis/game.controller";
+import {MINUTE} from "../../utils/timeConverter";
 
 export const useGetOneGame = ({gameId}) => {
 

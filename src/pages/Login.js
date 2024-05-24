@@ -4,7 +4,7 @@ import InputComp from "../components/common/input/InputComp";
 import ButtonComp from "../components/common/button/ButtonComp";
 import {AUTH_EMAIL_PAGE_PATH} from "./AuthEmailCode";
 import {useLogin} from "../hooks/login/useLogin";
-import {G_MARKET_FONT} from "../constant/FontFamily";
+import {G_MARKET_FONT} from "../constants/FontFamily";
 
 const LOGIN_PATH = "/login";
 

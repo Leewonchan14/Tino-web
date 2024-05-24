@@ -1,5 +1,5 @@
 import {useGetOwnLog} from "../../hooks/log/useGetOwnLog";
-import {G_MARKET_FONT} from "../../constant/FontFamily";
+import {G_MARKET_FONT} from "../../constants/FontFamily";
 import React from "react";
 import LoadingSpinner from "../common/spinner/LoadingSpinner";
 import ExistOwnLog from "./atoms/ExistOwnLog";

@@ -1,7 +1,7 @@
 import React from 'react';
 import InputComp from "../components/common/input/InputComp";
 import {useSendEmail} from "../hooks/login/useSendEmail";
-import {G_MARKET_FONT} from "../constant/FontFamily";
+import {G_MARKET_FONT} from "../constants/FontFamily";
 
 const AUTH_EMAIL_PAGE_PATH = "/email/auth";
 
