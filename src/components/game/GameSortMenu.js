@@ -1,26 +1,14 @@
 import React, {useEffect, useRef, useState} from "react";
 import arrow_drop_down from "../../assets/arrow_drop_down.png";
-import {GAME_SORT} from "../../api/game.controller";
 import GameSortMenuItemList from "./atoms/GameSortMenuItemList";
 
-
-const GameSortMenu = ({setSortState, initScroll, className}) => {
-    let sortMapper = {
-        조회순: GAME_SORT.VIEW_COUNT,
-        최신순: GAME_SORT.RECENT,
-        댓글순: GAME_SORT.REVIEW_COUNT,
-        인기순: GAME_SORT.LOG_COUNT,
-    }
-
+const GameSortMenu = ({sortMenu, setSortMenu, className}) => {
     const [isOpen, setIsOpen] = useState(false);
-    const options = ['조회순', '인기순', '댓글순', '최신순'];
-    const [selectedOption, setSelectedOption] = useState(options[0]);
-    useEffect(() => {
-        initScroll();
-        setSortState(sortMapper[selectedOption]);
-    }, [selectedOption]);
     const toggleButton = useRef();
 
+    useEffect(() => {
+        setSortMenu(sortMenu);
+    }, [sortMenu]);
 
     // 만약 다른 곳을 눌렀다면 닫히게 하기
     useEffect(() => {
@@ -33,9 +21,8 @@ const GameSortMenu = ({setSortState, initScroll, className}) => {
 
     const toggleDropdown = () => setIsOpen(!isOpen);
 
-    const handleOptionClick = (option) => {
-        setSelectedOption(option);
-        setSortState(sortMapper[option]);
+    const onSortOptionClick = (menu) => {
+        setSortMenu(menu)
         setIsOpen(false);
     };
 
@@ -44,13 +31,13 @@ const GameSortMenu = ({setSortState, initScroll, className}) => {
             <button
                 onClick={toggleDropdown}
                 className="inline-flex w-40 justify-between rounded-md border border-gray-300 bg-white px-4 py-2 shadow-sm h-10">
-                {selectedOption}
+                {sortMenu.name}
                 <div className={"flex justify-center items-center h-full"}>
                     <img src={arrow_drop_down} alt="arrow_drop_down" className="w-4"/>
                 </div>
             </button>
             {isOpen && (
-                <GameSortMenuItemList handleOptionClick={handleOptionClick} options={options}/>
+                <GameSortMenuItemList onSortOptionClick={onSortOptionClick}/>
             )}
         </div>
     );

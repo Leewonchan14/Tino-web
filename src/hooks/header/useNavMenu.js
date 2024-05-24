@@ -9,7 +9,7 @@ const MENU_LIST = [
     {
         name: "게임",
         path: HOME_PATH,
-        prevPath: HOME_PATH
+        prevPath: "HOME_PATH"
     },
     {
         name: "랭킹",
@@ -24,10 +24,11 @@ const MENU_LIST = [
 ]
 
 const getNowMenu = (path) => {
+    if (path === HOME_PATH) {
+        return MENU_LIST[0];
+    }
+
     return MENU_LIST.find(item => {
-        if (item.path === HOME_PATH) {
-            return path === HOME_PATH;
-        }
         return path.startsWith(item.prevPath)
     });
 }
@@ -43,10 +44,8 @@ const useNavMenu = () => {
         setMenuState(getNowMenu(location.pathname));
     }, [location.pathname]);
 
-    const onClickMenu = (e) => {
-        let findMenu =
-            MENU_LIST.find(item => item.name === e.target.innerText);
-        navigate(findMenu.path);
+    const onClickMenu = (menu) => {
+        navigate(menu.path);
     }
 
     return {menuState, setMenuState, onClickMenu};

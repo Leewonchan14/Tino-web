@@ -1,5 +1,5 @@
-import {GameController} from "../../api/game.controller";
 import {useQuery} from "@tanstack/react-query";
+import GameController from "../../api/game.controller";
 
 const MINUTE = 60 * 1000;
 const SECOND = 1000;

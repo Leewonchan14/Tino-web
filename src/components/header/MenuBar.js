@@ -12,7 +12,7 @@ function MenuBar({...rest}) {
         box-border border-[1px] border-gray-200 ">
                 {MENU_LIST.map((item, index) => (
                     <MenuButton key={index} menu={item} menuState={menuState}
-                                onClick={onClickMenu}/>
+                                onClickMenu={onClickMenu}/>
                 ))}
             </div>
         </div>

@@ -4,17 +4,18 @@ import {G_MARKET_FONT} from "../constant/FontFamily";
 import GameGrid from "../components/game/GameGrid";
 import GameSortMenu from "../components/game/GameSortMenu";
 import LoadingSpinner from "../components/common/spinner/LoadingSpinner";
-import useGetGames from "../hooks/game/useGetGames";
+import useGetGamesQuery from "../hooks/queries/game/useGetGamesQuery";
 import useReactQueryInfiniteScroll from "../hooks/recycle/useReactQueryInfiniteScroll";
+import {GAME_SORT_MENU} from "../api/game.controller";
 
 const HOME_PATH = "/";
 
 function Home(props) {
-    const [sortState, setSortState] = useState();
+    let [sortMenu, setSortMenu] = useState(GAME_SORT_MENU[0]);
 
     let {
         isSuccess, isFetching, gameState, fetchNextPage
-    } = useGetGames({sortState, pageSize: 6});
+    } = useGetGamesQuery({sortMenu: sortMenu.value , pageSize: 6});
 
     let {loadingComp} =
         useReactQueryInfiniteScroll({
@@ -34,8 +35,7 @@ function Home(props) {
                 전체 게임 {3} 개
             </h1>
 
-            <GameSortMenu setSortState={setSortState} className={""} initScroll={() => {
-            }}/>
+            <GameSortMenu sortMenu={sortMenu} setSortMenu={setSortMenu} className={""}/>
 
             <GameGrid isSuccess={isSuccess} gameState={gameState}/>
 

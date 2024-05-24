@@ -1,21 +1,22 @@
 import React from "react";
+import {GAME_SORT_MENU} from "../../../api/game.controller";
 
-const MenuItem = ({option, handleOptionClick}) => {
+const MenuItem = ({menu, onSortOptionClick}) => {
     return (
         <button
-            onClick={() => handleOptionClick(option)}
+            onClick={() => onSortOptionClick(menu)}
             className="text-gray-700 block w-full px-4 py-2 text-sm text-left hover:bg-blue-500 hover:text-white">
-            {option}
+            {menu.name}
         </button>
     );
 }
 
-const GameSortMenuItemList = ({handleOptionClick, options}) => {
+const GameSortMenuItemList = ({onSortOptionClick}) => {
     return (
         <div className="absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white">
             <div className="py-1">
-                {options.map((option) => (
-                    <MenuItem key={option} option={option} handleOptionClick={handleOptionClick}/>
+                {GAME_SORT_MENU.map((menu) => (
+                    <MenuItem key={menu.value} menu={menu} onSortOptionClick={onSortOptionClick}/>
                 ))}
             </div>
         </div>
