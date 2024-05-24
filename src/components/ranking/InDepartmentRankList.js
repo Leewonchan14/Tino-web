@@ -6,6 +6,8 @@ import React from "react";
 import RankController from "../../apis/rank.controller.js";
 import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfiniteScroll";
 import LoadingSpinner from "../common/spinner/LoadingSpinner";
+import default_image from "../../assets/default_image.jpg";
+
 
 const InDepartmentRankList = ({selectMajor}) => {
 
@@ -47,7 +49,7 @@ const InDepartmentRankList = ({selectMajor}) => {
                     <RankCard
                         key={inDepartmentRank.rankId} rank={inDepartmentRank.totalRank}
                         score={inDepartmentRank.rankWeight} text={inDepartmentRank.user.nickname}
-                        picture={""}/>)
+                        picture={default_image}/>)
             ))}
 
             <LoadingSpinner loadingComp={loadingComp} isFetching={isFetching}/>
