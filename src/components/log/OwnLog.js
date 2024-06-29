@@ -8,7 +8,7 @@ const OwnLog = ({gameId, userId}) => {
     let {ownLogState, isExist, isFetching} = useGetOwnLog({gameId, userId});
 
     return (
-        <div className={"w-52 flex justify-center items-center"}>
+        <div className={"w-52 border-r-2 flex justify-center items-center mobile:border-r-0 mobile:border-b-2 mobile:w-full"}>
             {isFetching && <LoadingSpinner isFetching={isFetching} className={""}/>}
 
             {!isFetching && isExist &&
@@ -18,8 +18,6 @@ const OwnLog = ({gameId, userId}) => {
             {!isFetching && !isExist &&
                 <OwnLogNotExist/>
             }
-
-            <div className={"border-2 h-full"}></div>
         </div>
     )
 }

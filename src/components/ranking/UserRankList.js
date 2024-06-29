@@ -1,37 +1,34 @@
 import React from "react";
-import RankCard from "./RankCard";
-import RankHeader from "./RankHeader";
 import LoadingSpinner from "../common/spinner/LoadingSpinner";
 import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfiniteScroll";
 import useGetUserRankInfiniteQuery from "../../hooks/queries/rank/useGetUserRankInfiniteQuery";
 import default_image from "../../assets/default_image.jpg";
+import { RankCardTable } from "./RankCardTable";
 
 const UserRankList = () => {
+  let { userState, isFetching, fetchNextPage, isSuccess } =
+    useGetUserRankInfiniteQuery();
 
-    let {
-        userState, isFetching, fetchNextPage, isSuccess
-    } = useGetUserRankInfiniteQuery()
+  let { loadingComp } = useReactQueryInfiniteScroll({
+    fetchData: fetchNextPage,
+    isFetching,
+  });
 
-    let {loadingComp} = useReactQueryInfiniteScroll({
-        fetchData: fetchNextPage, isFetching
-    })
-
-    return (
-        <section className={"w-full"}>
-            <RankHeader score={"점수"} item={"유저"}/>
-            {isSuccess && userState.pages.map((page, _) => (
-                page.map((userRank, _) =>
-                    <RankCard
-                        key={userRank.rankId} rank={userRank.totalRank}
-                        score={userRank.rankWeight} text={userRank.user.nickname}
-                        picture={default_image} />
-                        // picture={userRank.user.profileImageURL}/>
-                )
-            ))}
-
-            <LoadingSpinner loadingComp={loadingComp} isFetching={isFetching}/>
-        </section>
-    )
-}
+  return (
+    <>
+      <RankCardTable
+        isSuccess={isSuccess}
+        item={"유저"}
+        scoreName={"점수"}
+        states={userState}
+        getText={(state) => state.user.nickname}
+        getPicture={(state) => default_image}
+        getScore={(state) => state.rankWeight}
+        getKey={(state) => state.rankId}
+      />
+      <LoadingSpinner loadingComp={loadingComp} isFetching={isFetching} />
+    </>
+  );
+};
 
 export default UserRankList;

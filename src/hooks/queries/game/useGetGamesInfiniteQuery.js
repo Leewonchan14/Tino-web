@@ -2,7 +2,7 @@ import GameController from "../../../apis/game.controller";
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {SECOND} from "../../../utils/timeConverter";
 
-export const useGetGamesInfiniteQuery = ({sortMenu, pageSize}) => {
+export const useGetGamesInfiniteQuery = ({selectedGameSortMenu, pageSize}) => {
     const findAllGame = async ({page, size, sort}) => {
         const response = await GameController.findAll({
             page, size, sort
@@ -17,9 +17,9 @@ export const useGetGamesInfiniteQuery = ({sortMenu, pageSize}) => {
         isSuccess
     } = useInfiniteQuery(
         {
-            queryKey: ['games', {sort: sortMenu}],
+            queryKey: ['games', {sort: selectedGameSortMenu}],
             queryFn: async (args) => {
-                return await findAllGame({page: args.pageParam, size: pageSize, sort: sortMenu})
+                return await findAllGame({page: args.pageParam, size: pageSize, sort: selectedGameSortMenu.value})
             },
             initialPageParam: 0,
             getNextPageParam: (lastPage, allPages, lastPageParam) => {

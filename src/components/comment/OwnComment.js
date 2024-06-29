@@ -15,7 +15,7 @@ const OwnComment = () => {
                 "email": "",
             }
         }}
-                 containerStyle={"bg-indigo-100"}
+                 containerStyle={"bg-primary-100"}
                  nicknameStyle={"text-indigo-600"}
         />
     )

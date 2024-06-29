@@ -1,38 +1,47 @@
-import React from "react";
-import RankCard from "./RankCard";
-import RankHeader from "./RankHeader";
+import React, { useState } from "react";
 import LoadingSpinner from "../common/spinner/LoadingSpinner";
 import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfiniteScroll";
 import useGetGameRankInfiniteQuery from "../../hooks/queries/rank/useGetGameRankInfiniteQuery";
+import { RankCardTable } from "./RankCardTable";
+import { GAME_SORT_MENU } from "../../constants/Game";
+import GameSortMenu from "../game/GameSortMenu";
 
-const GameRankList = ({sortMenu}) => {
+const GameRankList = () => {
+  const [selectedRankOption, setSelectedRankOption] = useState(
+    GAME_SORT_MENU[0]
+  );
 
-    let {
-        gameState,
-        isFetching,
-        isSuccess,
-        fetchNextPage
-    } = useGetGameRankInfiniteQuery({sortMenu});
+  let { gameState, isFetching, isSuccess, fetchNextPage } =
+    useGetGameRankInfiniteQuery({ sortMenu: selectedRankOption });
 
-    let {loadingComp} = useReactQueryInfiniteScroll({
-        isFetching,
-        fetchData: fetchNextPage
-    })
+  let { loadingComp } = useReactQueryInfiniteScroll({
+    isFetching,
+    fetchData: fetchNextPage,
+  });
 
-    return (
-        <section className={"w-full"}>
-            <RankHeader score={sortMenu.text} item={"게임"}/>
-            {isSuccess && gameState.pages.map((page, index) => (
-                page.map((game, subIndex) =>
-                    <RankCard
-                        key={game.gameId} rank={index * 10 + subIndex + 1}
-                        score={game[sortMenu.score]} text={game.gameName}
-                        picture={game.gameImage}/>)
-            ))}
+  return (
+    <>
+      <GameRankOptionList
+        select={selectedRankOption}
+        setSortMenu={setSelectedRankOption}
+      />
+      <RankCardTable
+        isSuccess={isSuccess}
+        item={"게임"}
+        scoreName={selectedRankOption.text}
+        states={gameState}
+        getKey={(state) => state["gameId"]}
+        getScore={(state) => state[selectedRankOption.score]}
+        getText={(state) => state["gameName"]}
+        getPicture={(state) => state["gameImage"]}
+      />
+      <LoadingSpinner loadingComp={loadingComp} isFetching={isFetching} />
+    </>
+  );
+};
 
-            <LoadingSpinner loadingComp={loadingComp} isFetching={isFetching}/>
-        </section>
-    )
-}
+const GameRankOptionList = ({ select, setSortMenu }) => {
+  return <GameSortMenu sortMenu={select} setSortMenu={setSortMenu} />;
+};
 
 export default GameRankList;

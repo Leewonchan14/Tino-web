@@ -1,17 +1,32 @@
-const RankCard = ({rank, picture, score, text}) => {
-    return (
-        <article className={"w-full h-20 py-2 flex flex-row items-center border-b border-gray-200"}>
-            <span className={"font-bold text-center text-gray-500 w-[15%]"}>{rank}</span>
-            <div className={"w-[35%] h-full flex sm:w-auto"}>
-                <picture
-                    className={"flex h-16 w-16 rounded-full border-2 bg-white overflow-clip"}>
-                    <img draggable={false} src={picture} alt={"logo"}
-                         className={"h-full object-cover"}/>
-                </picture>
-                <span className={"flex ml-4 sm:w-auto items-center text-gray-500"}>{text}</span>
-            </div>
-            <span className={"flex flex-1 text-center justify-center text-gray-500 sm:line-clamp-2 sm:px-6"}>{score}</span>
-        </article>
-    );
-}
+const RankCard = ({ rank, picture, score, text }) => {
+  return (
+    <tr className={"w-full h-22 items-center border-b border-gray-200"}>
+      <td className={"text-center w-24"}>{rank}</td>
+      <td className={""}>
+        <div className={"flex items-center"}>
+          <picture
+            className={
+              "flex h-16 w-16 rounded-full border-2 bg-white overflow-clip"
+            }
+          >
+            <img
+              draggable={false}
+              src={picture}
+              alt={"logo"}
+              className={"object-cover"}
+            />
+          </picture>
+          {text}
+        </div>
+      </td>
+      <td
+        className={
+          "flex flex-col h-16 items-center justify-center line-clamp-2 text-center"
+        }
+      >
+        {score}
+      </td>
+    </tr>
+  );
+};
 export default RankCard;

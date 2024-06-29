@@ -1,6 +1,5 @@
-import React, {useState} from "react";
+import React from "react";
 import OwnComment from "./OwnComment";
-import StarInputRadioButton from "./StarInputRadioButton";
 import CommentInput from "./CommentInput";
 import CommentList from "./CommentList";
 
