@@ -12,7 +12,7 @@ export const RankCardTable = ({
   getText,
 }) => {
   return (
-    <table className={"w-full"}>
+    <table className={"relative w-full"}>
       <RankHeader score={scoreName} item={item} />
       <RankingCardList
         isSuccess={isSuccess}
@@ -28,7 +28,7 @@ export const RankCardTable = ({
 
 const RankHeader = ({ item, score }) => {
   return (
-    <thead className={"border-b border-gray-200"}>
+    <thead className={"sticky top-5 bg-primary-100 box-border"}>
       <tr className={""}>
         <th className={"w-24"}>순위</th>
         <th className={"text-start pl-5"}>{item}</th>
@@ -76,7 +76,7 @@ const RankCard = ({ rank, picture, score, text }) => {
         <div className={"flex items-center"}>
           <picture
             className={
-              "flex h-16 w-16 rounded-full border-2 bg-white overflow-clip"
+              "flex h-16 w-16 mr-4 rounded-full border-2 bg-white overflow-clip"
             }
           >
             <img

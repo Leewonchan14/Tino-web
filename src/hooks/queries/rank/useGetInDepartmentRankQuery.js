@@ -7,8 +7,8 @@ import { MINUTE } from "../../../utils/timeConverter";
 export const useGetInDepartmentRankQuery = () => {
   const [selectMajor, setSelectMajor] = useState(MAJOR[0]);
 
-  const onChange = (e) => {
-    setSelectMajor(MAJOR.find((major) => major.name === e.target.name));
+  const onChange = (name) => {
+    setSelectMajor(MAJOR.find((major) => major.name === name));
   };
 
   const fetchInDepartmentRank = async ({ page, size }) => {

@@ -3,8 +3,9 @@ import LoadingSpinner from "../common/spinner/LoadingSpinner";
 import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfiniteScroll";
 import useGetGameRankInfiniteQuery from "../../hooks/queries/rank/useGetGameRankInfiniteQuery";
 import { RankCardTable } from "./RankCardTable";
-import { GAME_SORT_MENU } from "../../constants/Game";
+import { GAME_SORT_MENU, REVIEW_COUNT } from "../../constants/Game";
 import GameSortMenu from "../game/GameSortMenu";
+import { timeToYearMonthDay } from "../../utils/timeConverter";
 
 const GameRankList = () => {
   const [selectedRankOption, setSelectedRankOption] = useState(
@@ -31,7 +32,12 @@ const GameRankList = () => {
         scoreName={selectedRankOption.text}
         states={gameState}
         getKey={(state) => state["gameId"]}
-        getScore={(state) => state[selectedRankOption.score]}
+        getScore={(state) => {
+          if (selectedRankOption.value === REVIEW_COUNT) {
+            return timeToYearMonthDay(state[selectedRankOption.score]);
+          }
+          return state[selectedRankOption.score];
+        }}
         getText={(state) => state["gameName"]}
         getPicture={(state) => state["gameImage"]}
       />

@@ -19,7 +19,7 @@ function SignUpPage(props) {
   } = useSignUp();
 
   return (
-    <div className={"mobile:h-auto flex flex-col justify-center"}>
+    <div className={"mobile:h-auto flex flex-col justify-center items-center"}>
       <h1
         className={
           "text-6xl my-5 font-bold flex justify-center mobile:text-4xl"
@@ -28,7 +28,7 @@ function SignUpPage(props) {
       >
         회원 가입
       </h1>
-      <div className={"flex-col"}>
+      <div className={"w-96 items-center justify-center mobile:w-full"}>
         <InputComp
           value={signupFormState.email}
           name={"email"}

@@ -62,6 +62,8 @@ const useLogin = () => {
       const { userId } = response.data;
       const { accessToken, refreshToken } = response.data.token;
 
+      console.log(response);
+
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("userId", userId);

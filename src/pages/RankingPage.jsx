@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Tabs } from "antd";
 import UserRankList from "../components/ranking/UserRankList";
 import DepartmentRankList from "../components/ranking/DepartmentRankList";
@@ -26,30 +26,28 @@ const RANKING_MENU_LIST = [
 ];
 
 const RankingPage = ({ ...rest }) => {
-  const [, setSelectedMenu] = useState(RANKING_MENU_LIST[0]);
+  const [selectedMenu, setSelectedMenu] = useState(RANKING_MENU_LIST[0]);
 
-  const onClickMenu = (menu) => {
-    setSelectedMenu(menu);
+  const SelectedSection = selectedMenu.children;
+
+  const onChange = (index) => {
+    setSelectedMenu(RANKING_MENU_LIST[index]);
   };
 
   return (
-    <>
+    <div className={"pb-20"}>
       <Tabs
-        rootClassName={"pb-20"}
         defaultActiveKey="1"
         centered
         size={"middle"}
         items={RANKING_MENU_LIST.map((menu, index) => ({
           label: menu.name,
           key: index,
-          children: menu.children({
-            key: index,
-            menu,
-            onClickMenu: () => onClickMenu(menu),
-          }),
         }))}
+        onChange={onChange}
       />
-    </>
+      <SelectedSection />
+    </div>
   );
 };
 

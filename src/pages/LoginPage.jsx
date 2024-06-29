@@ -27,7 +27,7 @@ function LoginPage(...rest) {
       >
         로그인
       </h1>
-      <div className={"w-[60%] flex flex-col items-center mobile:w-full"}>
+      <div className={"w-96 flex flex-col items-center mobile:w-full"}>
         <InputComp
           value={loginState.email}
           onChange={onChange}
