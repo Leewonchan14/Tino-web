@@ -73,7 +73,7 @@ const RankCard = ({ rank, picture, score, text }) => {
     <tr className={"w-full h-22 items-center border-b border-gray-200"}>
       <td className={"text-center"}>{rank}</td>
       <td className={""}>
-        <div className={"flex items-center"}>
+        <div className={"flex items-center text-nowrap"}>
           <picture
             className={
               "flex h-16 w-16 mr-4 rounded-full border-2 bg-white overflow-clip"

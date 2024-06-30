@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Tabs } from "antd";
 import UserRankList from "../components/ranking/UserRankList";
 import DepartmentRankList from "../components/ranking/DepartmentRankList";
-import InDepartment from "./Rank/InDepartment";
+import InDepartment from "../components/ranking/InDepartment";
 import GameRankList from "../components/ranking/GameRankList";
 
 export const RANKING_PATH = "/rank";

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { MAJOR } from "../../constants/Major";
-import { RankCardTable } from "../../components/ranking/RankCardTable";
+import { RankCardTable } from "./RankCardTable";
 import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfiniteScroll";
 import default_image from "../../assets/default_image.jpg";
-import LoadingSpinner from "../../components/common/spinner/LoadingSpinner";
+import LoadingSpinner from "../common/spinner/LoadingSpinner";
 import { useGetInDepartmentRankQuery } from "../../hooks/queries/rank/useGetInDepartmentRankQuery";
 
 const InDepartment = () => {

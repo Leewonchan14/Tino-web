@@ -2,35 +2,19 @@ import React from "react";
 import InputComp from "../components/common/input/InputComp";
 import { useSendEmail } from "../hooks/login/useSendEmail";
 import { G_MARKET_FONT } from "../constants/FontFamily";
+import { Spin } from "antd";
 
 const AUTH_EMAIL_PAGE_PATH = "/email/auth";
 
-function SignUpButton({ isFetching, text, onClick, className }) {
-  return (
-    <button
-      disabled={isFetching}
-      style={{ fontFamily: G_MARKET_FONT }}
-      className={
-        "w-full h-[3.5rem] p-[5px] my-[10px] bg-blue-600 text-white font-bold text-xl border-1 rounded-xl " +
-        className
-      }
-      onClick={onClick}
-    >
-      {!isFetching && text}
-      {isFetching && "전송중..."}
-    </button>
-  );
-}
-
 function AuthEmailCodePage(props) {
-  const [
+  const {
     email,
     onChangeEmail,
     isFetching,
     message,
     onClickSendEmail,
     GoSignUpForm,
-  ] = useSendEmail("");
+  } = useSendEmail("");
 
   return (
     <div className={"h-[70%] flex flex-col items-center"}>
@@ -73,6 +57,24 @@ function AuthEmailCodePage(props) {
         </button>
       </div>
     </div>
+  );
+}
+
+function SignUpButton({ isFetching, text, onClick, className }) {
+  return (
+    <button
+      disabled={isFetching}
+      style={{ fontFamily: G_MARKET_FONT }}
+      className={
+        "w-full h-[3.5rem] p-[5px] my-[10px] bg-blue-600 text-white font-bold text-xl border-1 rounded-xl " +
+        className
+      }
+      onClick={onClick}
+    >
+      {!isFetching && text}
+      <Spin spinning={isFetching} fullscreen={true} />
+      {isFetching && "전송중..."}
+    </button>
   );
 }
 
