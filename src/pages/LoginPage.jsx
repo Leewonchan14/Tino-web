@@ -5,17 +5,15 @@ import ButtonComp from "../components/common/button/ButtonComp";
 import { AUTH_EMAIL_PAGE_PATH } from "./AuthEmailCodePage";
 import { useLogin } from "../hooks/login/useLogin";
 import { G_MARKET_FONT } from "../constants/FontFamily";
+import { Spin } from "antd";
 
 const LOGIN_PATH = "/login";
 
 function LoginPage(...rest) {
   let navigate = useNavigate();
 
-  let { loginState, isValid, onChange, onSubmit } = useLogin();
-
-  const goSignUp = () => {
-    navigate(AUTH_EMAIL_PAGE_PATH);
-  };
+  let { loginState, errorMessage, isLoading, isValid, onChange, onSubmit } =
+    useLogin();
 
   return (
     <div className={"h-[70%] flex flex-col justify-center items-center"}>
@@ -53,9 +51,16 @@ function LoginPage(...rest) {
         </span>
 
         <ButtonComp text={"로그인"} onClick={onSubmit} />
+        <span className={"text-red-600"}>{errorMessage}</span>
+        <Spin fullscreen={true} spinning={isLoading} />
         <div className={"mt-4 w-full flex justify-center"}>
           계정이 없으신가요?
-          <button onClick={goSignUp} className={"ml-4 text-blue-600"}>
+          <button
+            onClick={() => {
+              navigate(AUTH_EMAIL_PAGE_PATH);
+            }}
+            className={"ml-4 text-blue-600"}
+          >
             회원가입 하러 가기
           </button>
         </div>

@@ -1,11 +1,16 @@
 import { useState } from "react";
 import { MAJOR } from "../../constants/Major";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import UserController from "../../apis/user.controller";
+import { LOGIN_PATH } from "../../pages/LoginPage";
 
 export const useSignUp = () => {
+  let navigate = useNavigate();
   let location = useLocation();
   const email = location?.state?.email || "";
 
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const [signupFormState, setSignupFormState] = useState({
     email: email,
     password: "",
@@ -57,15 +62,34 @@ export const useSignUp = () => {
   const onSubmit = async () => {
     let validState = await CheckValid();
 
-    const allValid = Object.entries(validState).every(([key, value]) => {
-      return value;
-    });
+    const allValid = Object.entries(validState).every(([key, value]) => value);
 
     if (!allValid) {
+      setErrorMessage("입력값이 올바르지 않습니다.");
       return;
     }
 
-    console.log("회원가입 요청");
+    setIsLoading(true);
+
+    try {
+      await UserController.signUp({ ...signupFormState });
+    } catch (err) {
+      console.error(err);
+      if (err.response.status === 404) {
+        setErrorMessage(err.response.data.message);
+        return;
+      }
+      if (err.response.status === 500) {
+        setErrorMessage("서버 오류입니다. 잠시 후 다시 시도해주세요.");
+        return;
+      }
+      setErrorMessage("알 수 없는 오류입니다. 잠시 후 다시 시도해주세요.");
+    } finally {
+      setIsLoading(false);
+    }
+
+    setIsLoading(false);
+    navigate(LOGIN_PATH);
   };
 
   const onChange = (e) => {
@@ -105,5 +129,7 @@ export const useSignUp = () => {
     isValid,
     onChange,
     onSubmit,
+    isLoading,
+    errorMessage,
   };
 };

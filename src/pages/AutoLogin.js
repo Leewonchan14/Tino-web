@@ -1,9 +1,9 @@
 import useAutoLogin from "../hooks/login/useAutoLogin";
 
 const AutoLogin = () => {
-    let {loading} = useAutoLogin();
+  useAutoLogin();
 
-    if (loading) return null;
-}
+  return null;
+};
 
 export default AutoLogin;

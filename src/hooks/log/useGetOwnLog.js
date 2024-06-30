@@ -1,25 +1,39 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import LogController from "../../apis/log.controller";
+import { userStore } from "../../stores/userStore";
+import { delayFetch } from "../../utils/delay";
 
-export const useGetOwnLog = ({gameId, userId}) => {
-    const [ownLogState, setOwnLogState] = useState({})
-    const [isExist, setIsExist] = useState(true)
-    const [isFetching, setIsFetching] = useState(true)
-    const findBestLogByGameId = async (gameId, userId) => {
-        setIsFetching(true)
-        try {
-            const response = await LogController.findBestLogByGameId({gameId, userId})
-            setOwnLogState(response.data)
-            setIsExist(true)
-            setIsFetching(false)
-        } catch (err) {
-            setIsFetching(false)
-            setIsExist(false)
-        }
+export const useGetOwnLog = ({ gameId }) => {
+  const { isLogin, userId } = userStore((state) => state);
+  const [ownLogState, setOwnLogState] = useState({});
+  const [isExist, setIsExist] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
+  const findBestLogByGameId = async () => {
+    setIsFetching(true);
+
+    let response;
+
+    try {
+      response = await delayFetch({
+        fetcherPromise: LogController.findBestLogByGameId({
+          gameId,
+          userId,
+        }),
+        milliseconds: 1000,
+      });
+    } catch (err) {
+      setIsExist(false);
+      return;
+    } finally {
+      setIsFetching(false);
     }
+    setIsExist(true);
+    setOwnLogState(response.data);
+  };
 
-    useEffect(() => {
-        findBestLogByGameId(gameId, userId);
-    }, []);
-    return {ownLogState, setOwnLogState, isExist, isFetching};
-}
+  useEffect(() => {
+    if (!isLogin) return;
+    findBestLogByGameId();
+  }, []);
+  return { ownLogState, setOwnLogState, isExist, isFetching, isLogin };
+};

@@ -1,70 +1,72 @@
-import {useLocation, useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 import UserController from "../../apis/user.controller";
+import { userStore } from "../../stores/userStore";
+import {
+  getLocalUserData,
+  removeLocalData,
+  setLocalData,
+} from "../../utils/LocalStorageController";
+
+export const ACCESS_TOKEN_LOCAL_KEY = "AccessToken";
+export const REFRESH_TOKEN_LOCAL_KEY = "RefreshToken";
+export const USER_ID_LOCAL_KEY = "userId";
 
 const useAutoLogin = () => {
+  const { prePath } = useLocation();
+  let navigate = useNavigate();
+  const { changeIsLogin } = userStore((state) => state);
 
-    const {prePath} = useLocation();
-    let navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
+  const goPrePage = () => {
+    removeLocalData();
+    setLoading(false);
+    navigate(prePath);
+  };
 
-    let preAccessToken = localStorage.getItem("AccessToken");
-    let preRefreshToken = localStorage.getItem("RefreshToken");
-    let preUserId = localStorage.getItem("userId");
+  const autoLogin = async () => {
+    setLoading(true);
 
-    const [loading, setLoading] = useState(true);
+    const localData = getLocalUserData();
+    console.log(localData);
 
-    const autoLogin = async () => {
-        setLoading(true);
+    const isAllDataExist = Object.values(localData).every((value) => value);
 
-        const GO_PRE_PAGE = () => {
-            localStorage.removeItem("accessToken");
-            localStorage.removeItem("refreshToken");
-            localStorage.removeItem("userId");
-            setLoading(false);
-            navigate(prePath);
-        };
+    if (!isAllDataExist) {
+      console.log("자동 로그인 실패: 데이터가 없습니다.");
+      goPrePage();
+      return;
+    }
 
-        if (!preUserId || !preAccessToken || !preRefreshToken) {
-            GO_PRE_PAGE();
-            return;
-        }
+    let res;
+    try {
+      res = await UserController.autoLogin(localData);
+    } catch (error) {
+      console.error(error);
+      console.log("자동 로그인 실패");
 
-        let res;
-        try {
-            res = await UserController.autoLogin({
-                userId: preUserId,
-                accessToken: preAccessToken,
-                refreshToken: preRefreshToken
-            });
-        } catch (error) {
-            GO_PRE_PAGE();
-            return;
-        }
+      goPrePage();
+      return;
+    } finally {
+      setLoading(false);
+    }
 
-        const {isSuccess, userId, token} = res.data;
-        const {accessToken, refreshToken} = token;
+    console.log(res.data);
 
-        // 로그인 페이지로 이동
-        if (!isSuccess) {
-            GO_PRE_PAGE();
-            return;
-        }
+    const { userId, token } = res.data;
+    const { accessToken, refreshToken } = token;
 
-        localStorage.setItem("userId", userId);
-        localStorage.setItem("accessToken", accessToken);
-        localStorage.setItem("refreshToken", refreshToken);
+    setLocalData({ accessToken, refreshToken, userId });
+    changeIsLogin(true);
+  };
 
-        setLoading(false);
-    };
+  useEffect(() => {
+    console.log("자동 로그인 시도");
+    autoLogin();
+  }, []);
 
-    useEffect(() => {
-        console.log("자동 로그인 시도");
-        // 토큰이 있다면 자동로그인 요청
-        autoLogin();
-    }, []);
-
-    return {loading};
+  return { loading };
 };
 
 export default useAutoLogin;

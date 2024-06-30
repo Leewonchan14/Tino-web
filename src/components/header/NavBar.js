@@ -4,21 +4,22 @@ import { useNavigate } from "react-router-dom";
 import { HOME_PATH } from "../../pages/HomePage";
 import { LOGIN_PATH } from "../../pages/LoginPage";
 import MenuBar from "./MenuBar";
+import { userStore } from "../../stores/userStore";
 
 function NavBar({ ...rest }) {
   let navigate = useNavigate();
-
-  const onLogin = () => {
-    navigate(LOGIN_PATH);
-  };
-  const goHome = () => {
-    navigate(HOME_PATH);
-  };
+  const { isLogin } = userStore((state) => state);
 
   return (
-    <div className={"h-28 flex justify-between py-4 px-4 mb-6 items-center"}>
+    <div
+      className={
+        "relative h-20 flex justify-between px-4 mb-6 items-center z-10"
+      }
+    >
       <picture
-        onClick={goHome}
+        onClick={() => {
+          navigate(HOME_PATH);
+        }}
         className={
           "relative overflow-clip block rounded-full bg-white w-20 h-20 mobile:w-14 mobile:h-14 " +
           "shadow-lg shadow-gray-200 z-10 cursor-pointer overflow-clip border-[1px]"
@@ -35,12 +36,37 @@ function NavBar({ ...rest }) {
       {/* 게임, 랭킹, 메뉴 버튼 */}
       <MenuBar />
 
-      {/* 로그인 버튼 */}
-      <div onClick={onLogin} className={"cursor-pointer z-0"}>
-        로그인
+      <div className={"flex justify-center"}>
+        {/* 로그인 버튼 */}
+        {!isLogin ? <LoginButton /> : <HeaderProfile />}
       </div>
     </div>
   );
 }
+
+const LoginButton = () => {
+  let navigate = useNavigate();
+
+  const onLogin = () => {
+    navigate(LOGIN_PATH);
+  };
+
+  return (
+    <div onClick={onLogin} className={"cursor-pointer z-0"}>
+      로그인
+    </div>
+  );
+};
+
+const HeaderProfile = () => {
+  return (
+    <div className={"flex items-center"}>
+      <div className={"w-10 h-10 overflow-clip rounded-full border-[1px]"}>
+        <img src={TinoIcon} alt={"profile"} className={"w-10"} />
+      </div>
+      <div className={"ml-2 text-nowrap"}>마이페이지</div>
+    </div>
+  );
+};
 
 export default NavBar;

@@ -12,6 +12,7 @@ const GAME_PATH_WITHOUT_PARAM = "/games/";
 function GameDetailPage(props) {
   let { gameId } = useParams();
   let { gameState, isFetching } = useGetOneGame({ gameId });
+
   return (
     <div className={"pb-20"}>
       {/*게임 화면*/}
@@ -21,7 +22,7 @@ function GameDetailPage(props) {
       <GameDescription gameState={gameState} isFetching={isFetching} />
 
       {/*게임 기록*/}
-      <LogSectionInGame gameId={gameId} userId={112} />
+      <LogSectionInGame gameId={gameId} />
 
       {/*댓글 목록*/}
       <CommentSectionInGame gameId={gameId} />

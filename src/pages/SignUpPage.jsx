@@ -5,6 +5,7 @@ import { useSignUp } from "../hooks/login/useSignUp";
 import { G_MARKET_FONT } from "../constants/FontFamily";
 import ComboBox from "../components/common/input/ComboBox";
 import { MAJOR } from "../constants/Major";
+import { Spin } from "antd";
 
 const SIGNUP_PATH = "/signup";
 
@@ -16,6 +17,8 @@ function SignUpPage(props) {
     onChange,
     onChangeMajor,
     onSubmit,
+    isLoading,
+    errorMessage,
   } = useSignUp();
 
   return (
@@ -92,7 +95,9 @@ function SignUpPage(props) {
           onChange={onChangeMajor}
           options={MAJOR}
         />
-        <ButtonComp text={"회원가입"} onClick={onSubmit} className={"!mb-20"} />
+        <ButtonComp text={"회원가입"} onClick={onSubmit} className={""} />
+        <div className={"text-red-600 text-center mb-10"}>{errorMessage}</div>
+        <Spin fullscreen={true} spinning={isLoading} />
       </div>
     </div>
   );
