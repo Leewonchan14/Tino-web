@@ -15,11 +15,6 @@ const MENU_LIST = [
     path: RANKING_PATH,
     prevPath: RANKING_PATH,
   },
-  {
-    name: "친구",
-    path: FRIEND_PAGE_PATH,
-    prevPath: FRIEND_PAGE_PATH,
-  },
 ];
 
 const getNowMenu = (path) => {

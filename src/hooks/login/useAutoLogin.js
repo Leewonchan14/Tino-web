@@ -64,9 +64,9 @@ const useAutoLogin = () => {
     console.log("자동 로그인 시도");
     // autoLogin();
 
-    // const localData = getLocalUserData();
-    // changeUserId(localData.userId);
-    // changeIsLogin(true);
+    const localData = getLocalUserData();
+    changeUserId(localData.userId);
+    changeIsLogin(true);
   }, []);
 
   return { loading };

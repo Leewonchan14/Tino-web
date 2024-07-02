@@ -50,7 +50,9 @@ function InDepartmentRankOption({ selectMajor, onChange }) {
 
   return (
     <>
-      <AcodianWrapper isOpen={isOpen}>
+      <AcodianWrapper
+        isOpen={document.querySelector("#root").scrollWidth >= 640 || isOpen}
+      >
         <div
           className={
             "flex py-4 mb-6 gap-4 w-full flex-wrap h-auto" +

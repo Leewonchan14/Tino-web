@@ -21,7 +21,7 @@ function NavBar({ ...rest }) {
           navigate(HOME_PATH);
         }}
         className={
-          "relative overflow-clip block rounded-full bg-white w-20 h-20 mobile:w-14 mobile:h-14 " +
+          "absolute left-2 overflow-clip block rounded-full bg-white w-20 h-20 mobile:w-14 mobile:h-14 " +
           "shadow-lg shadow-gray-200 z-10 cursor-pointer overflow-clip border-[1px]"
         }
       >
@@ -36,7 +36,7 @@ function NavBar({ ...rest }) {
       {/* 게임, 랭킹, 메뉴 버튼 */}
       <MenuBar />
 
-      <div className={"flex justify-center"}>
+      <div className={"absolute right-2 flex justify-center"}>
         {/* 로그인 버튼 */}
         {!isLogin ? <LoginButton /> : <HeaderProfile />}
       </div>
