@@ -38,23 +38,25 @@ const useAutoLogin = () => {
       return;
     }
 
-    let res;
-    try {
-      res = await UserController.autoLogin(localData);
-    } catch (error) {
-      console.error(error);
-      console.log("자동 로그인 실패");
+    // let res;
+    // try {
+    //   res = await UserController.autoLogin(localData);
+    // } catch (error) {
+    //   console.error(error);
+    //   console.log("자동 로그인 실패");
+    //
+    //   goPrePage();
+    //   return;
+    // } finally {
+    //   setLoading(false);
+    // }
 
-      goPrePage();
-      return;
-    } finally {
-      setLoading(false);
-    }
+    // console.log(res.data);
 
-    console.log(res.data);
+    // const { userId, token } = res.data;
+    // const { accessToken, refreshToken } = token;
 
-    const { userId, token } = res.data;
-    const { accessToken, refreshToken } = token;
+    const { userId, accessToken, refreshToken } = localData;
 
     setLocalData({ accessToken, refreshToken, userId });
     changeIsLogin(true);
@@ -62,11 +64,12 @@ const useAutoLogin = () => {
 
   useEffect(() => {
     console.log("자동 로그인 시도");
-    // autoLogin();
+    autoLogin();
 
-    const localData = getLocalUserData();
-    changeUserId(localData.userId);
-    changeIsLogin(true);
+    // const localData = getLocalUserData();
+    // console.log(localData);
+    // changeUserId(localData.userId);
+    // changeIsLogin(true);
   }, []);
 
   return { loading };

@@ -5,6 +5,7 @@ import { HOME_PATH } from "../../pages/HomePage";
 import { LOGIN_PATH } from "../../pages/LoginPage";
 import MenuBar from "./MenuBar";
 import { userStore } from "../../stores/userStore";
+import { removeLocalData } from "../../utils/LocalStorageController";
 
 function NavBar({ ...rest }) {
   let navigate = useNavigate();
@@ -59,12 +60,22 @@ const LoginButton = () => {
 };
 
 const HeaderProfile = () => {
+  const { changeIsLogin } = userStore((state) => state);
+
   return (
     <div className={"flex items-center"}>
       <div className={"w-10 h-10 overflow-clip rounded-full border-[1px]"}>
         <img src={TinoIcon} alt={"profile"} className={"w-10"} />
       </div>
-      <div className={"ml-2 text-nowrap"}>마이페이지</div>
+      <div
+        className={"ml-2 text-nowrap cursor-pointer"}
+        onClick={() => {
+          removeLocalData();
+          changeIsLogin(false);
+        }}
+      >
+        로그아웃
+      </div>
     </div>
   );
 };
