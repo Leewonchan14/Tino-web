@@ -1,26 +1,95 @@
 import BlueButton from "../common/button/BlueButton";
-import React, {useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import AutoResizeTextInputComp from "../common/input/AutoResizeTextInputComp";
 import StarInputRadioButton from "./StarInputRadioButton";
+import { CommentController } from "../../apis/comment.controller";
+import { userStore } from "../../stores/userStore";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AcodianWrapper } from "../common/wrapper/AcodianWrapper";
 
-const CommentInput = () => {
-    const [value, setValue] = useState("")
-    const [star, setStar] = useState(5)
+const CommentInput = ({
+  ownComment,
+  gameId,
+  isInputOpen,
+  isFetching,
+  toggleInputOpen,
+}) => {
+  const [value, setValue] = useState("");
+  const [star, setStar] = useState(5);
+  const { userId, isLogin } = userStore((state) => state);
 
-    const onChange = (e) => {
-        setValue(e.target.value);
+  useEffect(() => {
+    if (ownComment) {
+      setValue(ownComment?.reviewContent);
+      setStar(ownComment.star);
     }
+  }, [isFetching]);
 
-    return (
-        <div className={"h-auto mb-4"}>
-            {/*별점 입력 컴포넌트*/}
-            <AutoResizeTextInputComp value={value} onChange={onChange} placeholder={"댓글을 입력하세요"}/>
-            <section className={"flex h-10 items-center"}>
-                <StarInputRadioButton setStar={setStar} star={star}/>
-                <BlueButton className={"h-full w-32 text-xl font-bold !m-0 !ml-auto"}>입력</BlueButton>
-            </section>
-        </div>
-    )
-}
+  const queryClient = useQueryClient();
+
+  const onChange = (e) => {
+    setValue(e.target.value);
+  };
+
+  const mutationFn = () => {
+    if (!ownComment) {
+      return CommentController.createComment({
+        body: {
+          userId,
+          gameId,
+          reviewContent: value,
+          star,
+        },
+      });
+    } else {
+      return CommentController.updateComment({
+        reviewId: ownComment?.reviewId,
+        reviewContent: value,
+      });
+    }
+  };
+
+  const { mutate } = useMutation({
+    mutationFn,
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries({ queryKey: ["comments", gameId] });
+      queryClient.invalidateQueries({ queryKey: ["comment", gameId] });
+      queryClient.setQueryData(["comments", gameId], []);
+    },
+    onMutate: (variables) => {
+      toggleInputOpen();
+    },
+    onError: (error, variables, context) => {
+      console.error(error);
+    },
+  });
+  if (isFetching || !isLogin) {
+    return;
+  }
+
+  return (
+    <AcodianWrapper isOpen={isInputOpen || !ownComment}>
+      <div className={"mb-4 transition-all duration-500 delay-0 overflow-clip"}>
+        <AutoResizeTextInputComp
+          value={value}
+          onChange={onChange}
+          placeholder={"댓글을 입력하세요"}
+        />
+        {/*별점 입력 컴포넌트*/}
+        <section className={"flex mobile:flex-col"}>
+          <StarInputRadioButton setStar={setStar} star={star} />
+          <BlueButton
+            className={
+              "float-right h-12 w-32 text-xl font-bold !m-0 !ml-auto mobile:w-full !mobile:mt-4"
+            }
+            onClick={mutate}
+          >
+            입력
+          </BlueButton>
+        </section>
+      </div>
+    </AcodianWrapper>
+  );
+};
 
 export default CommentInput;

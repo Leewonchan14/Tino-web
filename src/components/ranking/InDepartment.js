@@ -5,6 +5,7 @@ import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfini
 import default_image from "../../assets/default_image.jpg";
 import LoadingSpinner from "../common/spinner/LoadingSpinner";
 import { useGetInDepartmentRankQuery } from "../../hooks/queries/rank/useGetInDepartmentRankQuery";
+import { AcodianWrapper } from "../common/wrapper/AcodianWrapper";
 
 const InDepartment = () => {
   const {
@@ -49,26 +50,26 @@ function InDepartmentRankOption({ selectMajor, onChange }) {
 
   return (
     <>
-      <div
-        className={
-          "overflow-clip flex py-4 mb-6 gap-4 w-full flex-wrap h-auto transition-all duration-1000" +
-          " " +
-          "mobile:relative mobile:block mobile:overflow-hidden mobile:p-0 mobile:m-0" +
-          " " +
-          (isOpen ? "mobile:max-h-[1400px]" : "mobile:max-h-0")
-        }
-      >
-        {MAJOR.map((major, index) => {
-          return (
-            <InDepartmentRankOptionItem
-              key={major.value}
-              onClick={onClick}
-              major={major}
-              selectMajor={selectMajor}
-            />
-          );
-        })}
-      </div>
+      <AcodianWrapper isOpen={isOpen}>
+        <div
+          className={
+            "flex py-4 mb-6 gap-4 w-full flex-wrap h-auto" +
+            " " +
+            "mobile:relative mobile:block mobile:p-0 mobile:m-0"
+          }
+        >
+          {MAJOR.map((major, index) => {
+            return (
+              <InDepartmentRankOptionItem
+                key={major.value}
+                onClick={onClick}
+                major={major}
+                selectMajor={selectMajor}
+              />
+            );
+          })}
+        </div>
+      </AcodianWrapper>
       <button
         className={
           "hidden my-6 bottom-10 w-full bg-primary-600 text-white font-bold rounded-xl py-2 text-xl" +

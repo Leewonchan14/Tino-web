@@ -15,7 +15,7 @@ export const USER_ID_LOCAL_KEY = "userId";
 const useAutoLogin = () => {
   const { prePath } = useLocation();
   let navigate = useNavigate();
-  const { changeIsLogin } = userStore((state) => state);
+  const { changeIsLogin, changeUserId } = userStore((state) => state);
 
   const [loading, setLoading] = useState(true);
 
@@ -29,7 +29,6 @@ const useAutoLogin = () => {
     setLoading(true);
 
     const localData = getLocalUserData();
-    console.log(localData);
 
     const isAllDataExist = Object.values(localData).every((value) => value);
 
@@ -63,7 +62,11 @@ const useAutoLogin = () => {
 
   useEffect(() => {
     console.log("자동 로그인 시도");
-    autoLogin();
+    // autoLogin();
+
+    // const localData = getLocalUserData();
+    // changeUserId(localData.userId);
+    // changeIsLogin(true);
   }, []);
 
   return { loading };
