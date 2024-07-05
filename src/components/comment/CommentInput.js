@@ -68,26 +68,24 @@ const CommentInput = ({
   }
 
   return (
-    <AcodianWrapper isOpen={isInputOpen || !ownComment}>
-      <div className={"mb-4 transition-all duration-500 delay-0 overflow-clip"}>
-        <AutoResizeTextInputComp
-          value={value}
-          onChange={onChange}
-          placeholder={"댓글을 입력하세요"}
-        />
-        {/*별점 입력 컴포넌트*/}
-        <section className={"flex mobile:flex-col"}>
-          <StarInputRadioButton setStar={setStar} star={star} />
-          <BlueButton
-            className={
-              "float-right h-12 w-32 text-xl font-bold !m-0 !ml-auto mobile:w-full !mobile:mt-4"
-            }
-            onClick={mutate}
-          >
-            입력
-          </BlueButton>
-        </section>
-      </div>
+    <AcodianWrapper isOpen={isInputOpen || !ownComment} duration={250}>
+      <AutoResizeTextInputComp
+        value={value}
+        onChange={onChange}
+        placeholder={"댓글을 입력하세요"}
+      />
+      {/*별점 입력 컴포넌트*/}
+      <section className={"flex mobile:flex-col"}>
+        <StarInputRadioButton setStar={setStar} star={star} />
+        <BlueButton
+          className={
+            "float-right h-12 w-32 text-xl font-bold cursor-pointer !m-0 !ml-auto mobile:w-full !mobile:mt-4"
+          }
+          onClick={mutate}
+        >
+          입력
+        </BlueButton>
+      </section>
     </AcodianWrapper>
   );
 };
