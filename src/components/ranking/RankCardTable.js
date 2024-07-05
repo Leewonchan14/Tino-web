@@ -70,7 +70,7 @@ const RankingCardList = ({
 
 const RankCard = ({ rank, picture, score, text }) => {
   return (
-    <tr className={"w-full h-22 items-center border-b border-gray-200"}>
+    <tr className={"w-full h-24 border-b border-gray-200"}>
       <td className={"text-center"}>{rank}</td>
       <td className={""}>
         <div className={"flex items-center text-nowrap"}>
@@ -89,12 +89,8 @@ const RankCard = ({ rank, picture, score, text }) => {
           {text}
         </div>
       </td>
-      <td
-        className={
-          "flex flex-col h-16 items-center justify-center line-clamp-2 text-center"
-        }
-      >
-        {score}
+      <td className={"text-center"}>
+        <div className={"line-clamp-2 px-4"}>{score}</div>
       </td>
     </tr>
   );
