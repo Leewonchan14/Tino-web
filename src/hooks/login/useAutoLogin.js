@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import UserController from "../../apis/user.controller";
 import { userStore } from "../../stores/userStore";
 import {
   getLocalUserData,
@@ -60,6 +59,7 @@ const useAutoLogin = () => {
 
     setLocalData({ accessToken, refreshToken, userId });
     changeIsLogin(true);
+    changeUserId(userId);
   };
 
   useEffect(() => {
