@@ -1,5 +1,4 @@
 import React from "react";
-import TinoIcon from "../../assets/tino_icon.png";
 import Skeleton from "react-loading-skeleton";
 
 export const LogTable = ({ isSuccess, logState, pageSize }) => {
@@ -50,7 +49,7 @@ function Log({ log, index, className }) {
             <img
               className={"h-16 object-cover"}
               // src={"https://tinos-images-storage.s3.ap-northeast-2.amazonaws.com/default_user_image.png"}
-              src={TinoIcon}
+              src={log.user.profileImageURL}
             />
           </picture>
           {log.user.nickname}

@@ -1,4 +1,3 @@
-import TinoIcon from "../../assets/tino_icon.png";
 import React from "react";
 import { G_MARKET_FONT } from "../../constants/FontFamily";
 import timeConverter from "../../utils/timeConverter";
@@ -14,7 +13,7 @@ const Comment = ({ comment, index, containerStyle, nicknameStyle }) => {
     >
       <section className={"flex items-center w-full"}>
         <picture className={"block rounded-full bg-gray-400 mr-4"}>
-          <img className={"h-14"} src={TinoIcon} alt="" />
+          <img className={"h-14"} src={comment.user.profileImageURL} alt="" />
         </picture>
         <CommentUserProfile comment={comment} nicknameStyle={nicknameStyle} />
       </section>

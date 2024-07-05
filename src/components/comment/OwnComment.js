@@ -2,7 +2,6 @@ import React from "react";
 import { CommentSkeleton, CommentUserProfile } from "./Comment";
 import { G_MARKET_FONT } from "../../constants/FontFamily";
 import { userStore } from "../../stores/userStore";
-import TinoIcon from "../../assets/tino_icon.png";
 
 const OwnComment = ({
   isFetching,
@@ -60,7 +59,7 @@ const ExistOwnComment = ({ comment, isInputOpen, toggleInputOpen }) => {
     >
       <section className={"flex items-center w-full"}>
         <picture className={"block rounded-full bg-gray-400 mr-4"}>
-          <img className={"h-14"} src={TinoIcon} alt="" />
+          <img className={"h-14"} src={comment.user.profileImageURL} alt="" />
         </picture>
         <CommentUserProfile
           comment={comment}

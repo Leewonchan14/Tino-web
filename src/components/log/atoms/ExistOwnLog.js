@@ -1,4 +1,3 @@
-import TinoIcon from "../../../assets/tino_icon.png";
 import React from "react";
 
 const ExistOwnLog = ({ ownLogState }) => {
@@ -11,7 +10,7 @@ const ExistOwnLog = ({ ownLogState }) => {
     >
       <div className={"text-3xl"}>{ownLogState.ranking}</div>
       <div className={"rounded-full border-[1px] border-white overflow-clip"}>
-        <img className={"h-20"} src={TinoIcon} alt="" />
+        <img className={"h-20"} src={ownLogState.user.profileImageURL} alt="" />
       </div>
       <div className={"font-bold"}>{ownLogState.user.nickname}</div>
       <div className={"text-2xl text-center"}>{ownLogState.gameScore}</div>
