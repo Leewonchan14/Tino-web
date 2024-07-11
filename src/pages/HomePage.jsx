@@ -33,8 +33,8 @@ function HomePage(props) {
       </h1>
 
       <h1 className={"mt-6 mb-12"}>
-        한국공학대학교 게임 설명입니다. 이것은 한국공학대학교 게임 설명입니다.
-        <br />이 문구는 웹사이트 dinogmaes-bugo.s3 한국공학대학교 입니다.
+        한국공학대학교 비공식 개발동아리 데브티노s 입니다. <br />이 곳에서
+        다양한 게임을 경험하고 학교내 다른 학과와 경쟁하세요!
       </h1>
 
       <GameSortMenu
