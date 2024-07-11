@@ -4,6 +4,8 @@ import React from "react";
 import ExistOwnLog from "./atoms/ExistOwnLog";
 import { Spin } from "antd";
 
+import TinoIcon from "../../assets/tino_icon.png";
+
 const OwnLog = ({ gameId }) => {
   let { ownLogState, isExist, isFetching, isLogin } = useGetOwnLog({ gameId });
 
@@ -42,16 +44,25 @@ const SwitchLogComp = ({ ownLogState, isFetching, isLogin, isExist }) => {
 
 const IsNotLogIn = () => {
   return (
-    <div
-      className={"mx-1 flex w-44 flex-col justify-center items-center h-full "}
-    >
+    <>
       <div
-        style={{ fontFamily: G_MARKET_FONT }}
-        className={"text-3xl text-center"}
+        className={
+          "flex w-full bg-primary-100 flex-col justify-center items-center h-full blur-md " +
+          "mobile:h-full mobile:flex-row mobile:w-full mobile:justify-evenly mobile:items-center"
+        }
       >
-        로그인이 <br /> 필요합니다.
+        <div className={"text-3xl"}>{1}</div>
+        <div className={"rounded-full border-[1px] border-white overflow-clip"}>
+          <img className={"h-20"} src={TinoIcon} alt="" />
+        </div>
+        <div className={"font-bold"}>티노</div>
+        <div className={"text-2xl text-center"}>0000</div>
       </div>
-    </div>
+      <span style={{ fontFamily: G_MARKET_FONT }} className={"absolute"}>
+        {" "}
+        로그인이 필요합니다
+      </span>
+    </>
   );
 };
 
