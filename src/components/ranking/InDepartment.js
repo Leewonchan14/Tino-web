@@ -100,13 +100,13 @@ const InDepartmentRankOptionItem = ({ selectMajor, onClick, major }) => {
           : "")
       }
     >
-      <div
+      <img
         className={
-          "w-12 h-12 mr-1 overflow-clip rounded-full border-[1px] border-black"
+          "w-9 h-9 mr-1 overflow-clip rounded-full border-[1px] border-black object-cover"
         }
-      >
-        <img className={"h-12 object-cover"} src={major.url} alt="" />
-      </div>
+        src={major.url}
+        alt=""
+      />
       {major.value}
     </button>
   );
