@@ -29,7 +29,7 @@ export const LogTable = ({ isSuccess, logState, pageSize }) => {
 
 const LogCardHeader = () => {
   return (
-    <thead className={"sticky z-10 bg-primary-600 text-white top-0 border-b-2"}>
+    <thead className={"sticky bg-primary-600 text-white top-0 h-12"}>
       <tr>
         <th className={"w-20"}>순위</th>
         <th className={"text-start pl-3"}>사용자</th>
