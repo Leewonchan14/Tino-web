@@ -1,23 +1,17 @@
 const Footer = () => {
   return (
-    <>
+    <footer>
       <div className="my-8 border-b border-gray-700" />
-      <footer>
-        <div className="flex justify-between mobile:flex-col mobile:gap-8">
-          {/* Contact Information */}
-          <ContactUs />
+      <div className="flex justify-between mobile:flex-col mobile:gap-8">
+        <ContactUs />
 
-          {/* Technologies Used */}
-          <TechUse />
+        <TechUse />
 
-          {/* Legal Information */}
-          <LegalInformation />
-        </div>
+        <LegalInformation />
+      </div>
 
-        {/* Footer Bottom */}
-        <FooterBottom />
-      </footer>
-    </>
+      <FooterBottom />
+    </footer>
   );
 };
 
@@ -38,7 +32,7 @@ const ContactUs = () => {
       <h3 className="font-bold text-xl mb-2">CONTACT US</h3>
       <div className={"flex flex-col gap-2"}>
         {CONTACT_INFO.map(({ icon, text }) => (
-          <div className={"flex gap-4"}>
+          <div key={text} className={"flex gap-4"}>
             <img className={"w-6 h-6"} src={icon} alt="" />
             {text}
           </div>
@@ -69,7 +63,7 @@ const TechUse = () => {
       <h3 className="font-bold text-xl mb-2">TECHNOLOGIES USED</h3>
       <div className={"flex flex-col gap-2"}>
         {TECH_USED_INFO.map(({ name, img }) => (
-          <div className={"flex gap-4"}>
+          <div key={name} className={"flex gap-4"}>
             <img className={"w-6 h-6"} src={img} />
             {name}
           </div>
