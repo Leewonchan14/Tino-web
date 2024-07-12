@@ -4,7 +4,7 @@ const GameIframe = ({ gameState, isFetching }) => {
   return (
     <div
       className={
-        "w-full overflow-clip h-[85vh] rounded-3xl flex justify-center items-center relative border-2"
+        "w-full overflow-clip h-[800px] rounded-3xl flex justify-center items-center relative border-2"
       }
     >
       <span className={"absolute top-1/2 z-0"}>

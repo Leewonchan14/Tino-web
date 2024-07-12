@@ -23,9 +23,9 @@ const CommentList = ({ gameId }) => {
 };
 
 const renderComments = (comments) => {
-  comments.map((comment) => {
-    return <Comment key={comment.reviewId} comment={comment} />;
-  });
+  return comments.map((comment) => (
+    <Comment key={comment.reviewId} comment={comment} />
+  ));
 };
 
 export default CommentList;

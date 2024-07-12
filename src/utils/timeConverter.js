@@ -1,5 +1,6 @@
 export const SECOND = 1000;
 export const MINUTE = 1000 * 60;
+export const HOUR = MINUTE * 60;
 
 const timeConverter = (dateTime) => {
   let date = new Date(dateTime);

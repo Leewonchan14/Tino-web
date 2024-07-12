@@ -14,6 +14,7 @@ import { SIGNUP_PATH, SignUpPage } from "./pages/SignUpPage";
 import { RANKING_PATH, RankingPage } from "./pages/RankingPage";
 import { Friend, FRIEND_PAGE_PATH } from "./pages/Friend";
 import React from "react";
+import { MY_PAGE_PATH, MyPage } from "./pages/MyPage";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           <Route exact path={SIGNUP_PATH} element={<SignUpPage />} />
           <Route exact path={RANKING_PATH} element={<RankingPage />} />
           <Route exact path={FRIEND_PAGE_PATH} element={<Friend />} />
+          <Route path={MY_PAGE_PATH} element={<MyPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

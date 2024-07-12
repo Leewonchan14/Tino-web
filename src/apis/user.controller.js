@@ -26,19 +26,7 @@ class UserController extends Api {
 
   // userId 로 user 조회
   findUserById = async (userId) => {
-    return new Promise((resolve, reject) => {
-      resolve({
-        data: {
-          userId: "112",
-          nickname: "이원찬",
-          email: "twoone14@tukorea.ac.kr",
-          profileImageURL: "string",
-          parentMajor: "컴퓨터공학부",
-          major: "소프트웨어학과",
-          role: "USER",
-        },
-      });
-    });
+    return await this.get(`/user/${userId}`);
   };
 
   // auto login

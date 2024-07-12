@@ -5,9 +5,9 @@ import { HOME_PATH } from "../../pages/HomePage";
 import { LOGIN_PATH } from "../../pages/LoginPage";
 import MenuBar from "./MenuBar";
 import { userStore } from "../../stores/userStore";
-import { removeLocalData } from "../../utils/LocalStorageController";
 import { MY_PAGE_PATH } from "../../pages/MyPage";
-import { Spin } from "antd";
+import { useGetUser } from "../../hooks/header/useGetUser";
+import Skeleton from "react-loading-skeleton";
 
 function NavBar({ ...rest }) {
   let navigate = useNavigate();
@@ -62,7 +62,7 @@ const LoginButton = () => {
 };
 
 const HeaderProfile = () => {
-  const { changeIsLogin } = userStore((state) => state);
+  let { isFetching, user } = useGetUser();
 
   let navigate = useNavigate();
 
@@ -71,34 +71,54 @@ const HeaderProfile = () => {
   };
 
   return (
-    <div className={"flex items-center"}>
-      <div
-        className={
-          "flex justify-center items-center w-10 h-10 overflow-clip rounded-full border-[1px] cursor-pointer"
-        }
-        onClick={goMyPage}
-      >
-        {renderProfileImage({ isFetching: true })}
-      </div>
-      <div
-        className={"ml-2 text-nowrap cursor-pointer"}
-        onClick={() => {
-          removeLocalData();
-          changeIsLogin(false);
-        }}
-      >
-        로그아웃
-      </div>
+    <div
+      className={"flex items-center gap-4 cursor-pointer"}
+      onClick={goMyPage}
+    >
+      <ProfileNickname isFetching={isFetching} nickname={user?.nickname} />
+      <ProfileImage
+        isFetching={isFetching}
+        profileImageURL={user?.profileImageURL}
+      />
     </div>
   );
 };
 
-const renderProfileImage = ({ isFetching }) => {
+const ProfileImage = ({ isFetching, profileImageURL }) => {
+  const renderProfileImageWithSkeleton = () => {
+    if (isFetching) {
+      return (
+        <Skeleton containerClassName={"flex w-full h-full"} circle={true} />
+      );
+    }
+
+    return (
+      <img
+        draggable={false}
+        src={profileImageURL}
+        alt={"profile"}
+        className={"w-10"}
+      />
+    );
+  };
+
+  return (
+    <div
+      className={
+        "flex justify-center items-center w-10 h-10 overflow-clip rounded-full border-[1px]"
+      }
+    >
+      {renderProfileImageWithSkeleton()}
+    </div>
+  );
+};
+
+const ProfileNickname = ({ isFetching, nickname }) => {
   if (isFetching) {
-    return <Spin spinning={true} size={"small"} />;
+    return <Skeleton containerClassName={"w-16"} />;
   }
 
-  return <img src={TinoIcon} alt={"profile"} className={"w-10"} />;
+  return nickname;
 };
 
 export default NavBar;

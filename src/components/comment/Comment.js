@@ -3,7 +3,6 @@ import timeConverter from "../../utils/timeConverter";
 import Skeleton from "react-loading-skeleton";
 import { ReactComponent as Star } from "../../assets/star.svg";
 import { range } from "../../utils/range";
-import { v4 } from "uuid";
 
 const Comment = ({ comment, containerStyle, nicknameStyle }) => {
   return (
@@ -59,7 +58,10 @@ const CommentRatingStar = ({ score }) => {
 
 export const CommentSkeleton = ({ length }) => {
   return range(length).map(() => (
-    <div key={v4()} className={"w-full h-40 rounded-2xl overflow-clip mb-4"}>
+    <div
+      key={crypto.randomUUID()}
+      className={"w-full h-40 rounded-2xl overflow-clip mb-4"}
+    >
       <Skeleton containerClassName={"flex h-full"} />
     </div>
   ));

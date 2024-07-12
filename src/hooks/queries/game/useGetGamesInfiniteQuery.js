@@ -2,16 +2,20 @@ import GameController from "../../../apis/game.controller";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { SECOND } from "../../../utils/timeConverter";
 import { GAME_CARD_FETCH_SIZE } from "../../../pages/HomePage";
+import { delayFetch } from "../../../utils/delay";
 
 export const useGetGamesInfiniteQuery = ({
   selectedGameSortMenu,
   pageSize,
 }) => {
   const findAllGame = async ({ page, size, sort }) => {
-    const response = await GameController.findAll({
-      page,
-      size,
-      sort,
+    const response = await delayFetch({
+      fetcherPromise: GameController.findAll({
+        page,
+        size,
+        sort,
+      }),
+      milliseconds: 500,
     });
     return response.data;
   };
