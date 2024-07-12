@@ -35,6 +35,6 @@ export const useGetOwnLog = ({ gameId }) => {
   useEffect(() => {
     if (!isLogin) return;
     findBestLogByGameId();
-  }, []);
+  }, [isLogin]);
   return { ownLogState, setOwnLogState, isExist, isFetching, isLogin };
 };
