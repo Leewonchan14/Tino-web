@@ -1,4 +1,5 @@
 import Skeleton from "react-loading-skeleton";
+import { uuid } from "../../utils/uuid";
 
 export const UserInfo = ({ isFetching, user }) => {
   const MEtA_DATA = [
@@ -9,7 +10,7 @@ export const UserInfo = ({ isFetching, user }) => {
 
   const renderUserInfo = () => {
     return MEtA_DATA.map(({ title, value, className }) => {
-      let key = crypto.randomUUID();
+      let key = uuid();
 
       if (isFetching) {
         return <Skeleton key={key} containerClassName={className} />;

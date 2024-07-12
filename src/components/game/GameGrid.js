@@ -1,6 +1,7 @@
 import React from "react";
 import GameCard, { GameCardSkeleton } from "./GameCard";
 import { range } from "../../utils/range";
+import { uuid } from "../../utils/uuid";
 
 const GameGrid = ({ isFetching, isSuccess, gameState }) => {
   return (
@@ -10,8 +11,7 @@ const GameGrid = ({ isFetching, isSuccess, gameState }) => {
       }
     >
       {isSuccess && renderGameCardsWithSkeletons(gameState.pages.flat())}
-      {isFetching &&
-        range(6).map(() => <GameCardSkeleton key={crypto.randomUUID()} />)}
+      {isFetching && range(6).map(() => <GameCardSkeleton key={uuid()} />)}
     </section>
   );
 };
@@ -21,7 +21,7 @@ const renderGameCardsWithSkeletons = (games) => {
   games.forEach((game, index) => {
     result.push(<GameCard key={game.gameId} game={game} />);
     if ((index + 1) % 4 === 0) {
-      result.push(<GameCardSkeleton key={crypto.randomUUID()} />);
+      result.push(<GameCardSkeleton key={uuid()} />);
     }
   });
   return result;

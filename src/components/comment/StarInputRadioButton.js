@@ -1,6 +1,7 @@
 import React from "react";
 import { ReactComponent as Star } from "../../assets/star.svg";
 import { range } from "../../utils/range";
+import { uuid } from "../../utils/uuid";
 
 const StarInputRadioButton = ({ star, setStar }) => {
   return (
@@ -15,7 +16,7 @@ const StarInputRadioButton = ({ star, setStar }) => {
 
 const renderStars = ({ star, setStar }) => {
   return range(1, 6).map((i) => (
-    <div key={crypto.randomUUID()} className={"cursor-pointer"} onClick={() => setStar(i)}>
+    <div key={uuid()} className={"cursor-pointer"} onClick={() => setStar(i)}>
       <Star
         width={32}
         height={32}
