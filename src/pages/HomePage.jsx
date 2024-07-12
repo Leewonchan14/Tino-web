@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Footer from "../components/footer/Footer";
-import { G_MARKET_FONT } from "../constants/FontFamily";
 import GameGrid from "../components/game/GameGrid";
 import GameSortMenu from "../components/game/GameSortMenu";
 import LoadingSpinner from "../components/common/spinner/LoadingSpinner";
@@ -30,8 +29,9 @@ function HomePage(props) {
   return (
     <>
       <h1
-        className={"text-6xl mt-28 font-bold mobile:text-4xl mobile:mt-6"}
-        style={{ fontFamily: G_MARKET_FONT }}
+        className={
+          "font-G_MARKET text-6xl mt-28 font-bold mobile:text-4xl mobile:mt-6"
+        }
       >
         티노 게임즈
       </h1>

@@ -1,24 +1,16 @@
-import React from 'react';
-import {G_MARKET_FONT} from "../../../constants/FontFamily";
+import React from "react";
 
-function ButtonComp({text, onClick, className}) {
-    const inputStyle = {
-        border: "1px solid #000000",
-        width: "100%",
-        height: "3.5rem",
-        borderRadius: "5px",
-        padding: "5px",
-        margin: "10px 0",
-        fontFamily: G_MARKET_FONT
-    }
-    return (
-        <button style={inputStyle}
-                className={"bg-blue-600 text-white font-bold text-xl "
-                    + className
-                }
-                onClick={onClick}>{text}</button>
-    )
-        ;
+function ButtonComp({ text, onClick }) {
+  return (
+    <button
+      className={
+        "w-full border-[1px] border-black h-[3.5rem] rounded-lg p-[5px] my-4 font-G_MARKET bg-blue-600 text-white font-bold text-xl "
+      }
+      onClick={onClick}
+    >
+      {text}
+    </button>
+  );
 }
 
 export default ButtonComp;

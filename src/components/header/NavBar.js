@@ -6,6 +6,8 @@ import { LOGIN_PATH } from "../../pages/LoginPage";
 import MenuBar from "./MenuBar";
 import { userStore } from "../../stores/userStore";
 import { removeLocalData } from "../../utils/LocalStorageController";
+import { MY_PAGE_PATH } from "../../pages/MyPage";
+import { Spin } from "antd";
 
 function NavBar({ ...rest }) {
   let navigate = useNavigate();
@@ -62,10 +64,21 @@ const LoginButton = () => {
 const HeaderProfile = () => {
   const { changeIsLogin } = userStore((state) => state);
 
+  let navigate = useNavigate();
+
+  const goMyPage = () => {
+    navigate(MY_PAGE_PATH);
+  };
+
   return (
     <div className={"flex items-center"}>
-      <div className={"w-10 h-10 overflow-clip rounded-full border-[1px]"}>
-        <img src={TinoIcon} alt={"profile"} className={"w-10"} />
+      <div
+        className={
+          "flex justify-center items-center w-10 h-10 overflow-clip rounded-full border-[1px] cursor-pointer"
+        }
+        onClick={goMyPage}
+      >
+        {renderProfileImage({ isFetching: true })}
       </div>
       <div
         className={"ml-2 text-nowrap cursor-pointer"}
@@ -78,6 +91,14 @@ const HeaderProfile = () => {
       </div>
     </div>
   );
+};
+
+const renderProfileImage = ({ isFetching }) => {
+  if (isFetching) {
+    return <Spin spinning={true} size={"small"} />;
+  }
+
+  return <img src={TinoIcon} alt={"profile"} className={"w-10"} />;
 };
 
 export default NavBar;

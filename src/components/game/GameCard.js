@@ -1,7 +1,6 @@
 import React from "react";
 import viewcount_icon from "../../assets/viewcount_icon.png";
 import { useNavigate } from "react-router-dom";
-import { G_MARKET_FONT } from "../../constants/FontFamily";
 import { GAME_PATH_WITHOUT_PARAM } from "../../pages/GameDetailPage";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
@@ -29,9 +28,7 @@ const GameCard = ({ game }) => {
         />
       </picture>
       <section className={"h-40 p-6 w-full flex-col flex"}>
-        <h1 className={"text-xl"} style={{ fontFamily: G_MARKET_FONT }}>
-          {game.gameName}
-        </h1>
+        <h1 className={"text-xl font-G_MARKET"}>{game.gameName}</h1>
         <span className={"w-full mt-2 text-gray-600 line-clamp-2"}>
           {game.description}
         </span>

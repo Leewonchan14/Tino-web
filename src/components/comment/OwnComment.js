@@ -1,6 +1,5 @@
 import React from "react";
 import { CommentSkeleton, CommentUserProfile } from "./Comment";
-import { G_MARKET_FONT } from "../../constants/FontFamily";
 import { userStore } from "../../stores/userStore";
 
 const OwnComment = ({
@@ -36,7 +35,7 @@ const OwnComment = ({
 
 export const NotLoginOwnComment = () => {
   return (
-    <div style={{ fontFamily: G_MARKET_FONT }} className={"mb-4"}>
+    <div className={"mb-4 font-G_MARKET"}>
       로그인을 하고 댓글을 남겨 보세요!
     </div>
   );
@@ -44,9 +43,7 @@ export const NotLoginOwnComment = () => {
 
 const NotExistOwnComment = () => {
   return (
-    <div style={{ fontFamily: G_MARKET_FONT }} className={"mb-4"}>
-      본인의 댓글이 존재하지 않습니다.
-    </div>
+    <div className={"mb-4 font-G_MARKET"}>본인의 댓글이 존재하지 않습니다.</div>
   );
 };
 

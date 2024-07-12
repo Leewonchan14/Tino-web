@@ -2,7 +2,6 @@ import React from "react";
 import InputComp from "../components/common/input/InputComp";
 import ButtonComp from "../components/common/button/ButtonComp";
 import { useSignUp } from "../hooks/login/useSignUp";
-import { G_MARKET_FONT } from "../constants/FontFamily";
 import ComboBox from "../components/common/input/ComboBox";
 import { MAJOR } from "../constants/Major";
 import { Spin } from "antd";
@@ -25,9 +24,8 @@ function SignUpPage(props) {
     <div className={"mobile:h-auto flex flex-col justify-center items-center"}>
       <h1
         className={
-          "text-6xl my-5 font-bold flex justify-center mobile:text-4xl"
+          "font-G_MARKET text-6xl my-5 font-bold flex justify-center mobile:text-4xl"
         }
-        style={{ fontFamily: G_MARKET_FONT }}
       >
         회원 가입
       </h1>
@@ -95,7 +93,7 @@ function SignUpPage(props) {
           onChange={onChangeMajor}
           options={MAJOR}
         />
-        <ButtonComp text={"회원가입"} onClick={onSubmit} className={""} />
+        <ButtonComp text={"회원가입"} onClick={onSubmit} />
         <div className={"text-red-600 text-center mb-10"}>{errorMessage}</div>
         <Spin fullscreen={true} spinning={isLoading} />
       </div>

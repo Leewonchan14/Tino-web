@@ -1,5 +1,4 @@
 import { useGetOwnLog } from "../../hooks/log/useGetOwnLog";
-import { G_MARKET_FONT } from "../../constants/FontFamily";
 import React from "react";
 import ExistOwnLog from "./atoms/ExistOwnLog";
 import { Spin } from "antd";
@@ -58,10 +57,7 @@ const IsNotLogIn = () => {
         <div className={"font-bold"}>티노</div>
         <div className={"text-2xl text-center"}>0000</div>
       </div>
-      <span style={{ fontFamily: G_MARKET_FONT }} className={"absolute"}>
-        {" "}
-        로그인이 필요합니다
-      </span>
+      <span className={"absolute font-G_MARKET"}> 로그인이 필요합니다</span>
     </>
   );
 };
@@ -71,10 +67,7 @@ const OwnLogNotExist = () => {
     <div
       className={"mx-1 flex w-44 flex-col justify-center items-center h-full "}
     >
-      <div
-        style={{ fontFamily: G_MARKET_FONT }}
-        className={"text-3xl text-center"}
-      >
+      <div className={"text-3xl text-center font-G_MARKET"}>
         게임기록이 <br /> 없습니다.
       </div>
     </div>

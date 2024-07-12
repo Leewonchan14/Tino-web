@@ -1,7 +1,6 @@
 import React from "react";
 import InputComp from "../components/common/input/InputComp";
 import { useSendEmail } from "../hooks/login/useSendEmail";
-import { G_MARKET_FONT } from "../constants/FontFamily";
 import { Spin } from "antd";
 
 const AUTH_EMAIL_PAGE_PATH = "/email/auth";
@@ -20,9 +19,8 @@ function AuthEmailCodePage(props) {
     <div className={"h-[70%] flex flex-col items-center"}>
       <h1
         className={
-          "text-6xl mobile:text-4xl my-12 font-bold flex justify-center"
+          "font-G_MARKET text-6xl mobile:text-4xl my-12 font-bold flex justify-center"
         }
-        style={{ fontFamily: G_MARKET_FONT }}
       >
         이메일 인증
       </h1>
@@ -43,12 +41,7 @@ function AuthEmailCodePage(props) {
         />
       </div>
 
-      <div
-        style={{ fontFamily: G_MARKET_FONT }}
-        className={"text-red-600 text-center"}
-      >
-        {message}
-      </div>
+      <div className={"font-G_MARKET text-red-600 text-center"}>{message}</div>
 
       <div className={"mt-4 w-full flex justify-center"}>
         이미 이메일을 받으셨나요?
@@ -64,9 +57,8 @@ function SignUpButton({ isFetching, text, onClick, className }) {
   return (
     <button
       disabled={isFetching}
-      style={{ fontFamily: G_MARKET_FONT }}
       className={
-        "w-full h-[3.5rem] p-[5px] my-[10px] bg-blue-600 text-white font-bold text-xl border-1 rounded-xl " +
+        "font-G_MARKET w-full h-[3.5rem] p-[5px] my-[10px] bg-blue-600 text-white font-bold text-xl border-1 rounded-xl " +
         className
       }
       onClick={onClick}

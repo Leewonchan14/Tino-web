@@ -4,7 +4,6 @@ import InputComp from "../components/common/input/InputComp";
 import ButtonComp from "../components/common/button/ButtonComp";
 import { AUTH_EMAIL_PAGE_PATH } from "./AuthEmailCodePage";
 import { useLogin } from "../hooks/login/useLogin";
-import { G_MARKET_FONT } from "../constants/FontFamily";
 import { Spin } from "antd";
 
 const LOGIN_PATH = "/login";
@@ -19,9 +18,8 @@ function LoginPage(...rest) {
     <div className={"h-[70%] flex flex-col justify-center items-center"}>
       <h1
         className={
-          "text-6xl mobile:text-5xl my-12 font-bold flex justify-center"
+          "font-G_MARKET text-6xl mobile:text-5xl my-12 font-bold flex justify-center"
         }
-        style={{ fontFamily: G_MARKET_FONT }}
       >
         로그인
       </h1>

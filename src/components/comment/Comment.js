@@ -1,5 +1,4 @@
 import React from "react";
-import { G_MARKET_FONT } from "../../constants/FontFamily";
 import timeConverter from "../../utils/timeConverter";
 import Skeleton from "react-loading-skeleton";
 import { ReactComponent as Star } from "../../assets/star.svg";
@@ -27,10 +26,7 @@ export function CommentUserProfile({ comment, nicknameStyle }) {
     <div className={"flex items-center flex-1"}>
       <section className={"flex-col w-full"}>
         <div className={"flex relative"}>
-          <span
-            style={{ fontFamily: G_MARKET_FONT }}
-            className={"text-xl " + nicknameStyle}
-          >
+          <span className={"text-xl font-G_MARKET " + nicknameStyle}>
             {comment.user.nickname}
           </span>
           <time className={"absolute text-gray-400 ml-auto right-0"}>
