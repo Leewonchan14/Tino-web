@@ -23,7 +23,7 @@ const CommentList = ({ gameId }) => {
           ))
         )}
       <LoadingSpinner loadingComp={loadingComp} isFetching={isFetching} />
-      {isFetching && range(1, 3).map((num) => <CommentSkeleton key={num} />)}
+      {isFetching && range(3).map((num) => <CommentSkeleton key={num} />)}
     </>
   );
 };

@@ -9,6 +9,7 @@ import useReactQueryInfiniteScroll from "../hooks/recycle/useReactQueryInfiniteS
 import { GAME_SORT_MENU } from "../constants/Game";
 
 const HOME_PATH = "/";
+export const GAME_CARD_FETCH_SIZE = 6;
 
 function HomePage(props) {
   let [selectedGameSortMenu, setSelectedGameSortMenu] = useState(
@@ -16,7 +17,10 @@ function HomePage(props) {
   );
 
   let { isSuccess, isFetching, gameState, fetchNextPage } =
-    useGetGamesInfiniteQuery({ selectedGameSortMenu, pageSize: 6 });
+    useGetGamesInfiniteQuery({
+      selectedGameSortMenu,
+      pageSize: GAME_CARD_FETCH_SIZE,
+    });
 
   let { loadingComp } = useReactQueryInfiniteScroll({
     fetchData: fetchNextPage,
@@ -43,7 +47,11 @@ function HomePage(props) {
         className={""}
       />
 
-      <GameGrid isSuccess={isSuccess} gameState={gameState} />
+      <GameGrid
+        isFetching={isFetching}
+        isSuccess={isSuccess}
+        gameState={gameState}
+      />
 
       <LoadingSpinner loadingComp={loadingComp} isFetching={true} />
 

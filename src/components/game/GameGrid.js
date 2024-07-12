@@ -1,15 +1,30 @@
 import React from "react";
-import GameCard, {GameCardSkeleton} from "./GameCard";
+import GameCard, { GameCardSkeleton } from "./GameCard";
+import { range } from "../../utils/range";
+import { v4 } from "uuid";
 
-const GameGrid = ({isSuccess, gameState}) => {
-    return (
-        <section className={"grid grid-cols-3 xl:grid-cols-3 sm:grid-cols-2 mobile:grid-cols-1 min-w-[300px] gap-6 w-full"}>
-            {isSuccess && gameState.pages.map((page, index) => (
-                page.map((game) => <GameCard key={game.gameId} game={game}/>)
-            ))}
-            {!isSuccess && Array.from({length: 6}).map((_, index) => <GameCardSkeleton key={index}/>)}
-        </section>
-    );
+const GameGrid = ({ isFetching, isSuccess, gameState }) => {
+  return (
+    <section
+      className={
+        "grid grid-cols-3 xl:grid-cols-3 sm:grid-cols-2 mobile:grid-cols-1 min-w-[300px] gap-6 w-full"
+      }
+    >
+      {isSuccess && renderGameCardsWithSkeletons(gameState.pages.flat())}
+      {isFetching && range(6).map(() => <GameCardSkeleton key={v4()} />)}
+    </section>
+  );
+};
+
+const renderGameCardsWithSkeletons = (games) => {
+  const result = [];
+  games.forEach((game, index) => {
+    result.push(<GameCard key={game.gameId} game={game} />);
+    if ((index + 1) % 4 === 0) {
+      result.push(<GameCardSkeleton key={v4()} />);
+    }
+  });
+  return result;
 };
 
 export default GameGrid;

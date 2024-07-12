@@ -7,7 +7,7 @@ const StarInputRadioButton = ({ star, setStar }) => {
     <div className={"mobile:my-4"}>
       <div className={"font-bold"}>게임을 평가 하세요</div>
       <div className={"flex mobile:block"}>
-        {range(1, 5).map((i) => (
+        {range(1, 6).map((i) => (
           <div key={i} className={"cursor-pointer"} onClick={() => setStar(i)}>
             <Star
               width={20}

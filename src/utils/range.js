@@ -1,3 +1,13 @@
 export const range = (start, end) => {
-  return Array.from({ length: end - start + 1 }).map((_, i) => i + 1);
+  let _start;
+  let length;
+  if (!end) {
+    _start = 0;
+    length = start;
+  } else {
+    _start = start;
+    length = end - start;
+  }
+
+  return Array.from({ length }).map((_, i) => _start + 1);
 };
