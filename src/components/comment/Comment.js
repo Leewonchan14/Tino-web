@@ -3,12 +3,12 @@ import { G_MARKET_FONT } from "../../constants/FontFamily";
 import timeConverter from "../../utils/timeConverter";
 import Skeleton from "react-loading-skeleton";
 import { ReactComponent as Star } from "../../assets/star.svg";
-import { ReactComponent as Heart } from "../../assets/heart.svg";
+import { range } from "../../utils/range";
+import { v4 } from "uuid";
 
-const Comment = ({ comment, index, containerStyle, nicknameStyle }) => {
+const Comment = ({ comment, containerStyle, nicknameStyle }) => {
   return (
     <article
-      key={index}
       className={"block border-2 w-full rounded-3xl mb-4 p-8 " + containerStyle}
     >
       <section className={"flex items-center w-full"}>
@@ -17,7 +17,6 @@ const Comment = ({ comment, index, containerStyle, nicknameStyle }) => {
         </picture>
         <CommentUserProfile comment={comment} nicknameStyle={nicknameStyle} />
       </section>
-      {/*<CommentHelpfulButton isHelpful={false} score={comment.helpful} />*/}
       <span className={"block mt-2"}>{comment.reviewContent}</span>
     </article>
   );
@@ -62,23 +61,12 @@ const CommentRatingStar = ({ score }) => {
   );
 };
 
-const CommentHelpfulButton = ({ isHelpful, onClick, score }) => {
-  return (
-    <div onClick={onClick} className={"flex items-center cursor-pointer"}>
-      <Heart width={20} height={20} fill={"gray"} />
-    </div>
-  );
-};
-
-export const CommentSkeleton = ({ loadingComp }) => {
-  return (
-    <div
-      ref={loadingComp}
-      className={"w-full h-40 rounded-2xl overflow-clip mb-4"}
-    >
+export const CommentSkeleton = ({ length }) => {
+  return range(length).map(() => (
+    <div key={v4()} className={"w-full h-40 rounded-2xl overflow-clip mb-4"}>
       <Skeleton containerClassName={"flex h-full"} />
     </div>
-  );
+  ));
 };
 
 export default Comment;
