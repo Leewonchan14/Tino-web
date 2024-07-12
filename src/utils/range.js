@@ -9,5 +9,5 @@ export const range = (start, end) => {
     length = end - start;
   }
 
-  return Array.from({ length }).map((_, i) => _start + 1);
+  return Array.from({ length }).map((_, i) => _start + i);
 };
