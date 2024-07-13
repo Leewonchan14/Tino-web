@@ -2,14 +2,15 @@ import { useGetUser } from "../hooks/header/useGetUser";
 import { ProfileImage } from "../components/mypage/ProfileImage";
 import { UserInfo } from "../components/mypage/UserInfo";
 import { removeLocalData } from "../utils/LocalStorageController";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { userStore } from "../stores/userStore";
+import { HOME_PATH } from "./HomePage";
 
 export const MY_PAGE_PATH = "/mypage";
 
 export const MyPage = () => {
   let { isFetching, user } = useGetUser();
-  let location = useLocation();
+  let navigate = useNavigate();
   const { changeIsLogin } = userStore((state) => state);
   return (
     <>
@@ -24,6 +25,7 @@ export const MyPage = () => {
         onClick={() => {
           removeLocalData();
           changeIsLogin(false);
+          navigate(HOME_PATH);
         }}
       >
         로그아웃
