@@ -1,7 +1,6 @@
 import { useGetOwnLog } from "../../hooks/log/useGetOwnLog";
 import React from "react";
-import ExistOwnLog from "./atoms/ExistOwnLog";
-import { Spin } from "antd";
+import ExistOwnLog, { OwnLogSkeleton } from "./atoms/ExistOwnLog";
 
 import TinoIcon from "../../assets/tino_icon.png";
 
@@ -27,21 +26,21 @@ const OwnLog = ({ gameId }) => {
 
 const SwitchLogComp = ({ ownLogState, isFetching, isLogin, isExist }) => {
   if (!isLogin) {
-    return <IsNotLogIn />;
+    return <BlurOwnLog text={"로그인이 필요합니다."} />;
   }
 
   if (isFetching) {
-    return <Spin spinning={true} size={"large"} />;
+    return <OwnLogSkeleton />;
   }
 
-  if (isExist) {
-    return <ExistOwnLog ownLogState={ownLogState} />;
+  if (!isExist) {
+    return <BlurOwnLog text={"게임 기록이 없습니다."} />;
   }
 
-  return <OwnLogNotExist />;
+  return <ExistOwnLog ownLogState={ownLogState} />;
 };
 
-const IsNotLogIn = () => {
+const BlurOwnLog = ({ text }) => {
   return (
     <>
       <div
@@ -57,20 +56,8 @@ const IsNotLogIn = () => {
         <div className={"font-bold"}>티노</div>
         <div className={"text-2xl text-center"}>0000</div>
       </div>
-      <span className={"absolute font-G_MARKET"}> 로그인이 필요합니다</span>
+      <span className={"absolute font-G_MARKET"}>{text}</span>
     </>
-  );
-};
-
-const OwnLogNotExist = () => {
-  return (
-    <div
-      className={"mx-1 flex w-44 flex-col justify-center items-center h-full "}
-    >
-      <div className={"text-3xl text-center font-G_MARKET"}>
-        게임기록이 <br /> 없습니다.
-      </div>
-    </div>
   );
 };
 
