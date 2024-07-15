@@ -6,8 +6,9 @@ import { useGetOwnComments } from "../../hooks/comment/useGetOwnComments";
 
 const CommentSectionInGame = ({ gameId, ...rest }) => {
   const [isInputOpen, setIsInputOpen] = useState(false);
-  const toggleInputOpen = () => {
-    setIsInputOpen((pre) => !pre);
+  const toggleInputOpen = (next) => {
+    if (!next) setIsInputOpen((pre) => !pre);
+    if (next) setIsInputOpen(next);
   };
   const {
     comment: ownComment,

@@ -52,23 +52,62 @@ const CommentInput = ({
   const { mutate } = useMutation({
     mutationFn,
     onSuccess: (data, variables, context) => {
-      queryClient.invalidateQueries({ queryKey: ["comments", gameId] });
-      queryClient.invalidateQueries({ queryKey: ["comment", gameId] });
-      queryClient.setQueryData(["comments", gameId], []);
+      queryClient.invalidateQueries({
+        queryKey: ["comments", gameId],
+      });
     },
-    onMutate: (variables) => {
-      toggleInputOpen();
+    onMutate: async (e) => {
+      await queryClient.cancelQueries(["comment", gameId]);
+      const preComment = queryClient.getQueryData([
+        "comment",
+        gameId,
+        userId,
+      ]);
+      await queryClient.cancelQueries([
+        "comments",
+        gameId,
+        { sort: "RECENT" },
+      ]);
+      queryClient.setQueryData(
+        ["comments", gameId, { sort: "RECENT" }],
+        (old) => {
+          return { ...old, pageParams: [0], pages: [[]] };
+          // return old;
+        }
+      );
+      queryClient.setQueryData(
+        ["comment", gameId, userId],
+        (oldData) => ({
+          ...oldData,
+          reviewContent: value,
+          star,
+        })
+      );
+      toggleInputOpen(false);
+
+      return { preComment };
     },
     onError: (error, variables, context) => {
       console.error(error);
+      queryClient.setQueryData(
+        ["comment", gameId, userId],
+        context.preComment
+      );
+      queryClient.invalidateQueries({
+        queryKey: ["comments", gameId],
+      });
     },
   });
+
   if (isFetching || !isLogin) {
     return;
   }
 
   return (
-    <AcodianWrapper isOpen={isInputOpen || !ownComment} duration={250}>
+    <AcodianWrapper
+      isOpen={isInputOpen || !ownComment}
+      duration={250}
+    >
       <AutoResizeTextInputComp
         value={value}
         onChange={onChange}

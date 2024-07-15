@@ -43,11 +43,17 @@ export const NotLoginOwnComment = () => {
 
 const NotExistOwnComment = () => {
   return (
-    <div className={"mb-4 font-G_MARKET"}>본인의 댓글이 존재하지 않습니다.</div>
+    <div className={"mb-4 font-G_MARKET"}>
+      본인의 댓글이 존재하지 않습니다.
+    </div>
   );
 };
 
-const ExistOwnComment = ({ comment, isInputOpen, toggleInputOpen }) => {
+const ExistOwnComment = ({
+  comment,
+  isInputOpen,
+  toggleInputOpen,
+}) => {
   return (
     <article
       className={
@@ -56,7 +62,11 @@ const ExistOwnComment = ({ comment, isInputOpen, toggleInputOpen }) => {
     >
       <section className={"flex items-center w-full"}>
         <picture className={"block rounded-full bg-gray-400 mr-4"}>
-          <img className={"h-14"} src={comment.user.profileImageURL} alt="" />
+          <img
+            className={"h-14"}
+            src={comment.user.profileImageURL}
+            alt=""
+          />
         </picture>
         <CommentUserProfile
           comment={comment}
@@ -66,8 +76,10 @@ const ExistOwnComment = ({ comment, isInputOpen, toggleInputOpen }) => {
       {/*<CommentHelpfulButton isHelpful={false} score={comment.helpful} />*/}
       <span className={"block mt-2"}>{comment.reviewContent}</span>
       <span
-        className={"absolute bottom-6 right-8 underline cursor-pointer"}
-        onClick={toggleInputOpen}
+        className={
+          "absolute bottom-6 right-8 underline cursor-pointer"
+        }
+        onClick={() => toggleInputOpen()}
       >
         {isInputOpen ? "닫기" : "수정"}
       </span>
