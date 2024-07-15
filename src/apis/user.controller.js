@@ -1,5 +1,4 @@
 import { Api } from "./common.controller";
-import TinoIcon from "../assets/tino_icon.png";
 import { USER_OBJECT_KEY } from "../utils/userConverter";
 
 class UserController extends Api {
@@ -61,8 +60,9 @@ class UserController extends Api {
   // user update
   update = async ({ userId, modifiedUser }) => {
     delete modifiedUser[USER_OBJECT_KEY.EMAIL];
-    return await this.put(`/user/${userId}`, {
-      data: { userId, ...modifiedUser },
+    return await this.put(`/user`, {
+      userId,
+      ...modifiedUser,
     });
   };
 }

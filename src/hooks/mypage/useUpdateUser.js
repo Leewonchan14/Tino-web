@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { userToMyPageInfo } from "../../utils/userConverter";
 import UserController from "../../apis/user.controller";
 import { userStore } from "../../stores/userStore";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const useUpdateUser = ({ user }) => {
   let { userId } = userStore((state) => state);
@@ -27,9 +28,18 @@ export const useUpdateUser = ({ user }) => {
     console.log(modifiedUser);
   }, [modifiedUser]);
 
+  const queryClient = useQueryClient();
+
   const handleOnClickUpdateButton = async () => {
     if (window.confirm("수정하사겠습니까?")) {
       try {
+        queryClient.setQueryData(["user", userId], (old) => {
+          return {
+            ...old,
+            ...modifiedUser,
+          };
+        });
+        setIsActiveInput(false);
         await UserController.update({ userId, modifiedUser });
       } catch (e) {
         console.log(e);

@@ -61,9 +61,13 @@ const ExistOwnComment = ({
       }
     >
       <section className={"flex items-center w-full"}>
-        <picture className={"block rounded-full bg-gray-400 mr-4"}>
+        <picture
+          className={
+            "w-12 h-12 block rounded-full overflow-clip bg-gray-100 mr-4"
+          }
+        >
           <img
-            className={"h-14"}
+            className={"object-cover w-full h-full"}
             src={comment.user.profileImageURL}
             alt=""
           />

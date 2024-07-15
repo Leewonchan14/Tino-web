@@ -8,13 +8,26 @@ import { uuid } from "../../utils/uuid";
 const Comment = ({ comment, containerStyle, nicknameStyle }) => {
   return (
     <article
-      className={"block border-2 w-full rounded-3xl mb-4 p-8 " + containerStyle}
+      className={
+        "block border-2 w-full rounded-3xl mb-4 p-8 " + containerStyle
+      }
     >
       <section className={"flex items-center w-full"}>
-        <picture className={"block rounded-full bg-gray-400 mr-4"}>
-          <img className={"h-14"} src={comment.user.profileImageURL} alt="" />
+        <picture
+          className={
+            "w-12 h-12 block rounded-full overflow-clip bg-gray-200 mr-4"
+          }
+        >
+          <img
+            className={"object-cover w-full h-full"}
+            src={comment.user.profileImageURL}
+            alt=""
+          />
         </picture>
-        <CommentUserProfile comment={comment} nicknameStyle={nicknameStyle} />
+        <CommentUserProfile
+          comment={comment}
+          nicknameStyle={nicknameStyle}
+        />
       </section>
       <span className={"block mt-2"}>{comment.reviewContent}</span>
     </article>
@@ -59,7 +72,10 @@ const CommentRatingStar = ({ score }) => {
 
 export const CommentSkeleton = ({ length }) => {
   return range(length).map(() => (
-    <div key={uuid()} className={"w-full h-40 rounded-2xl overflow-clip mb-4"}>
+    <div
+      key={uuid()}
+      className={"w-full h-40 rounded-2xl overflow-clip mb-4"}
+    >
       <Skeleton containerClassName={"flex h-full"} />
     </div>
   ));

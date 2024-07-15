@@ -71,7 +71,7 @@ const ChangeImageButtonWithSkeleton = ({
         disabled={isUploading}
         className={`w-full font-G_MARKET h-10 text-lg bg-primary-600 rounded-lg text-white font-bold 
         ${isActiveInput ? "block" : "hidden"}
-        ${isUploading && "blur-md"}
+        ${isUploading && "blur-sm"}
         `}
         onClick={() => imageInputRef.current.click()}
       >

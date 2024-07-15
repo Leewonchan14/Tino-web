@@ -75,7 +75,10 @@ const HeaderProfile = () => {
       className={"flex items-center gap-4 cursor-pointer"}
       onClick={goMyPage}
     >
-      <ProfileNickname isFetching={isFetching} nickname={user?.nickname} />
+      <ProfileNickname
+        isFetching={isFetching}
+        nickname={user?.nickname}
+      />
       <ProfileImage
         isFetching={isFetching}
         profileImageURL={user?.profileImageURL}
@@ -88,7 +91,10 @@ const ProfileImage = ({ isFetching, profileImageURL }) => {
   const renderProfileImageWithSkeleton = () => {
     if (isFetching) {
       return (
-        <Skeleton containerClassName={"flex w-full h-full"} circle={true} />
+        <Skeleton
+          containerClassName={"flex w-full h-full"}
+          circle={true}
+        />
       );
     }
 
@@ -97,7 +103,7 @@ const ProfileImage = ({ isFetching, profileImageURL }) => {
         draggable={false}
         src={profileImageURL}
         alt={"profile"}
-        className={"w-10"}
+        className={"object-cover w-full h-full"}
       />
     );
   };
