@@ -53,7 +53,7 @@ export const timeToYearMonthDay = (dateTime) => {
   let month = date.getMonth() + 1;
   let day = date.getDate();
 
-  return `${year}년 ${month}월 ${day}일`;
+  return `${year % 100}.${month}.${day}`;
 };
 
 export default timeConverter;
