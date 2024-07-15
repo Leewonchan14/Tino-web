@@ -1,35 +1,54 @@
 import { useGetUser } from "../hooks/header/useGetUser";
 import { ProfileImage } from "../components/mypage/ProfileImage";
 import { UserInfo } from "../components/mypage/UserInfo";
-import { removeLocalData } from "../utils/LocalStorageController";
-import { useLocation, useNavigate } from "react-router-dom";
-import { userStore } from "../stores/userStore";
-import { HOME_PATH } from "./HomePage";
+import React from "react";
+import { USER_OBJECT_KEY } from "../utils/userConverter";
+import {
+  LogoutButton,
+  UpdateActiveButton,
+} from "../components/mypage/Buttons";
+import { useUpdateUser } from "../hooks/mypage/useUpdateUser";
 
 export const MY_PAGE_PATH = "/mypage";
 
 export const MyPage = () => {
-  let { isFetching, user } = useGetUser();
-  let navigate = useNavigate();
-  const { changeIsLogin } = userStore((state) => state);
+  let { user } = useGetUser();
+
+  let {
+    isActiveInput,
+    handleClickActiveButton,
+    modifiedUser,
+    handleOnChange,
+    handleOnClickUpdateButton,
+  } = useUpdateUser({ user });
+
   return (
     <>
-      <div className={"mt-32 gap-6 flex mobile:flex-col"}>
-        <ProfileImage
-          isFetching={isFetching}
-          profileImageURL={user?.profileImageURL}
-        />
-        <UserInfo isFetching={isFetching} user={user} />
-      </div>
-      <button
-        onClick={() => {
-          removeLocalData();
-          changeIsLogin(false);
-          navigate(HOME_PATH);
-        }}
+      <div
+        className={
+          "items-center mt-32 mb-10 gap-6 flex mobile:flex-col"
+        }
       >
-        로그아웃
-      </button>
+        <ProfileImage
+          imageUrl={modifiedUser?.[USER_OBJECT_KEY.PROFILE_IMAGE_URL]}
+          handleOnChange={handleOnChange}
+        />
+        <div className={"border-l-[1px]"} />
+        <UserInfo
+          isActiveInput={isActiveInput}
+          modifiedUser={modifiedUser}
+          handleOnChange={handleOnChange}
+        >
+          <UpdateActiveButton
+            isActiveInput={isActiveInput}
+            handleClickActiveButton={handleClickActiveButton}
+            handleOnClickUpdateButton={handleOnClickUpdateButton}
+          />
+        </UserInfo>
+      </div>
+      <div className={"flex justify-center"}>
+        <LogoutButton className={""} />
+      </div>
     </>
   );
 };

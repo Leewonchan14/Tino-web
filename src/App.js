@@ -2,7 +2,7 @@ import "./App.css";
 import ScrollToTop from "./hooks/recycle/useScrollToTop";
 import AutoLogin from "./pages/AutoLogin";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import LayoutWithNavBar from "./layout/LayoutWithNavBar";
+import NavBarLayout from "./layout/NavBarLayout";
 import { HOME_PATH, HomePage } from "./pages/HomePage";
 import { GAME_PATH, GameDetailPage } from "./pages/GameDetailPage";
 import { LOGIN_PATH, LoginPage } from "./pages/LoginPage";
@@ -15,6 +15,7 @@ import { RANKING_PATH, RankingPage } from "./pages/RankingPage";
 import { Friend, FRIEND_PAGE_PATH } from "./pages/Friend";
 import React from "react";
 import { MY_PAGE_PATH, MyPage } from "./pages/MyPage";
+import { MyPageLayout } from "./layout/MyPageLayout";
 
 function App() {
   return (
@@ -22,9 +23,13 @@ function App() {
       <ScrollToTop />
       <AutoLogin />
       <Routes>
-        <Route exact element={<LayoutWithNavBar />}>
+        <Route exact element={<NavBarLayout />}>
           <Route exact path={HOME_PATH} element={<HomePage />} />
-          <Route exact path={GAME_PATH} element={<GameDetailPage />} />
+          <Route
+            exact
+            path={GAME_PATH}
+            element={<GameDetailPage />}
+          />
           <Route exact path={LOGIN_PATH} element={<LoginPage />} />
           <Route
             exact
@@ -32,9 +37,15 @@ function App() {
             element={<AuthEmailCodePage />}
           />
           <Route exact path={SIGNUP_PATH} element={<SignUpPage />} />
-          <Route exact path={RANKING_PATH} element={<RankingPage />} />
+          <Route
+            exact
+            path={RANKING_PATH}
+            element={<RankingPage />}
+          />
           <Route exact path={FRIEND_PAGE_PATH} element={<Friend />} />
-          <Route path={MY_PAGE_PATH} element={<MyPage />} />
+          <Route exact element={<MyPageLayout />}>
+            <Route path={MY_PAGE_PATH} element={<MyPage />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

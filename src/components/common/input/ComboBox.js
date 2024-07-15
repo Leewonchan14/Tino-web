@@ -9,12 +9,19 @@ const inputStyle = {
   margin: "10px 0",
 };
 
-function ComboBox({ onChange, value, options, className, textClass }) {
+function ComboBox({
+  onChange,
+  value,
+  name,
+  options,
+  className,
+  textClass,
+}) {
   return (
     <select
       style={inputStyle}
       onChange={onChange}
-      name={"inputUserId"}
+      name={name}
       value={value}
       className={"font-G_MARKET !lg:w-[60%] " + className}
     >

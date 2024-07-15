@@ -1,37 +1,77 @@
 import Skeleton from "react-loading-skeleton";
-import { uuid } from "../../utils/uuid";
+import React from "react";
+import { useGetUser } from "../../hooks/header/useGetUser";
+import {
+  nicknameTextSizeInMyPage,
+  USER_OBJECT_KEY,
+} from "../../utils/userConverter";
+import { UpdateInput } from "./Inputs";
 
-export const UserInfo = ({ isFetching, user }) => {
-  const MEtA_DATA = [
-    { title: "닉네임", value: user?.nickname, className: "w-32" },
-    { title: "이메일", value: user?.email, className: "w-96" },
-    { title: "학과", value: user?.major, className: "w-80" },
-  ];
-
-  const renderUserInfo = () => {
-    return MEtA_DATA.map(({ title, value, className }) => {
-      let key = uuid();
-
-      if (isFetching) {
-        return <Skeleton key={key} containerClassName={className} />;
-      }
-
-      return (
-        <div key={key}>
-          {title} : {value}
-        </div>
-      );
-    });
-  };
+export const UserInfo = ({
+  modifiedUser,
+  isActiveInput,
+  handleOnChange,
+  children,
+}) => {
+  let { isFetching } = useGetUser();
 
   return (
     <div
       className={
-        "flex flex-col flex-1 justify-center font-G_MARKET text-xl gap-3 " +
-        "mobile:text-lg"
+        "flex flex-col flex-1 justify-center items-start font-G_MARKET text-xl gap-3 " +
+        "mobile:text-lg mobile:w-full"
       }
     >
-      {renderUserInfo()}
+      {Object.values(USER_OBJECT_KEY)
+        .filter((key) => key !== USER_OBJECT_KEY.PROFILE_IMAGE_URL)
+        .map((key) => (
+          <ShowInfoComp
+            key={key}
+            isFetching={isFetching}
+            isActiveInput={isActiveInput}
+            handleOnChange={handleOnChange}
+            name={key}
+            value={modifiedUser?.[key]}
+          />
+        ))}
+      {children}
+    </div>
+  );
+};
+
+const ShowInfoComp = ({
+  isFetching,
+  handleOnChange,
+  isActiveInput,
+  name,
+  value,
+}) => {
+  if (isFetching)
+    return (
+      <Skeleton
+        containerClassName={`w-80 ${nicknameTextSizeInMyPage(name)}`}
+      />
+    );
+
+  if (isActiveInput)
+    return (
+      <UpdateInput
+        handleOnChange={handleOnChange}
+        name={name}
+        value={value}
+      />
+    );
+
+  return <ShowUserData name={name} value={value} />;
+};
+
+const ShowUserData = ({ name, value }) => {
+  return (
+    <div
+      className={`flex items-center gap-2 p-[2px]
+    ${nicknameTextSizeInMyPage(name)}`}
+    >
+      <span>{value}</span>
     </div>
   );
 };
