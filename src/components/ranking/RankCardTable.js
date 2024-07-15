@@ -28,10 +28,14 @@ export const RankCardTable = ({
 
 const RankHeader = ({ item, score }) => {
   return (
-    <thead className={"sticky top-0 bg-primary-100 box-border"}>
+    <thead
+      className={
+        "sticky h-12 top-0 bg-primary-600 box-border text-white text-lg"
+      }
+    >
       <tr className={""}>
         <th className={"w-24"}>순위</th>
-        <th className={"text-start pl-5"}>{item}</th>
+        <th className={"text-start pl-4"}>{item}</th>
         <th className={"text-nowrap"}>{score}</th>
       </tr>
     </thead>
@@ -98,7 +102,9 @@ const RankCard = ({ rank, picture, score, text }) => {
 
 const RankCardSkeleton = () => {
   return (
-    <tr className={"w-full h-22 items-center border-b border-gray-200"}>
+    <tr
+      className={"w-full h-22 items-center border-b border-gray-200"}
+    >
       <td className={"text-center flex justify-center"}>
         <div className={"w-10"}>
           <Skeleton />
@@ -106,7 +112,11 @@ const RankCardSkeleton = () => {
       </td>
       <td>
         <div className={"flex items-center"}>
-          <div className={"h-16 w-16 rounded-full border-2 overflow-clip"}>
+          <div
+            className={
+              "h-16 w-16 rounded-full border-2 overflow-clip"
+            }
+          >
             <Skeleton
               containerClassName={"flex h-full"}
               className={"h-16 w-16"}
