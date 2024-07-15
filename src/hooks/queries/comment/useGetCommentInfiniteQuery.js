@@ -28,7 +28,7 @@ export const useGetCommentInfiniteQuery = ({
     fetchNextPage,
     isSuccess,
   } = useInfiniteQuery({
-    queryKey: ["comments", gameId, { sort: sort }],
+    queryKey: ["comments", gameId, { sort }],
     queryFn: async (args) => {
       return await fetchComments({
         page: args.pageParam,

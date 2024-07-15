@@ -2,39 +2,56 @@ import axios from "axios";
 
 export class Api {
   base_url = process.env.REACT_APP_BASE_URL;
+
+  // axios static instance
   axiosInstance;
 
   constructor() {
     this.axiosInstance = axios.create({
       baseURL: this.base_url,
+      // default headers
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   }
 
-  async sendRequest(options) {
-    const { method, url, data, content_type } = options;
-
-    const config = {
-      headers: {
-        "Content-Type": content_type,
-      },
-    };
-
+  async sendRequest({ method, url, data, config }) {
     return await this.axiosInstance[method](url, data, config);
   }
 
-  async get(url, { data, content_type = "application/json" } = {}) {
-    return await this.sendRequest({ method: "get", url, data, content_type });
+  async get(url, config) {
+    return await this.sendRequest({
+      method: "get",
+      url,
+      config,
+    });
   }
 
-  async post(url, { data, content_type = "application/json" } = {}) {
-    return await this.sendRequest({ method: "post", url, data, content_type });
+  async post(url, body, config) {
+    return await this.sendRequest({
+      method: "post",
+      url,
+      data: body,
+      config,
+    });
   }
 
-  async put(url, { data, content_type = "application/json" } = {}) {
-    return await this.sendRequest({ method: "put", url, data, content_type });
+  async put(url, body, config) {
+    return await this.sendRequest({
+      method: "put",
+      url,
+      data: body,
+      config,
+    });
   }
 
-  async patch(url, { data, content_type = "application/json" } = {}) {
-    return await this.sendRequest({ method: "patch", url, data, content_type });
+  async patch(url, body, config) {
+    return await this.sendRequest({
+      method: "patch",
+      url,
+      data: body,
+      config,
+    });
   }
 }

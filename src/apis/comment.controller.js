@@ -22,12 +22,12 @@ class comment_controller extends Api {
 
   // 댓글 작성
   createComment = async ({ body }) => {
-    return await this.post(`/review`, { data: body });
+    return await this.post(`/review`, body);
   };
 
   // 댓글 수정
   updateComment = async ({ reviewId, reviewContent }) => {
-    return await this.put(`/review/${reviewId}`, { data: { reviewContent } });
+    return await this.put(`/review/${reviewId}`, { reviewContent });
   };
 }
 

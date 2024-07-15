@@ -1,31 +1,47 @@
 import { Api } from "./common.controller";
+import TinoIcon from "../assets/tino_icon.png";
+import { USER_OBJECT_KEY } from "../utils/userConverter";
 
 class UserController extends Api {
   // 회원 가입
   signUp = async ({ email, password, nickname, major, code }) => {
     return await this.post("/user", {
-      data: {
-        email,
-        password,
-        nickname,
-        major,
-        code,
-      },
+      email,
+      password,
+      nickname,
+      major,
+      code,
     });
   };
 
   // 로그인
   login = async ({ email, password }) => {
+    // return Promise.resolve({
+    //   data: {
+    //     userId: 1,
+    //     token: {
+    //       accessToken: "abc",
+    //       refreshToken: "abc",
+    //     },
+    //   },
+    // });
+
     return await this.post("/user/login", {
-      data: {
-        email,
-        password,
-      },
+      email,
+      password,
     });
   };
 
   // userId 로 user 조회
   findUserById = async (userId) => {
+    // return Promise.resolve({
+    //   data: {
+    //     profileImageURL: TinoIcon,
+    //     nickname: "티노",
+    //     email: "twoone14@tukorea.ac.kr",
+    //     major: "컴퓨터공학과",
+    //   },
+    // });
     return await this.get(`/user/${userId}`);
   };
 
@@ -39,6 +55,14 @@ class UserController extends Api {
           "Content-Type": "application/json",
         },
       },
+    });
+  };
+
+  // user update
+  update = async ({ userId, modifiedUser }) => {
+    delete modifiedUser[USER_OBJECT_KEY.EMAIL];
+    return await this.put(`/user/${userId}`, {
+      data: { userId, ...modifiedUser },
     });
   };
 }
