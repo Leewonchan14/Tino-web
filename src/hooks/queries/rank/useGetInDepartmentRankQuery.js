@@ -3,6 +3,7 @@ import { MAJOR } from "../../../constants/Major";
 import RankController from "../../../apis/rank.controller";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { MINUTE } from "../../../utils/timeConverter";
+import { delayFetch } from "../../../utils/delay";
 
 export const useGetInDepartmentRankQuery = () => {
   const [selectMajor, setSelectMajor] = useState(MAJOR[0]);
@@ -12,10 +13,13 @@ export const useGetInDepartmentRankQuery = () => {
   };
 
   const fetchInDepartmentRank = async ({ page, size }) => {
-    let response = await RankController.findInDepartmentRank({
-      page,
-      size,
-      major: selectMajor.name,
+    let response = await delayFetch({
+      fetcherPromise: RankController.findInDepartmentRank({
+        page,
+        size,
+        major: selectMajor.name,
+      }),
+      milliseconds: 500,
     });
     return response.data.rankList;
   };
@@ -28,7 +32,10 @@ export const useGetInDepartmentRankQuery = () => {
   } = useInfiniteQuery({
     queryKey: ["rank", "department", selectMajor.name],
     queryFn: async (args) => {
-      return await fetchInDepartmentRank({ page: args.pageParam, size: 10 });
+      return await fetchInDepartmentRank({
+        page: args.pageParam,
+        size: 10,
+      });
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages, lastPageParam) => {
