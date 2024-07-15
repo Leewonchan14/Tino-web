@@ -5,8 +5,6 @@ const Footer = () => {
       <div className="flex justify-between mobile:flex-col mobile:gap-8">
         <ContactUs />
 
-        <TechUse />
-
         <LegalInformation />
       </div>
 
@@ -35,37 +33,6 @@ const ContactUs = () => {
           <div key={text} className={"flex gap-4"}>
             <img className={"w-6 h-6"} src={icon} alt="" />
             {text}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const TechUse = () => {
-  const TECH_USED_INFO = [
-    {
-      name: "React",
-      img: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png",
-    },
-    {
-      name: "Spring Boot",
-      img: "https://taetaetae.github.io/images/spring-boot-eclipse/spring-boot-logo.jpg",
-    },
-    {
-      name: "MySql",
-      img: "https://w7.pngwing.com/pngs/747/798/png-transparent-mysql-logo-mysql-database-web-development-computer-software-dolphin-marine-mammal-animals-text-thumbnail.png",
-    },
-  ];
-
-  return (
-    <div className="w-full md:w-1/4 mb-6">
-      <h3 className="font-bold text-xl mb-2">TECHNOLOGIES USED</h3>
-      <div className={"flex flex-col gap-2"}>
-        {TECH_USED_INFO.map(({ name, img }) => (
-          <div key={name} className={"flex gap-4"}>
-            <img className={"w-6 h-6"} src={img} />
-            {name}
           </div>
         ))}
       </div>
