@@ -31,6 +31,7 @@ export const MyPage = () => {
       >
         <ProfileImage
           imageUrl={modifiedUser?.[USER_OBJECT_KEY.PROFILE_IMAGE_URL]}
+          isActiveInput={isActiveInput}
           handleOnChange={handleOnChange}
         />
         <div className={"border-l-[1px]"} />

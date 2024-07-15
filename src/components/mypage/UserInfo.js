@@ -53,7 +53,7 @@ const ShowInfoComp = ({
       />
     );
 
-  if (isActiveInput)
+  if (isActiveInput && name !== USER_OBJECT_KEY.EMAIL)
     return (
       <UpdateInput
         handleOnChange={handleOnChange}

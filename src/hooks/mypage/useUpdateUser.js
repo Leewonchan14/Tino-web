@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { userToMyPageInfo } from "../../utils/userConverter";
+import UserController from "../../apis/user.controller";
+import { userStore } from "../../stores/userStore";
 
 export const useUpdateUser = ({ user }) => {
-  const [modifiedUser, setModifiedUser] = useState(user);
+  let { userId } = userStore((state) => state);
+
+  const [modifiedUser, setModifiedUser] = useState(null);
 
   const [isActiveInput, setIsActiveInput] = useState(false);
 
@@ -19,9 +23,17 @@ export const useUpdateUser = ({ user }) => {
     setModifiedUser(userToMyPageInfo(user));
   }, [user]);
 
-  const handleOnClickUpdateButton = () => {
+  useEffect(() => {
+    console.log(modifiedUser);
+  }, [modifiedUser]);
+
+  const handleOnClickUpdateButton = async () => {
     if (window.confirm("수정하사겠습니까?")) {
-      console.log("update!");
+      try {
+        await UserController.update({ userId, modifiedUser });
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 

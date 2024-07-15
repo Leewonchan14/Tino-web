@@ -1,14 +1,26 @@
 import Skeleton from "react-loading-skeleton";
 import { useRef } from "react";
-import { imageFileToUrl } from "../../utils/image";
 import { useGetUser } from "../../hooks/header/useGetUser";
 import { USER_OBJECT_KEY } from "../../utils/userConverter";
+import { useImageUpload } from "../../hooks/image/useImageUpload";
 
-export const ProfileImage = ({ imageUrl, handleOnChange }) => {
+export const ProfileImage = ({
+  imageUrl,
+  isActiveInput,
+  handleOnChange,
+}) => {
+  let { isUploading, handleChangeImageUpload } = useImageUpload();
+
   return (
     <div className={"w-32 flex flex-col gap-3 text-xl"}>
-      <ImageWithSkeleton imageUrl={imageUrl} />
+      <ImageWithSkeleton
+        imageUrl={imageUrl}
+        isUploading={isUploading}
+      />
       <ChangeImageButtonWithSkeleton
+        isActiveInput={isActiveInput}
+        isUploading={isUploading}
+        handleChangeImageUpload={handleChangeImageUpload}
         handleOnChange={handleOnChange}
       />
       <div className={"w-full px-4 mobile:px-0"}></div>
@@ -16,10 +28,10 @@ export const ProfileImage = ({ imageUrl, handleOnChange }) => {
   );
 };
 
-const ImageWithSkeleton = ({ imageUrl }) => {
+const ImageWithSkeleton = ({ imageUrl, isUploading }) => {
   let { isFetching } = useGetUser();
   const renderImage = () => {
-    if (isFetching) {
+    if (isFetching || isUploading) {
       return (
         <Skeleton width={"100%"} height={"100%"} circle={true} />
       );
@@ -39,28 +51,28 @@ const ImageWithSkeleton = ({ imageUrl }) => {
   return <div className={"w-32 h-32"}>{renderImage()}</div>;
 };
 
-const ChangeImageButtonWithSkeleton = ({ handleOnChange }) => {
-  let { isFetching } = useGetUser();
+const ChangeImageButtonWithSkeleton = ({
+  isActiveInput,
+  isUploading,
+  handleOnChange,
+  handleChangeImageUpload,
+}) => {
   const imageInputRef = useRef(null);
 
-  if (isFetching) {
-    return <Skeleton containerClassName={"w-full text-3xl"} />;
-  }
-
-  const handleChangeImage = () => {
-    let file = imageInputRef.current.files[0];
-    handleOnChange(
-      USER_OBJECT_KEY.PROFILE_IMAGE_URL,
-      imageFileToUrl(file)
-    );
+  const onChangeInput = async (e) => {
+    let url = await handleChangeImageUpload(e);
+    if (!url) return;
+    handleOnChange(USER_OBJECT_KEY.PROFILE_IMAGE_URL, url);
   };
 
   return (
     <>
       <button
-        className={
-          "w-full font-G_MARKET h-10 text-lg bg-primary-600 rounded-lg text-white font-bold"
-        }
+        disabled={isUploading}
+        className={`w-full font-G_MARKET h-10 text-lg bg-primary-600 rounded-lg text-white font-bold 
+        ${isActiveInput ? "block" : "hidden"}
+        ${isUploading && "blur-md"}
+        `}
         onClick={() => imageInputRef.current.click()}
       >
         사진변경
@@ -69,9 +81,9 @@ const ChangeImageButtonWithSkeleton = ({ handleOnChange }) => {
         ref={imageInputRef}
         className={"hidden"}
         type="file"
-        accept="image/jpg,impge/png,image/jpeg,image/gif"
+        accept="image/jpg,image/png,image/jpeg,image/gif"
         name="profileImageURL"
-        onChange={handleChangeImage}
+        onChange={onChangeInput}
       />
     </>
   );
