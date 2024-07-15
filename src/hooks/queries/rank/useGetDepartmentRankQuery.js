@@ -1,10 +1,14 @@
 import RankController from "../../../apis/rank.controller";
 import { useQuery } from "@tanstack/react-query";
 import { MINUTE } from "../../../utils/timeConverter";
+import { delayFetch } from "../../../utils/delay";
 
 const useGetDepartmentRankQuery = () => {
   const fetchDepartmentRank = async () => {
-    let response = await RankController.findDepartmentRank();
+    let response = await delayFetch({
+      fetcherPromise: RankController.findDepartmentRank(),
+      milliseconds: 500,
+    });
     return response.data.rankList;
   };
 
