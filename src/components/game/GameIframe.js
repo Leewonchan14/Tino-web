@@ -1,6 +1,8 @@
 import React from "react";
+import { userStore } from "../../stores/userStore";
 
 const GameIframe = ({ gameState, isFetching }) => {
+  let { userId } = userStore((state) => state);
   return (
     <div
       className={
@@ -13,7 +15,7 @@ const GameIframe = ({ gameState, isFetching }) => {
       {!isFetching && (
         <iframe
           className={"w-full h-full z-30"}
-          src={gameState.gameUrl}
+          src={`${gameState.gameUrl}?userId=${userId}`}
           title={gameState.gameName}
         />
       )}
