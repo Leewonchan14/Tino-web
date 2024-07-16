@@ -40,7 +40,7 @@ const ImageWithSkeleton = ({ imageUrl, isUploading }) => {
     return (
       <img
         className={
-          "float-left w-full h-full border-[1px] rounded-full shadow-lg object-cover"
+          "w-full h-full border-[1px] rounded-full shadow-lg object-cover"
         }
         src={imageUrl}
         alt={""}
