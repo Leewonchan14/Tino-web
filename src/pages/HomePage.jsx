@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import Footer from "../components/footer/Footer";
 import GameGrid from "../components/game/GameGrid";
 import GameSortMenu from "../components/game/GameSortMenu";
-import LoadingSpinner from "../components/common/spinner/LoadingSpinner";
-import useGetGamesInfiniteQuery from "../hooks/queries/game/useGetGamesInfiniteQuery";
-import useReactQueryInfiniteScroll from "../hooks/recycle/useReactQueryInfiniteScroll";
 import { GAME_SORT_MENU } from "../constants/Game";
+import useGetGamesInfiniteQuery from "../hooks/queries/game/useGetGamesInfiniteQuery";
 
 const HOME_PATH = "/";
 export const GAME_CARD_FETCH_SIZE = 6;
@@ -21,11 +19,6 @@ function HomePage(props) {
       pageSize: GAME_CARD_FETCH_SIZE,
     });
 
-  let { loadingComp } = useReactQueryInfiniteScroll({
-    fetchData: fetchNextPage,
-    isFetching,
-  });
-
   return (
     <>
       <h1
@@ -37,8 +30,8 @@ function HomePage(props) {
       </h1>
 
       <h1 className={"mt-6 mb-12"}>
-        한국공학대학교 비공식 개발동아리 데브티노s 입니다. <br />이 곳에서
-        다양한 게임을 경험하고 학교내 다른 학과와 경쟁하세요!
+        한국공학대학교 비공식 개발동아리 데브티노s 입니다. <br />이
+        곳에서 다양한 게임을 경험하고 학교내 다른 학과와 경쟁하세요!
       </h1>
 
       <GameSortMenu
@@ -51,9 +44,9 @@ function HomePage(props) {
         isFetching={isFetching}
         isSuccess={isSuccess}
         gameState={gameState}
+        fetchNextPage={fetchNextPage}
+        selectedGameSortMenu={selectedGameSortMenu}
       />
-
-      <LoadingSpinner loadingComp={loadingComp} isFetching={true} />
 
       <Footer />
     </>
