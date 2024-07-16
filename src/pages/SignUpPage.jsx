@@ -72,7 +72,7 @@ function SignUpPage(props) {
   );
 }
 
-const ErrorMessage = ({ isValid, message }) => {
+export const ErrorMessage = ({ isValid, message }) => {
   return (
     <span className={"text-red-600"}>{!isValid && message}</span>
   );

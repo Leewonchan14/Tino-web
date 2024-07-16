@@ -4,17 +4,16 @@ import { useLocation, useNavigate } from "react-router-dom";
 import UserController from "../../apis/user.controller";
 import { LOGIN_PATH } from "../../pages/LoginPage";
 import {
-  EMAIL_FORMAT,
   GREATER_AND_SMALLER_THAN,
   isValidate,
   MATCH_PASSWORD,
   NOT_EMPTY,
   ONLY_EQUAL,
   ONLY_NUMBER,
-  PASSWORD_FORMAT,
-  SMALLER_EQUAL_THAN,
-} from "../../utils/validator";
+} from "../../utils/validator/validator";
 import { delayFetch } from "../../utils/delay";
+import { PASSWORD_FORMAT } from "../../utils/validator/password";
+import { EMAIL_FORMAT } from "../../utils/validator/email";
 
 export const useSignUp = () => {
   let navigate = useNavigate();
@@ -32,11 +31,7 @@ export const useSignUp = () => {
   const SIGN_UP_FORM_INPUT_LIST = [
     {
       name: "email",
-      inputShould: [
-        NOT_EMPTY,
-        EMAIL_FORMAT,
-        SMALLER_EQUAL_THAN({ num: 30 }),
-      ],
+      inputShould: EMAIL_FORMAT,
       placeholder: "인증코드를 보낸 이메일을 입력해 주세요",
     },
     {
@@ -47,7 +42,7 @@ export const useSignUp = () => {
     },
     {
       name: "password",
-      inputShould: [NOT_EMPTY, PASSWORD_FORMAT],
+      inputShould: PASSWORD_FORMAT,
       placeholder: "비밀번호를 입력하세요",
       type: "password",
     },
@@ -86,7 +81,7 @@ export const useSignUp = () => {
   });
 
   const checkValid = () => {
-    return Object.entries(isValid).every(([key, value]) => value);
+    return Object.values(isValid).every((value) => value);
   };
 
   const onSubmit = async () => {
@@ -115,10 +110,10 @@ export const useSignUp = () => {
             "알 수 없는 오류입니다. 잠시 후 다시 시도해주세요.";
           break;
       }
-      setErrorMessage((pre) => ({
-        ...pre,
+      setErrorMessage({
+        ...errorMessage,
         total: message,
-      }));
+      });
       return;
     } finally {
       setIsLoading(false);
@@ -147,7 +142,7 @@ export const useSignUp = () => {
       });
 
     setIsValid((pre) => ({
-      ...isValid,
+      ...pre,
       [name]: nextIsValid,
     }));
 

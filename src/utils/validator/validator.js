@@ -1,14 +1,4 @@
 // { regex, errorMessage } <- 컨벤션
-export const EMAIL_FORMAT = {
-  regex: new RegExp("^[a-zA-Z0-9._%+-]+@tukorea\\.ac\\.kr$"),
-  errorMessage: "학교 이메일만 가능합니다. (tukorea.ac.kr)",
-};
-
-export const PASSWORD_FORMAT = {
-  regex: new RegExp("^.{6,18}$"),
-  errorMessage: "비밀번호는 6자 이상, 18자 이하 이어야 합니다.",
-};
-
 export const MATCH_PASSWORD = ({ password }) => ({
   regex: new RegExp(`^${password}$`),
   errorMessage: "비밀번호가 일치하지 않습니다.",

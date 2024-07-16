@@ -16,7 +16,7 @@ function AuthEmailCodePage(props) {
   } = useSendEmail("");
 
   return (
-    <div className={"h-[70%] flex flex-col items-center"}>
+    <div className={"flex flex-col items-center"}>
       <h1
         className={
           "font-G_MARKET text-6xl mobile:text-4xl my-12 font-bold flex justify-center"
@@ -30,6 +30,7 @@ function AuthEmailCodePage(props) {
       <div className={"flex mobile:w-full"}>
         <InputComp
           value={email}
+          className={"!w-96"}
           onChange={onChangeEmail}
           placeholder={"E-mail 을 입력하세요"}
         />
@@ -37,15 +38,20 @@ function AuthEmailCodePage(props) {
           isFetching={isFetching}
           onClick={onClickSendEmail}
           text={"코드 발송"}
-          className={"!text-lg !w-32 !ml-8"}
+          className={"!text-lg !w-auto !px-2 !ml-8"}
         />
       </div>
 
-      <div className={"font-G_MARKET text-red-600 text-center"}>{message}</div>
+      <div className={"font-G_MARKET text-red-600 text-center"}>
+        {message}
+      </div>
 
       <div className={"mt-4 w-full flex justify-center"}>
         이미 이메일을 받으셨나요?
-        <button onClick={GoSignUpForm} className={"ml-4 text-blue-600"}>
+        <button
+          onClick={GoSignUpForm}
+          className={"ml-4 text-blue-600"}
+        >
           회원가입 하러 가기
         </button>
       </div>

@@ -23,7 +23,7 @@ function InputComp({
       onChange={onChange}
       name={name}
       type={type}
-      className={"font-G_MARKET " + className}
+      className={`font-G_MARKET ${className}`}
       value={value}
       placeholder={placeholder}
     />
