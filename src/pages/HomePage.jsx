@@ -43,6 +43,7 @@ function HomePage(props) {
       <GameGrid
         isFetching={isFetching}
         isSuccess={isSuccess}
+        isAddOn={true}
         gameState={gameState}
         fetchNextPage={fetchNextPage}
         selectedGameSortMenu={selectedGameSortMenu}

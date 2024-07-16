@@ -63,11 +63,13 @@ export const LogoutButton = ({ className }) => {
   };
 
   return (
-    <button
-      onClick={handleOnClick}
-      className={`rounded-lg bg-red-500 w-[120px] h-10 text-lg text-white font-G_MARKET font-bold ${className}`}
-    >
-      로그아웃
-    </button>
+    <div className={"flex justify-center"}>
+      <button
+        onClick={handleOnClick}
+        className={`rounded-lg bg-red-500 w-[120px] h-10 text-lg text-white font-G_MARKET font-bold ${className}`}
+      >
+        로그아웃
+      </button>
+    </div>
   );
 };

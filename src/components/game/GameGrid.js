@@ -8,9 +8,11 @@ import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfini
 const GameGrid = ({
   isSuccess,
   isFetching,
+  isAddOn = false,
+  emptyMessage = "",
   gameState,
   fetchNextPage,
-  selectedGameSortMenu,
+  className = "",
   ...props
 }) => {
   let { loadingComp } = useReactQueryInfiniteScroll({
@@ -18,29 +20,46 @@ const GameGrid = ({
     isFetching,
   });
 
+  let isEmpty = !isFetching && gameState.pages.flat().length === 0;
+
   return (
-    <section
-      className={
-        "grid grid-cols-3 xl:grid-cols-3 sm:grid-cols-2 mobile:grid-cols-1 min-w-[300px] gap-6 w-full"
-      }
-    >
-      {isSuccess &&
-        renderGameCardsWithSkeletons(gameState.pages.flat())}
-      {isFetching &&
-        range(6).map(() => <GameCardSkeleton key={uuid()} />)}
-      <LoadingSpinner loadingComp={loadingComp} isFetching={true} />
-    </section>
+    <div className={"relative flex justify-center items-center"}>
+      <span className={"absolute font-G_MARKET my-4 z-10"}>
+        {isEmpty && emptyMessage}
+      </span>
+      <section
+        className={`grid grid-cols-3 xl:grid-cols-3 sm:grid-cols-2 mobile:grid-cols-1 min-w-[300px] gap-6 w-full 
+      ${className} ${isEmpty && "blur"}`}
+      >
+        {isSuccess &&
+          renderGameCardsWithSkeletons(
+            gameState.pages.flat(),
+            isAddOn,
+            emptyMessage
+          )}
+        {isFetching &&
+          range(6).map(() => <GameCardSkeleton key={uuid()} />)}
+        <LoadingSpinner loadingComp={loadingComp} isFetching={true} />
+      </section>
+    </div>
   );
 };
 
-const renderGameCardsWithSkeletons = (games) => {
+const renderGameCardsWithSkeletons = (
+  games,
+  isAddOn,
+  emptyMessage
+) => {
   const result = [];
   games.forEach((game, index) => {
     result.push(<GameCard key={game.gameId} game={game} />);
-    if ((index + 1) % 4 === 0) {
+    if (isAddOn && (index + 1) % 4 === 0) {
       result.push(<GameCardSkeleton key={uuid()} />);
     }
   });
+  if (result.length === 0) {
+    return range(6).map(() => <GameCardSkeleton key={uuid()} />);
+  }
   return result;
 };
 

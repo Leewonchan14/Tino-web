@@ -8,11 +8,21 @@ import {
   UpdateActiveButton,
 } from "../components/mypage/Buttons";
 import { useUpdateUser } from "../hooks/mypage/useUpdateUser";
+import useMyPage from "../hooks/mypage/useMyPage";
+import useGetRecentPlayGameInfiniteQuery from "../hooks/mypage/useGetRecentPlayGameInfiniteQuery";
+import GameGrid from "../components/game/GameGrid";
 
 export const MY_PAGE_PATH = "/mypage";
 
+export const GAME_CARD_FETCH_SIZE = 6;
+
 export const MyPage = () => {
   let { user } = useGetUser();
+
+  useMyPage();
+
+  let { gameState, isFetching, isSuccess, fetchNextPage } =
+    useGetRecentPlayGameInfiniteQuery();
 
   let {
     isActiveInput,
@@ -47,9 +57,19 @@ export const MyPage = () => {
           />
         </UserInfo>
       </div>
-      <div className={"flex justify-center"}>
-        <LogoutButton className={""} />
-      </div>
+      <LogoutButton className={""} />
+      <hr className={"mt-20"} />
+      <h2 className={"font-G_MARKET text-3" + "xl my-12"}>
+        최근한 게임들
+      </h2>
+      <GameGrid
+        isFetching={isFetching}
+        gameState={gameState}
+        isSuccess={isSuccess}
+        emptyMessage={"최근 플레이한 게임이 없습니다..."}
+        fetchNextPage={fetchNextPage}
+      />
+      <div className={"mb-20"}></div>
     </>
   );
 };
