@@ -32,13 +32,18 @@ const GameGrid = ({
       ${className} ${isEmpty && "blur"}`}
       >
         {isSuccess &&
-          renderGameCardsWithSkeletons(
-            gameState.pages.flat(),
-            isAddOn,
-            emptyMessage
-          )}
-        {isFetching &&
+          gameState.pages
+            .flat()
+            .map((game) => (
+              <GameCard key={game.gameId} game={game} />
+            ))}
+        {(isEmpty || isFetching) &&
           range(6).map(() => <GameCardSkeleton key={uuid()} />)}
+        {/*// renderGameCardsWithSkeletons(*/}
+        {/*//   gameState.pages.flat(),*/}
+        {/*//   isAddOn,*/}
+        {/*//   emptyMessage*/}
+        {/*// )}*/}
         <LoadingSpinner loadingComp={loadingComp} isFetching={true} />
       </section>
     </div>
@@ -57,9 +62,6 @@ const renderGameCardsWithSkeletons = (
       result.push(<GameCardSkeleton key={uuid()} />);
     }
   });
-  if (result.length === 0) {
-    return range(6).map(() => <GameCardSkeleton key={uuid()} />);
-  }
   return result;
 };
 
