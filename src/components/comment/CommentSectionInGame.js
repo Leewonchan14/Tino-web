@@ -1,20 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import OwnComment from "./OwnComment";
 import CommentInput from "./CommentInput";
 import CommentList from "./CommentList";
-import { useGetOwnComments } from "../../hooks/comment/useGetOwnComments";
+import usePostComment from "../../hooks/comment/usePostComment";
+import useIsOpen from "../../hooks/recycle/useIsOpen";
 
 const CommentSectionInGame = ({ gameId, ...rest }) => {
-  const [isInputOpen, setIsInputOpen] = useState(false);
-  const toggleInputOpen = (next) => {
-    if (!next) setIsInputOpen((pre) => !pre);
-    if (next) setIsInputOpen(next);
-  };
-  const {
-    comment: ownComment,
-    isFetching,
-    error,
-  } = useGetOwnComments({ gameId });
+  const { mutate, isPending } = usePostComment({
+    gameId,
+  });
+
+  let { isOpen, toggleIsOpen } = useIsOpen();
 
   return (
     <>
@@ -22,20 +18,18 @@ const CommentSectionInGame = ({ gameId, ...rest }) => {
       <section className={"w-full rounded-3xl"}>
         {/*자신의 댓글 컴포넌트*/}
         <OwnComment
-          comment={ownComment}
-          isFetching={isFetching}
-          error={error}
-          toggleInputOpen={toggleInputOpen}
-          isInputOpen={isInputOpen}
+          isPending={isPending}
+          gameId={gameId}
+          isOpen={isOpen}
+          toggleIsOpen={toggleIsOpen}
         />
 
         {/*댓글 입력 컴포넌트*/}
         <CommentInput
-          isFetching={isFetching}
-          ownComment={ownComment}
           gameId={gameId}
-          isInputOpen={isInputOpen}
-          toggleInputOpen={toggleInputOpen}
+          isOpen={isOpen}
+          toggleIsOpen={toggleIsOpen}
+          mutate={mutate}
         />
 
         {/*게임의 달린 댓글 목록*/}

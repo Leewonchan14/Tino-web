@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CommentSkeleton, CommentUserProfile } from "./Comment";
 import { userStore } from "../../stores/userStore";
+import { useGetOwnComments } from "../../hooks/comment/useGetOwnComments";
 
-const OwnComment = ({
-  isFetching,
-  error,
-  comment,
-  isInputOpen,
-  toggleInputOpen,
-}) => {
+const OwnComment = ({ gameId, isPending, isOpen, toggleIsOpen }) => {
+  const { comment, isFetching, error } = useGetOwnComments({
+    gameId,
+  });
+
+  useEffect(() => {
+    console.log("isFetching || isPending", isFetching || isPending);
+  }, [isPending]);
+
   const { isLogin } = userStore((state) => state);
 
   if (!isLogin) {
     return <NotLoginOwnComment />;
   }
 
-  if (isFetching) {
-    return <CommentSkeleton />;
+  if (isFetching || isPending) {
+    return <CommentSkeleton length={1} />;
   }
 
   if (error) {
@@ -27,8 +30,8 @@ const OwnComment = ({
   return (
     <ExistOwnComment
       comment={comment}
-      isInputOpen={isInputOpen}
-      toggleInputOpen={toggleInputOpen}
+      isOpen={isOpen}
+      toggleIsOpen={toggleIsOpen}
     />
   );
 };
@@ -49,11 +52,7 @@ const NotExistOwnComment = () => {
   );
 };
 
-const ExistOwnComment = ({
-  comment,
-  isInputOpen,
-  toggleInputOpen,
-}) => {
+const ExistOwnComment = ({ comment, isOpen, toggleIsOpen }) => {
   return (
     <article
       className={
@@ -83,9 +82,9 @@ const ExistOwnComment = ({
         className={
           "absolute bottom-6 right-8 underline cursor-pointer"
         }
-        onClick={() => toggleInputOpen()}
+        onClick={toggleIsOpen}
       >
-        {isInputOpen ? "닫기" : "수정"}
+        {isOpen ? "닫기" : "수정"}
       </span>
     </article>
   );

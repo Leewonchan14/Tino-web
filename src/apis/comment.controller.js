@@ -21,8 +21,13 @@ class comment_controller extends Api {
   };
 
   // 댓글 작성
-  createComment = async ({ body }) => {
-    return await this.post(`/review`, body);
+  createComment = async ({ userId, gameId, reviewContent, star }) => {
+    return await this.post(`/review`, {
+      userId,
+      gameId,
+      reviewContent,
+      star,
+    });
   };
 
   // 댓글 수정
