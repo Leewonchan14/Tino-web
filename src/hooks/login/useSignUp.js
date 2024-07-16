@@ -3,87 +3,123 @@ import { MAJOR } from "../../constants/Major";
 import { useLocation, useNavigate } from "react-router-dom";
 import UserController from "../../apis/user.controller";
 import { LOGIN_PATH } from "../../pages/LoginPage";
+import {
+  EMAIL_FORMAT,
+  GREATER_AND_SMALLER_THAN,
+  isValidate,
+  MATCH_PASSWORD,
+  NOT_EMPTY,
+  ONLY_EQUAL,
+  ONLY_NUMBER,
+  PASSWORD_FORMAT,
+  SMALLER_EQUAL_THAN,
+} from "../../utils/validator";
+import { delayFetch } from "../../utils/delay";
 
 export const useSignUp = () => {
   let navigate = useNavigate();
   let location = useLocation();
   const email = location?.state?.email || "";
 
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [signupFormState, setSignupFormState] = useState({
-    email: email,
+    email,
+    code: "",
     password: "",
+    rePassword: "",
     nickname: "",
     major: MAJOR[0].value,
-    code: "",
   });
-
+  const SIGN_UP_FORM_INPUT_LIST = [
+    {
+      name: "email",
+      inputShould: [
+        NOT_EMPTY,
+        EMAIL_FORMAT,
+        SMALLER_EQUAL_THAN({ num: 30 }),
+      ],
+      placeholder: "인증코드를 보낸 이메일을 입력해 주세요",
+    },
+    {
+      name: "code",
+      inputShould: [NOT_EMPTY, ONLY_NUMBER, ONLY_EQUAL({ num: 6 })],
+      placeholder: "E-mail로 받은 인증코드를 입력하세요",
+      type: "number",
+    },
+    {
+      name: "password",
+      inputShould: [NOT_EMPTY, PASSWORD_FORMAT],
+      placeholder: "비밀번호를 입력하세요",
+      type: "password",
+    },
+    {
+      name: "rePassword",
+      inputShould: [
+        MATCH_PASSWORD({ password: signupFormState.password }),
+      ],
+      placeholder: "비밀번호를 다시 입력하세요",
+      type: "password",
+    },
+    {
+      name: "nickname",
+      inputShould: [
+        NOT_EMPTY,
+        GREATER_AND_SMALLER_THAN({ min: 2, max: 16 }),
+      ],
+      placeholder: "이름을 입력하세요",
+    },
+  ];
+  const [errorMessage, setErrorMessage] = useState({
+    email: "",
+    code: "",
+    password: "",
+    rePassword: "",
+    nickname: "",
+    total: "",
+  });
+  const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState({
     email: true,
-    email_blank: true,
+    code: true,
     password: true,
-    password_blank: true,
     rePassword: true,
     nickname: true,
-    nickname_blank: true,
-    code: true,
   });
 
-  const regs = {
-    email: /^[a-zA-Z0-9._%+-]+@tukorea.ac.kr$/,
-    password: /^.{8,}$/,
-    notBlank: /^.+$/,
-    code: /^[0-9]{6}$/,
-  };
-
-  const [rePassword, setRePassword] = useState("");
-
-  const CheckValid = async () => {
-    return new Promise((resolve, reject) => {
-      setIsValid((stat) => {
-        let newData = {
-          ...isValid,
-          email: regs.email.test(signupFormState.email),
-          email_blank: regs.notBlank.test(signupFormState.email),
-          password: regs.password.test(signupFormState.password),
-          password_blank: regs.notBlank.test(signupFormState.password),
-          nickname_blank: regs.notBlank.test(signupFormState.nickname),
-          code: regs.code.test(signupFormState.code),
-        };
-
-        resolve(newData);
-
-        return newData;
-      });
-    });
+  const checkValid = () => {
+    return Object.entries(isValid).every(([key, value]) => value);
   };
 
   const onSubmit = async () => {
-    let validState = await CheckValid();
-
-    const allValid = Object.entries(validState).every(([key, value]) => value);
-
-    if (!allValid) {
-      setErrorMessage("입력값이 올바르지 않습니다.");
-      return;
-    }
+    if (!checkValid()) return;
 
     setIsLoading(true);
 
+    let { rePassword, ...signupForm } = signupFormState;
+
     try {
-      await UserController.signUp({ ...signupFormState });
+      await delayFetch({
+        fetcherPromise: UserController.signUp({ ...signupForm }),
+        milliseconds: 300,
+      });
     } catch (err) {
-      console.error(err);
-      if (err.response.status === 404) {
-        setErrorMessage(err.response.data.message);
-        return;
+      let message;
+      switch (err.response.status) {
+        case 404:
+          message = err.response.data.message;
+          break;
+        case 500:
+          message = "서버 오류입니다. 잠시 후 다시 시도해주세요.";
+          break;
+        default:
+          message =
+            "알 수 없는 오류입니다. 잠시 후 다시 시도해주세요.";
+          break;
       }
-      if (err.response.status === 500) {
-        setErrorMessage("서버 오류입니다. 잠시 후 다시 시도해주세요.");
-        return;
-      }
-      setErrorMessage("알 수 없는 오류입니다. 잠시 후 다시 시도해주세요.");
+      setErrorMessage((pre) => ({
+        ...pre,
+        total: message,
+      }));
+      return;
     } finally {
       setIsLoading(false);
     }
@@ -93,39 +129,37 @@ export const useSignUp = () => {
   };
 
   const onChange = (e) => {
-    if (e.target.name === "rePassword") {
-      setRePassword(e.target.value);
-      setIsValid({
-        ...isValid,
-        rePassword: signupFormState.password === e.target.value,
-      });
-      return;
-    }
+    let { name, value } = e.target;
 
     setSignupFormState({
       ...signupFormState,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
 
-    if (e.target.name === "password") {
-      setIsValid({
-        ...isValid,
-        rePassword: rePassword === e.target.value,
+    let findInput = SIGN_UP_FORM_INPUT_LIST.find(
+      (item) => item.name === name
+    );
+
+    let { isValid: nextIsValid, errorMessage: nextErrorMessage } =
+      isValidate({
+        value,
+        should: findInput.inputShould,
       });
-    }
-  };
 
-  const onChangeMajor = (e) => {
-    setSignupFormState({
-      ...signupFormState,
-      major: e.target.value,
-    });
+    setIsValid((pre) => ({
+      ...isValid,
+      [name]: nextIsValid,
+    }));
+
+    setErrorMessage((pre) => ({
+      ...pre,
+      [name]: nextErrorMessage,
+    }));
   };
 
   return {
     signupFormState,
-    rePassword,
-    onChangeMajor,
+    SIGN_UP_FORM_INPUT_LIST,
     isValid,
     onChange,
     onSubmit,

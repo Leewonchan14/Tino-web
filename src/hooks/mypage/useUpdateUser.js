@@ -24,10 +24,6 @@ export const useUpdateUser = ({ user }) => {
     setModifiedUser(userToMyPageInfo(user));
   }, [user]);
 
-  useEffect(() => {
-    console.log(modifiedUser);
-  }, [modifiedUser]);
-
   const queryClient = useQueryClient();
 
   const handleOnClickUpdateButton = async () => {
