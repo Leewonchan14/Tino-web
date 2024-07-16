@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <footer>
       <div className="my-8 border-b border-gray-700" />
-      <div className="flex justify-between mobile:flex-col mobile:gap-8">
+      <div className="flex justify-around mobile:flex-col mobile:gap-8">
         <ContactUs />
 
         <LegalInformation />
