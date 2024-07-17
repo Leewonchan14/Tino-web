@@ -75,8 +75,8 @@ const UserRankToolTip = ({ children }) => {
             각 Game마다 1~100등까지 결과들에 점수를 매겨 전체 게임
             유저 랭킹을 설정
           </li>
-          {TOOLTIP_TEXT.map((text) => (
-            <Text {...text} />
+          {TOOLTIP_TEXT.map((text, index) => (
+            <Text key={index} {...text} />
           ))}
         </ul>
       }

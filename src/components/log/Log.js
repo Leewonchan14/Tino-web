@@ -1,13 +1,12 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
+import { uuid } from "../../utils/uuid";
 
 export const LogTable = ({ isSuccess, isFetching, logState }) => {
   const renderLogs = () => {
-    return logState.pages
-      .flat()
-      .map((log, index) => (
-        <Log {...{ log, key: log.logId, index }} />
-      ));
+    return logState.pages.flat().map((log, index) => {
+      return <Log key={log.logId} {...{ log, index }} />;
+    });
   };
 
   return (
@@ -18,7 +17,7 @@ export const LogTable = ({ isSuccess, isFetching, logState }) => {
           {isSuccess && renderLogs()}
           {isFetching &&
             Array.from({ length: 10 }).map((_, index) => {
-              return <LogSkeleton key={index} />;
+              return <LogSkeleton key={uuid()} />;
             })}
         </tbody>
       </table>
