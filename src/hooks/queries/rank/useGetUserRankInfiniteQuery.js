@@ -3,10 +3,15 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { MINUTE } from "../../../utils/timeConverter";
 import { delayFetch } from "../../../utils/delay";
 
+const PAGE_SIZE = 12;
+
 const useGetUserRankInfiniteQuery = () => {
-  const fetchUserRank = async ({ page, size }) => {
+  const fetchUserRank = async ({ page }) => {
     let response = await delayFetch({
-      fetcherPromise: RankController.findUserRank({ page, size }),
+      fetcherPromise: RankController.findUserRank({
+        page,
+        size: PAGE_SIZE,
+      }),
       milliseconds: 200,
     });
     return response.data.rankList;
@@ -19,11 +24,11 @@ const useGetUserRankInfiniteQuery = () => {
   } = useInfiniteQuery({
     queryKey: ["rank", "user"],
     queryFn: async (args) => {
-      return await fetchUserRank({ page: args.pageParam, size: 12 });
+      return await fetchUserRank({ page: args.pageParam });
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages, lastPageParam) => {
-      if (lastPage.length === 0) return undefined;
+      if (lastPage.length < PAGE_SIZE) return undefined;
       return lastPageParam + 1;
     },
     staleTime: MINUTE,

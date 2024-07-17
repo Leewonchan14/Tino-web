@@ -7,7 +7,7 @@ const useGetDepartmentRankQuery = () => {
   const fetchDepartmentRank = async () => {
     let response = await delayFetch({
       fetcherPromise: RankController.findDepartmentRank(),
-      milliseconds: 500,
+      milliseconds: 300,
     });
     return response.data.rankList;
   };

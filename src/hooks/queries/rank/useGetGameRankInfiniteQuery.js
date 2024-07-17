@@ -3,12 +3,14 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { MINUTE } from "../../../utils/timeConverter";
 import { delayFetch } from "../../../utils/delay";
 
+const PAGE_SIZE = 10;
+
 const useGetGameRankInfiniteQuery = ({ sortMenu }) => {
-  const fetchGameRank = async ({ page, size, sort }) => {
+  const fetchGameRank = async ({ page, sort }) => {
     let response = await delayFetch({
       fetcherPromise: RankController.findGameRank({
         page,
-        size,
+        size: PAGE_SIZE,
         sort,
       }),
       milliseconds: 200,
@@ -25,13 +27,12 @@ const useGetGameRankInfiniteQuery = ({ sortMenu }) => {
     queryFn: async (args) => {
       return await fetchGameRank({
         page: args.pageParam,
-        size: 10,
         sort: sortMenu.value,
       });
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages, lastPageParam) => {
-      if (lastPage.length === 0) return undefined;
+      if (lastPage.length < PAGE_SIZE) return undefined;
       return lastPageParam + 1;
     },
     staleTime: MINUTE,

@@ -6,7 +6,7 @@ import { GAME_SORT_MENU } from "../constants/Game";
 import useGetGamesInfiniteQuery from "../hooks/queries/game/useGetGamesInfiniteQuery";
 
 const HOME_PATH = "/";
-export const GAME_CARD_FETCH_SIZE = 6;
+export const GAME_CARD_FETCH_SIZE = 8;
 
 function HomePage(props) {
   let [selectedGameSortMenu, setSelectedGameSortMenu] = useState(

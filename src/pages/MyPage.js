@@ -79,7 +79,7 @@ const NoRecentPlayGames = () => {
   return (
     <div className={"relative flex justify-center items-center"}>
       <span className={"absolute font-G_MARKET text-lg z-10"}>
-        최근한 게임이 없습니다.
+        최근 플레이한 게임이 없습니다.
       </span>
       <div className={"w-full blur-sm"}>
         <GameGrid hooks={() => ({ isFetching: true })} />

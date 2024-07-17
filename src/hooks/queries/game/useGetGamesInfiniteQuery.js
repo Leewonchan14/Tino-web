@@ -16,7 +16,7 @@ export const useGetGamesInfiniteQuery = ({
         size,
         sort,
       }),
-      milliseconds: 500,
+      milliseconds: 200,
     });
     return response.data;
   };
