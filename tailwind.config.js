@@ -1,11 +1,12 @@
+const { PRIMARY } = require("./src/constants/Color");
 module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
         primary: {
-          600: "rgb(37, 99, 235)",
-          100: "rgb(224, 231, 255)",
+          600: `${PRIMARY}`,
+          100: "#E0E7FFFF",
         },
       },
       screens: {
