@@ -45,7 +45,7 @@ const useAutoLogin = () => {
     } catch (error) {
       console.error(error);
       console.log("자동 로그인 실패");
-      if (res.status === 404) {
+      if (error.response.status === 404) {
         console.log("토큰 만료");
       }
       resetDataAndGoHome();

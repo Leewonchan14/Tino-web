@@ -1,8 +1,7 @@
 import React from "react";
 import { useGetLogsByGameId } from "../../hooks/log/useGetLogsByGameId";
 import LoadingSpinner from "../common/spinner/LoadingSpinner";
-import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfiniteScroll";
-import Log, { LogSkeleton, LogTable } from "./Log";
+import { LogTable } from "./Log";
 
 function LogList({ gameId }) {
   const pageSize = 10;

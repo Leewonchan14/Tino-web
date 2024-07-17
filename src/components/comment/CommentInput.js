@@ -2,7 +2,7 @@ import BlueButton from "../common/button/BlueButton";
 import React from "react";
 import AutoResizeTextInputComp from "../common/input/AutoResizeTextInputComp";
 import StarInputRadioButton from "./StarInputRadioButton";
-import { AcodianWrapper } from "../common/wrapper/AcodianWrapper";
+import { AccordionWrapper } from "../common/wrapper/AccordionWrapper";
 import useCommentInput from "../../hooks/comment/useCommentInput";
 import { useGetOwnComments } from "../../hooks/comment/useGetOwnComments";
 import { userStore } from "../../stores/userStore";
@@ -36,7 +36,7 @@ const CommentInput = ({ gameId, isOpen, toggleIsOpen, mutate }) => {
   }
 
   return (
-    <AcodianWrapper isOpen={isOpen} duration={250}>
+    <AccordionWrapper isOpen={isOpen} duration={250}>
       <AutoResizeTextInputComp
         value={inputComment.reviewContent}
         onChange={onChange}
@@ -59,7 +59,7 @@ const CommentInput = ({ gameId, isOpen, toggleIsOpen, mutate }) => {
           입력
         </BlueButton>
       </section>
-    </AcodianWrapper>
+    </AccordionWrapper>
   );
 };
 

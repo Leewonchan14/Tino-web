@@ -5,12 +5,13 @@ import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfini
 import default_image from "../../assets/default_image.jpg";
 import LoadingSpinner from "../common/spinner/LoadingSpinner";
 import { useGetInDepartmentRankQuery } from "../../hooks/queries/rank/useGetInDepartmentRankQuery";
-import { AcodianWrapper } from "../common/wrapper/AcodianWrapper";
+import { AccordionWrapper } from "../common/wrapper/AccordionWrapper";
 
 const InDepartment = () => {
   const {
     inDepartmentState,
     isFetching,
+    hasNextPage,
     fetchNextPage,
     isSuccess,
     selectMajor,
@@ -20,6 +21,7 @@ const InDepartment = () => {
   let { loadingComp } = useReactQueryInfiniteScroll({
     fetchData: fetchNextPage,
     isFetching,
+    hasNextPage,
   });
 
   return (
@@ -56,7 +58,7 @@ function InDepartmentRankOption({ selectMajor, onChange }) {
 
   return (
     <>
-      <AcodianWrapper
+      <AccordionWrapper
         isOpen={
           document.querySelector("#root").scrollWidth >= 640 || isOpen
         }
@@ -79,7 +81,7 @@ function InDepartmentRankOption({ selectMajor, onChange }) {
             );
           })}
         </div>
-      </AcodianWrapper>
+      </AccordionWrapper>
       <button
         className={
           "hidden my-6 bottom-10 w-full bg-primary-600 text-white font-bold rounded-xl py-2 text-xl" +
