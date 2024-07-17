@@ -5,9 +5,8 @@ import { GAME_PATH_WITHOUT_PARAM } from "../../pages/GameDetailPage";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
-const GameCard = ({ game }) => {
+const GameCard = ({ game, className }) => {
   let navigate = useNavigate();
-
   const onClick = () => {
     navigate(`${GAME_PATH_WITHOUT_PARAM}${game.gameId}`);
   };
@@ -15,9 +14,8 @@ const GameCard = ({ game }) => {
   return (
     <article
       onClick={onClick}
-      className={
-        "border-2 border-gray-100 relative overflow-clip w-full rounded-2xl cursor-pointer bg-gray-50 flex-col"
-      }
+      className={`border-2 border-gray-100 relative overflow-clip w-full rounded-2xl cursor-pointer bg-gray-50 flex-col 
+        ${className}`}
     >
       <picture className={"block h-44 w-full"}>
         <img

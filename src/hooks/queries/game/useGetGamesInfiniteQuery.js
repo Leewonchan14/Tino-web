@@ -3,6 +3,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { SECOND } from "../../../utils/timeConverter";
 import { GAME_CARD_FETCH_SIZE } from "../../../pages/HomePage";
 import { delayFetch } from "../../../utils/delay";
+import useReactQueryInfiniteScroll from "../../recycle/useReactQueryInfiniteScroll";
 
 export const useGetGamesInfiniteQuery = ({
   selectedGameSortMenu,
@@ -44,7 +45,12 @@ export const useGetGamesInfiniteQuery = ({
     gcTime: 30 * SECOND,
   });
 
-  return { isSuccess, isFetching, gameState, fetchNextPage };
+  let { loadingComp } = useReactQueryInfiniteScroll({
+    fetchData: fetchNextPage,
+    isFetching,
+  });
+
+  return { isSuccess, isFetching, gameState, loadingComp };
 };
 
 export default useGetGamesInfiniteQuery;

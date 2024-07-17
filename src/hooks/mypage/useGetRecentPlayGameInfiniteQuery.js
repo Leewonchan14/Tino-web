@@ -4,6 +4,7 @@ import GameController from "../../apis/game.controller";
 import { userStore } from "../../stores/userStore";
 import { GAME_CARD_FETCH_SIZE } from "../../pages/MyPage";
 import { SECOND } from "../../utils/timeConverter";
+import useReactQueryInfiniteScroll from "../recycle/useReactQueryInfiniteScroll";
 
 const useGetRecentPlayGameInfiniteQuery = () => {
   let { userId } = userStore((state) => state);
@@ -43,7 +44,12 @@ const useGetRecentPlayGameInfiniteQuery = () => {
     gcTime: 0,
   });
 
-  return { isSuccess, isFetching, gameState, fetchNextPage };
+  let { loadingComp } = useReactQueryInfiniteScroll({
+    fetchData: fetchNextPage,
+    isFetching,
+  });
+
+  return { isSuccess, isFetching, gameState, loadingComp };
 };
 
 export default useGetRecentPlayGameInfiniteQuery;

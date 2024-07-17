@@ -13,12 +13,6 @@ function HomePage(props) {
     GAME_SORT_MENU[0]
   );
 
-  let { isSuccess, isFetching, gameState, fetchNextPage } =
-    useGetGamesInfiniteQuery({
-      selectedGameSortMenu,
-      pageSize: GAME_CARD_FETCH_SIZE,
-    });
-
   return (
     <>
       <h1
@@ -41,12 +35,11 @@ function HomePage(props) {
       />
 
       <GameGrid
-        isFetching={isFetching}
-        isSuccess={isSuccess}
-        isAddOn={true}
-        gameState={gameState}
-        fetchNextPage={fetchNextPage}
-        selectedGameSortMenu={selectedGameSortMenu}
+        hooks={useGetGamesInfiniteQuery}
+        args={[
+          { selectedGameSortMenu, pageSize: GAME_CARD_FETCH_SIZE },
+        ]}
+        withAds={true}
       />
 
       <Footer />

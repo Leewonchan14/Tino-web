@@ -21,9 +21,6 @@ export const MyPage = () => {
 
   useMyPage();
 
-  let { gameState, isFetching, isSuccess, fetchNextPage } =
-    useGetRecentPlayGameInfiniteQuery();
-
   let {
     isActiveInput,
     handleClickActiveButton,
@@ -62,13 +59,7 @@ export const MyPage = () => {
       <h2 className={"font-G_MARKET text-3" + "xl my-12"}>
         최근한 게임들
       </h2>
-      <GameGrid
-        isFetching={isFetching}
-        gameState={gameState}
-        isSuccess={isSuccess}
-        emptyMessage={"최근 플레이한 게임이 없습니다..."}
-        fetchNextPage={fetchNextPage}
-      />
+      <GameGrid hooks={useGetRecentPlayGameInfiniteQuery} />
       <div className={"mb-20"}></div>
     </>
   );
