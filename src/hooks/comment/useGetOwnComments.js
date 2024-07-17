@@ -26,6 +26,7 @@ export const useGetOwnComments = ({ gameId }) => {
   const {
     data: comment,
     isFetching,
+    isSuccess,
     error,
   } = useQuery({
     queryKey: ["comment", gameId, userId],
@@ -35,5 +36,5 @@ export const useGetOwnComments = ({ gameId }) => {
     retry: () => false,
   });
 
-  return { isFetching, comment, error };
+  return { isFetching, isSuccess, comment, error };
 };

@@ -7,10 +7,12 @@ const useCommentInput = ({ gameId, toggleIsOpen }) => {
     star: 5,
   });
 
-  const { comment, isFetching } = useGetOwnComments({ gameId });
+  const { comment, isFetching, isSuccess } = useGetOwnComments({
+    gameId,
+  });
 
   useEffect(() => {
-    if (isFetching) return;
+    if (isFetching || !isSuccess) return;
 
     if (!comment) {
       toggleIsOpen(true);
