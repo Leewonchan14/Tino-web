@@ -60,8 +60,31 @@ export const MyPage = () => {
         최근한 게임들
       </h2>
       <GameGrid hooks={useGetRecentPlayGameInfiniteQuery} />
-      <div className={"mb-20"}></div>
+      <NoRecentPlayGames />
     </>
+  );
+};
+
+const NoRecentPlayGames = () => {
+  let { isFetching, isSuccess, gameState } =
+    useGetRecentPlayGameInfiniteQuery();
+
+  let isEmpty =
+    !isFetching &&
+    isSuccess &&
+    gameState?.pages?.flat()?.length === 0;
+
+  if (!isEmpty) return null;
+
+  return (
+    <div className={"relative flex justify-center items-center"}>
+      <span className={"absolute font-G_MARKET text-lg z-10"}>
+        최근한 게임이 없습니다.
+      </span>
+      <div className={"w-full blur-sm"}>
+        <GameGrid hooks={() => ({ isFetching: true })} />
+      </div>
+    </div>
   );
 };
 
