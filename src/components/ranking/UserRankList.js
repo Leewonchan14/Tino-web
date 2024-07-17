@@ -17,7 +17,7 @@ const UserRankList = () => {
   return (
     <>
       <RankCardTable
-        isSuccess={isSuccess}
+        {...{ isSuccess, isFetching }}
         item={"유저"}
         scoreName={"점수"}
         states={userState}
@@ -26,7 +26,10 @@ const UserRankList = () => {
         getScore={(state) => state.rankWeight}
         getKey={(state) => state.rankId}
       />
-      <LoadingSpinner loadingComp={loadingComp} isFetching={isFetching} />
+      <LoadingSpinner
+        loadingComp={loadingComp}
+        isFetching={isFetching}
+      />
     </>
   );
 };

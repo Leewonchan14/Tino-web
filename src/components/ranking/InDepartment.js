@@ -24,9 +24,12 @@ const InDepartment = () => {
 
   return (
     <>
-      <InDepartmentRankOption selectMajor={selectMajor} onChange={onChange} />
+      <InDepartmentRankOption
+        selectMajor={selectMajor}
+        onChange={onChange}
+      />
       <RankCardTable
-        isSuccess={isSuccess}
+        {...{ isSuccess, isFetching }}
         item={"학과"}
         scoreName={"점수"}
         states={inDepartmentState}
@@ -35,7 +38,10 @@ const InDepartment = () => {
         getScore={(state) => state.rankWeight}
         getText={(state) => state.user.nickname}
       />
-      <LoadingSpinner loadingComp={loadingComp} isFetching={isFetching} />
+      <LoadingSpinner
+        loadingComp={loadingComp}
+        isFetching={isFetching}
+      />
     </>
   );
 };
@@ -51,7 +57,9 @@ function InDepartmentRankOption({ selectMajor, onChange }) {
   return (
     <>
       <AcodianWrapper
-        isOpen={document.querySelector("#root").scrollWidth >= 640 || isOpen}
+        isOpen={
+          document.querySelector("#root").scrollWidth >= 640 || isOpen
+        }
       >
         <div
           className={
@@ -86,7 +94,11 @@ function InDepartmentRankOption({ selectMajor, onChange }) {
   );
 }
 
-const InDepartmentRankOptionItem = ({ selectMajor, onClick, major }) => {
+const InDepartmentRankOptionItem = ({
+  selectMajor,
+  onClick,
+  major,
+}) => {
   return (
     <button
       name={major.name}

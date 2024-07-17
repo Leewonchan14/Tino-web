@@ -2,9 +2,10 @@ import React from "react";
 import Skeleton from "react-loading-skeleton";
 
 export const RankCardTable = ({
+  isSuccess,
+  isFetching,
   scoreName,
   item,
-  isSuccess,
   states,
   getKey,
   getPicture,
@@ -15,12 +16,8 @@ export const RankCardTable = ({
     <table className={"w-full"}>
       <RankHeader score={scoreName} item={item} />
       <RankingCardList
-        isSuccess={isSuccess}
-        states={states}
-        getKey={getKey}
-        getPicture={getPicture}
-        getScore={getScore}
-        getText={getText}
+        {...{ isSuccess, isFetching, states }}
+        {...{ getKey, getPicture, getScore, getText }}
       />
     </table>
   );
@@ -30,7 +27,7 @@ const RankHeader = ({ item, score }) => {
   return (
     <thead
       className={
-        "sticky h-12 top-0 bg-primary-600 box-border text-white text-lg"
+        "sticky h-12 top-0 bg-primary-600 box-border text-white text-lg z-10"
       }
     >
       <tr className={""}>
@@ -44,6 +41,7 @@ const RankHeader = ({ item, score }) => {
 
 const RankingCardList = ({
   isSuccess,
+  isFetching,
   states,
   getKey,
   getPicture,
@@ -64,8 +62,8 @@ const RankingCardList = ({
             />
           ))
         )}
-      {!isSuccess &&
-        Array.from({ length: 9 }).map((_, index) => {
+      {isFetching &&
+        Array.from({ length: 12 }).map((_, index) => {
           return <RankCardSkeleton key={index} />;
         })}
     </tbody>

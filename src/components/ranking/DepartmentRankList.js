@@ -4,12 +4,13 @@ import { RankCardTable } from "./RankCardTable";
 import { MAJOR } from "../../constants/Major";
 
 const DepartmentRankList = () => {
-  let { isSuccess, departmentState } = useGetDepartmentRankQuery();
+  let { isSuccess, isFetching, departmentState } =
+    useGetDepartmentRankQuery();
 
   return (
     <>
       <RankCardTable
-        isSuccess={isSuccess}
+        {...{ isSuccess, isFetching }}
         item={"학과"}
         scoreName={"점수"}
         states={{ pages: [departmentState] }}

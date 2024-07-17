@@ -7,7 +7,7 @@ const useGetUserRankInfiniteQuery = () => {
   const fetchUserRank = async ({ page, size }) => {
     let response = await delayFetch({
       fetcherPromise: RankController.findUserRank({ page, size }),
-      milliseconds: 500,
+      milliseconds: 200,
     });
     return response.data.rankList;
   };
@@ -19,7 +19,7 @@ const useGetUserRankInfiniteQuery = () => {
   } = useInfiniteQuery({
     queryKey: ["rank", "user"],
     queryFn: async (args) => {
-      return await fetchUserRank({ page: args.pageParam, size: 10 });
+      return await fetchUserRank({ page: args.pageParam, size: 12 });
     },
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages, lastPageParam) => {

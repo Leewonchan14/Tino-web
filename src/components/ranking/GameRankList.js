@@ -27,21 +27,26 @@ const GameRankList = () => {
         setSortMenu={setSelectedRankOption}
       />
       <RankCardTable
-        isSuccess={isSuccess}
+        {...{ isSuccess, isFetching }}
         item={"게임"}
         scoreName={selectedRankOption.text}
         states={gameState}
         getKey={(state) => state["gameId"]}
         getScore={(state) => {
           if (selectedRankOption.value === REVIEW_COUNT) {
-            return timeToYearMonthDay(state[selectedRankOption.score]);
+            return timeToYearMonthDay(
+              state[selectedRankOption.score]
+            );
           }
           return state[selectedRankOption.score];
         }}
         getText={(state) => state["gameName"]}
         getPicture={(state) => state["gameImage"]}
       />
-      <LoadingSpinner loadingComp={loadingComp} isFetching={isFetching} />
+      <LoadingSpinner
+        loadingComp={loadingComp}
+        isFetching={isFetching}
+      />
     </>
   );
 };
