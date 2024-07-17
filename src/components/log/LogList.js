@@ -7,15 +7,11 @@ import Log, { LogSkeleton, LogTable } from "./Log";
 function LogList({ gameId }) {
   const pageSize = 10;
 
-  let { isSuccess, isFetching, logState, fetchNextPage } = useGetLogsByGameId({
-    gameId,
-    pageSize,
-  });
-
-  let { loadingComp } = useReactQueryInfiniteScroll({
-    fetchData: fetchNextPage,
-    isFetching,
-  });
+  let { isSuccess, isFetching, logState, loadingComp } =
+    useGetLogsByGameId({
+      gameId,
+      pageSize,
+    });
 
   return (
     <div
@@ -23,9 +19,8 @@ function LogList({ gameId }) {
         "flex-col h-full flex-1 justify-center overflow-y-scroll mobile:h-64"
       }
     >
-      <LogTable isSuccess={isSuccess} logState={logState} pageSize={pageSize} />
-
-      <LoadingSpinner loadingComp={loadingComp} isFetching={isFetching} />
+      <LogTable {...{ isSuccess, isFetching, logState }} />
+      <LoadingSpinner {...{ loadingComp }} />
     </div>
   );
 }

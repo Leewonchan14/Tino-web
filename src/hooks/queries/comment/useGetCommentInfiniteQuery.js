@@ -16,7 +16,7 @@ export const useGetCommentInfiniteQuery = ({
         size,
         page,
       }),
-      milliseconds: 300,
+      milliseconds: 200,
     });
 
     return response.data;
