@@ -8,7 +8,7 @@ import { useGetOwnComments } from "../../hooks/comment/useGetOwnComments";
 import { userStore } from "../../stores/userStore";
 
 const CommentInput = ({ gameId, isOpen, toggleIsOpen, mutate }) => {
-  const { comment, isFetching } = useGetOwnComments({
+  const { isFetching } = useGetOwnComments({
     gameId,
   });
 
@@ -16,6 +16,7 @@ const CommentInput = ({ gameId, isOpen, toggleIsOpen, mutate }) => {
 
   let { inputComment, changeInput } = useCommentInput({
     gameId,
+    toggleIsOpen,
   });
 
   const onChange = (e) => {
@@ -35,7 +36,7 @@ const CommentInput = ({ gameId, isOpen, toggleIsOpen, mutate }) => {
   }
 
   return (
-    <AcodianWrapper isOpen={isOpen || !comment} duration={250}>
+    <AcodianWrapper isOpen={isOpen} duration={250}>
       <AutoResizeTextInputComp
         value={inputComment.reviewContent}
         onChange={onChange}

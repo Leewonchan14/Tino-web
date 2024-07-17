@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useGetOwnComments } from "./useGetOwnComments";
 
-const useCommentInput = ({ gameId }) => {
+const useCommentInput = ({ gameId, toggleIsOpen }) => {
   const [inputComment, setInputComment] = useState({
     reviewContent: "",
     star: 5,
@@ -10,14 +10,19 @@ const useCommentInput = ({ gameId }) => {
   const { comment, isFetching } = useGetOwnComments({ gameId });
 
   useEffect(() => {
-    if (comment) {
-      let { reviewContent, star } = comment;
-      setInputComment({
-        reviewContent,
-        star,
-      });
+    if (isFetching) return;
+
+    if (!comment) {
+      toggleIsOpen(true);
+      return;
     }
-  }, [isFetching]);
+
+    let { reviewContent, star } = comment;
+    setInputComment({
+      reviewContent,
+      star,
+    });
+  }, [isFetching, comment]);
 
   const changeInput = ({ name, value }) => {
     setInputComment((pre) => ({

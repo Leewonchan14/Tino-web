@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { CommentSkeleton, CommentUserProfile } from "./Comment";
 import { userStore } from "../../stores/userStore";
 import { useGetOwnComments } from "../../hooks/comment/useGetOwnComments";
@@ -7,10 +7,6 @@ const OwnComment = ({ gameId, isPending, isOpen, toggleIsOpen }) => {
   const { comment, isFetching, error } = useGetOwnComments({
     gameId,
   });
-
-  useEffect(() => {
-    console.log("isFetching || isPending", isFetching || isPending);
-  }, [isPending]);
 
   const { isLogin } = userStore((state) => state);
 
@@ -22,7 +18,7 @@ const OwnComment = ({ gameId, isPending, isOpen, toggleIsOpen }) => {
     return <CommentSkeleton length={1} />;
   }
 
-  if (error) {
+  if (!comment) {
     console.error(error);
     return <NotExistOwnComment />;
   }

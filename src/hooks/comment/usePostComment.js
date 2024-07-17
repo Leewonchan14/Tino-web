@@ -2,7 +2,6 @@ import { CommentController } from "../../apis/comment.controller";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { userStore } from "../../stores/userStore";
 import { useGetOwnComments } from "./useGetOwnComments";
-import { useState } from "react";
 import { delayFetch } from "../../utils/delay";
 
 const usePostComment = ({ gameId }) => {
@@ -27,7 +26,13 @@ const usePostComment = ({ gameId }) => {
 
   const { mutate, isPending } = useMutation({
     mutationFn,
-    onSuccess: (data, variables, context) => {},
+    onSuccess: (data, variables, context) => {
+      if (comment) return;
+      // 이전 댓글이 없을 때만 invalidate
+      queryClient.invalidateQueries({
+        queryKey: ["comment", gameId, userId],
+      });
+    },
     onMutate: async ({ reviewContent, star }) => {
       // 이전 댓글이 있었을때
       if (!comment) return;
