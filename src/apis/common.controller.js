@@ -17,17 +17,12 @@ export class Api {
   }
 
   async sendRequest({ method, url, data, config }) {
-    let args = [];
-
-    if (method === "get") {
-      args = [url, config];
-    }
-
-    if (method === "post" || method === "put" || method === "patch") {
-      args = [url, data, config];
-    }
-
-    return await this.axiosInstance[method](...args);
+    return await this.axiosInstance.request({
+      url,
+      method,
+      data,
+      ...config,
+    });
   }
 
   async get(url, config) {
