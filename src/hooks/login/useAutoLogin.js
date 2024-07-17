@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { userStore } from "../../stores/userStore";
 import {
@@ -6,56 +6,56 @@ import {
   removeLocalData,
   setLocalData,
 } from "../../utils/LocalStorageController";
+import UserController from "../../apis/user.controller";
+import { HOME_PATH } from "../../pages/HomePage";
 
-export const ACCESS_TOKEN_LOCAL_KEY = "AccessToken";
-export const REFRESH_TOKEN_LOCAL_KEY = "RefreshToken";
+export const ACCESS_TOKEN_LOCAL_KEY = "accessToken";
+export const REFRESH_TOKEN_LOCAL_KEY = "refreshToken";
 export const USER_ID_LOCAL_KEY = "userId";
 
 const useAutoLogin = () => {
-  const { prePath } = useLocation();
   let navigate = useNavigate();
   const { changeIsLogin, changeUserId } = userStore((state) => state);
 
   const [loading, setLoading] = useState(true);
 
-  const goPrePage = () => {
+  const resetDataAndGoHome = () => {
     removeLocalData();
     setLoading(false);
-    navigate(prePath);
+    navigate(HOME_PATH);
   };
 
   const autoLogin = async () => {
     setLoading(true);
-
     const localData = getLocalUserData();
 
-    const isAllDataExist = Object.values(localData).every((value) => value);
+    const isAllDataExist = Object.values(localData).every(
+      (value) => value
+    );
 
     if (!isAllDataExist) {
       console.log("자동 로그인 실패: 데이터가 없습니다.");
-      goPrePage();
+      resetDataAndGoHome();
       return;
     }
 
-    // let res;
-    // try {
-    //   res = await UserController.autoLogin(localData);
-    // } catch (error) {
-    //   console.error(error);
-    //   console.log("자동 로그인 실패");
-    //
-    //   goPrePage();
-    //   return;
-    // } finally {
-    //   setLoading(false);
-    // }
+    let res;
+    try {
+      res = await UserController.autoLogin(localData);
+    } catch (error) {
+      console.error(error);
+      console.log("자동 로그인 실패");
+      if (res.status === 404) {
+        console.log("토큰 만료");
+      }
+      resetDataAndGoHome();
+      return;
+    } finally {
+      setLoading(false);
+    }
 
-    // console.log(res.data);
-
-    // const { userId, token } = res.data;
-    // const { accessToken, refreshToken } = token;
-
-    const { userId, accessToken, refreshToken } = localData;
+    const { userId, token } = res.data;
+    const { accessToken, refreshToken } = token;
 
     setLocalData({ accessToken, refreshToken, userId });
     changeIsLogin(true);
@@ -65,11 +65,6 @@ const useAutoLogin = () => {
   useEffect(() => {
     console.log("자동 로그인 시도");
     autoLogin();
-
-    // const localData = getLocalUserData();
-    // console.log(localData);
-    // changeUserId(localData.userId);
-    // changeIsLogin(true);
   }, []);
 
   return { loading };

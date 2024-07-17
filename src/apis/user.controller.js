@@ -46,13 +46,11 @@ class UserController extends Api {
 
   // auto login
   autoLogin = async ({ userId, accessToken, refreshToken }) => {
-    return await this.get(`/users/${userId}/auto/login`, {
-      data: {
-        headers: {
-          accessToken,
-          refreshToken,
-          "Content-Type": "application/json",
-        },
+    return await this.get(`/user/${userId}/auto/login`, {
+      headers: {
+        accessToken,
+        refreshToken,
+        "Content-Type": "application/json",
       },
     });
   };
