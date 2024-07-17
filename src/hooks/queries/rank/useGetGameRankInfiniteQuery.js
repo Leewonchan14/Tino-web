@@ -21,6 +21,7 @@ const useGetGameRankInfiniteQuery = ({ sortMenu }) => {
     data: gameState,
     isFetching,
     fetchNextPage,
+    hasNextPage,
     isSuccess,
   } = useInfiniteQuery({
     queryKey: ["rank", "game", sortMenu],
@@ -39,7 +40,13 @@ const useGetGameRankInfiniteQuery = ({ sortMenu }) => {
     gcTime: 5 * MINUTE,
   });
 
-  return { gameState, isFetching, fetchNextPage, isSuccess };
+  return {
+    gameState,
+    isFetching,
+    hasNextPage,
+    fetchNextPage,
+    isSuccess,
+  };
 };
 
 export default useGetGameRankInfiniteQuery;

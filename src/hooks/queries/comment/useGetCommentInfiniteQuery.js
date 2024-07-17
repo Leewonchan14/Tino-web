@@ -26,6 +26,7 @@ export const useGetCommentInfiniteQuery = ({
     data: comments,
     isFetching,
     fetchNextPage,
+    hasNextPage,
     isSuccess,
   } = useInfiniteQuery({
     queryKey: ["comments", gameId, { sort }],
@@ -46,7 +47,13 @@ export const useGetCommentInfiniteQuery = ({
     gcTime: 30 * SECOND,
   });
 
-  return { isSuccess, isFetching, comments, fetchNextPage };
+  return {
+    isSuccess,
+    isFetching,
+    hasNextPage,
+    comments,
+    fetchNextPage,
+  };
 };
 
 export default useGetCommentInfiniteQuery;

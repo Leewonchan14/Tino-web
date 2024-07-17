@@ -12,11 +12,17 @@ const GameRankList = () => {
     GAME_SORT_MENU[0]
   );
 
-  let { gameState, isFetching, isSuccess, fetchNextPage } =
-    useGetGameRankInfiniteQuery({ sortMenu: selectedRankOption });
+  let {
+    gameState,
+    isFetching,
+    hasNextPage,
+    isSuccess,
+    fetchNextPage,
+  } = useGetGameRankInfiniteQuery({ sortMenu: selectedRankOption });
 
   let { loadingComp } = useReactQueryInfiniteScroll({
     isFetching,
+    hasNextPage,
     fetchData: fetchNextPage,
   });
 

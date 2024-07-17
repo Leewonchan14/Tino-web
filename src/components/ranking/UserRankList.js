@@ -6,12 +6,18 @@ import default_image from "../../assets/default_image.jpg";
 import { RankCardTable } from "./RankCardTable";
 
 const UserRankList = () => {
-  let { userState, isFetching, fetchNextPage, isSuccess } =
-    useGetUserRankInfiniteQuery();
+  let {
+    userState,
+    isFetching,
+    hasNextPage,
+    fetchNextPage,
+    isSuccess,
+  } = useGetUserRankInfiniteQuery();
 
   let { loadingComp } = useReactQueryInfiniteScroll({
     fetchData: fetchNextPage,
     isFetching,
+    hasNextPage,
   });
 
   return (

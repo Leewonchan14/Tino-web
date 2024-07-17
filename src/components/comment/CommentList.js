@@ -5,19 +5,28 @@ import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfini
 import LoadingSpinner from "../common/spinner/LoadingSpinner";
 
 const CommentList = ({ gameId }) => {
-  const { comments, isFetching, fetchNextPage, isSuccess } =
-    useGetCommentInfiniteQuery({ gameId });
+  const {
+    comments,
+    isFetching,
+    hasNextPage,
+    fetchNextPage,
+    isSuccess,
+  } = useGetCommentInfiniteQuery({ gameId });
 
   const { loadingComp } = useReactQueryInfiniteScroll({
     fetchData: fetchNextPage,
     isFetching,
+    hasNextPage,
   });
 
   return (
     <>
       {isSuccess && renderComments(comments.pages.flat())}
       {isFetching && <CommentSkeleton length={4} />}
-      <LoadingSpinner loadingComp={loadingComp} isFetching={isFetching} />
+      <LoadingSpinner
+        loadingComp={loadingComp}
+        isFetching={isFetching}
+      />
     </>
   );
 };

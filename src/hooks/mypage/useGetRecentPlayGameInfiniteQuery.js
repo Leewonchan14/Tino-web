@@ -26,6 +26,7 @@ const useGetRecentPlayGameInfiniteQuery = () => {
     data: gameState,
     isFetching,
     fetchNextPage,
+    hasNextPage,
     isSuccess,
   } = useInfiniteQuery({
     queryKey: ["games", "recent", userId],
@@ -47,6 +48,7 @@ const useGetRecentPlayGameInfiniteQuery = () => {
   let { loadingComp } = useReactQueryInfiniteScroll({
     fetchData: fetchNextPage,
     isFetching,
+    hasNextPage,
   });
 
   return { isSuccess, isFetching, gameState, loadingComp };

@@ -20,7 +20,9 @@ export const useGetLogsByGameId = ({ gameId, pageSize }) => {
   let {
     data: logState,
     isFetching,
+    isFetchingNextPage,
     fetchNextPage,
+    hasNextPage,
     isSuccess,
   } = useInfiniteQuery({
     queryKey: ["logs", { gameId }],
@@ -32,7 +34,7 @@ export const useGetLogsByGameId = ({ gameId, pageSize }) => {
       }),
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages, lastPageParam) => {
-      if (lastPage.length === 0) return undefined;
+      if (lastPage.length < pageSize) return undefined;
       return lastPageParam + 1;
     },
     staleTime: 30 * SECOND,
@@ -42,6 +44,8 @@ export const useGetLogsByGameId = ({ gameId, pageSize }) => {
   let { loadingComp } = useReactQueryInfiniteScroll({
     fetchData: fetchNextPage,
     isFetching,
+    isFetchingNextPage,
+    hasNextPage,
   });
 
   return { isSuccess, isFetching, logState, loadingComp };

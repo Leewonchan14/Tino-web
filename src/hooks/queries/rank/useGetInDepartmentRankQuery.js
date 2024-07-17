@@ -29,6 +29,7 @@ export const useGetInDepartmentRankQuery = () => {
   let {
     data: inDepartmentState,
     isFetching,
+    hasNextPage,
     fetchNextPage,
     isSuccess,
   } = useInfiniteQuery({
@@ -50,6 +51,7 @@ export const useGetInDepartmentRankQuery = () => {
   return {
     inDepartmentState,
     isFetching,
+    hasNextPage,
     fetchNextPage,
     isSuccess,
     selectMajor,

@@ -20,6 +20,7 @@ const useGetUserRankInfiniteQuery = () => {
     data: userState,
     isFetching,
     fetchNextPage,
+    hasNextPage,
     isSuccess,
   } = useInfiniteQuery({
     queryKey: ["rank", "user"],
@@ -35,7 +36,13 @@ const useGetUserRankInfiniteQuery = () => {
     gcTime: 5 * MINUTE,
   });
 
-  return { userState, isFetching, fetchNextPage, isSuccess };
+  return {
+    userState,
+    isFetching,
+    hasNextPage,
+    fetchNextPage,
+    isSuccess,
+  };
 };
 
 export default useGetUserRankInfiniteQuery;

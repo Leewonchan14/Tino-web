@@ -25,6 +25,7 @@ export const useGetGamesInfiniteQuery = ({
     data: gameState,
     isFetching,
     fetchNextPage,
+    hasNextPage,
     isSuccess,
   } = useInfiniteQuery({
     queryKey: ["games", { sort: selectedGameSortMenu }],
@@ -48,6 +49,7 @@ export const useGetGamesInfiniteQuery = ({
   let { loadingComp } = useReactQueryInfiniteScroll({
     fetchData: fetchNextPage,
     isFetching,
+    hasNextPage,
   });
 
   return { isSuccess, isFetching, gameState, loadingComp };

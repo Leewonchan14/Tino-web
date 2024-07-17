@@ -1,31 +1,36 @@
-import {useEffect, useRef} from "react";
+import { useEffect, useRef } from "react";
 
-const useReactQueryInfiniteScroll = ({fetchData, isFetching}) => {
+const useReactQueryInfiniteScroll = ({
+  fetchData,
+  isFetching,
+  hasNextPage,
+}) => {
+  const loadingComp = useRef();
 
-    const loadingComp = useRef();
+  useEffect(() => {
+    const handleObserver = (entries) => {
+      const target = entries[0];
 
-    useEffect(() => {
-        const handleObserver = (entries) => {
-            const target = entries[0];
-            if (target.isIntersecting && !isFetching) {
-                fetchData();
-            }
-        }
+      if (isFetching) return;
+      if (!hasNextPage) return;
+      if (!target.isIntersecting) return;
 
-        const observer = new IntersectionObserver(handleObserver, {
-            threshold: 0
-        });
+      fetchData();
+    };
 
-        const observerTarget = loadingComp.current;
-        if (observerTarget) {
-            observer.observe(observerTarget);
-        }
+    const observer = new IntersectionObserver(handleObserver, {
+      threshold: 0,
+    });
 
-        return () => observer.disconnect();
-    }, [isFetching]);
+    const observerTarget = loadingComp.current;
+    if (observerTarget) {
+      observer.observe(observerTarget);
+    }
 
+    return () => observer.disconnect();
+  }, [isFetching]);
 
-    return {loadingComp};
-}
+  return { loadingComp };
+};
 
 export default useReactQueryInfiniteScroll;
