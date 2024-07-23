@@ -65,21 +65,17 @@ function InDepartmentRankOption({ selectMajor, onChange }) {
       >
         <div
           className={
-            "flex py-4 mb-6 gap-4 w-full flex-wrap h-auto" +
+            "whitespace-pre gap-4 overflow-x-auto py-4 mb-6" +
             " " +
-            "mobile:relative mobile:block mobile:p-0 mobile:m-0"
+            "mobile:relative mobile:p-0 mobile:m-0 mobile:flex mobile:flex-col"
           }
         >
-          {MAJOR.map((major, index) => {
-            return (
-              <InDepartmentRankOptionItem
-                key={major.value}
-                onClick={onClick}
-                major={major}
-                selectMajor={selectMajor}
-              />
-            );
-          })}
+          {MAJOR.map((major, index) => (
+            <InDepartmentRankOptionItem
+              key={major.value}
+              {...{ onClick, major, selectMajor, index }}
+            />
+          ))}
         </div>
       </AccordionWrapper>
       <button
@@ -98,31 +94,41 @@ function InDepartmentRankOption({ selectMajor, onChange }) {
 
 const InDepartmentRankOptionItem = ({
   selectMajor,
+  index,
   onClick,
   major,
 }) => {
   return (
-    <button
-      name={major.name}
-      onClick={() => onClick(major.name)}
-      className={
-        "flex items-center text-gray-600 text-nowrap px-2 py-1 text-center bg-gray-100 rounded-full hover:bg-primary-100" +
-        "mobile:hover:bg-transparent mobile:hover:text-primary-600 mobile:bg-transparent mobile:w-full" +
-        " " +
-        (major.value === selectMajor.value
-          ? "bg-primary-600 text-white font-bold mobile:text-primary-600 mobile:border-primary-600"
-          : "")
-      }
-    >
-      <img
+    <>
+      <button
+        name={major.name}
+        onClick={() => onClick(major.name)}
         className={
-          "w-9 h-9 mr-1 overflow-clip rounded-full border-[1px] border-black object-cover"
+          "mr-4 inline-flex items-center text-gray-600 px-2 py-1 text-center bg-gray-100 rounded-full hover:bg-primary-100" +
+          " " +
+          "mobile:hover:bg-transparent mobile:hover:text-primary-600 mobile:bg-transparent mobile:w-full" +
+          " " +
+          (major.value === selectMajor.value
+            ? "bg-primary-600 text-white font-bold mobile:text-primary-600 mobile:border-primary-600"
+            : "")
         }
-        src={major.url}
-        alt=""
-      />
-      {major.value}
-    </button>
+      >
+        <img
+          className={
+            "w-9 h-9 mr-1 overflow-clip rounded-full border-[1px] border-black object-cover"
+          }
+          src={major.url}
+          alt=""
+        />
+        <p className={"whitespace-nowrap"}> {major.value}</p>
+      </button>
+      {Math.floor(MAJOR.length / 2) === index && (
+        <>
+          <br />
+          <br />
+        </>
+      )}
+    </>
   );
 };
 export default InDepartment;
