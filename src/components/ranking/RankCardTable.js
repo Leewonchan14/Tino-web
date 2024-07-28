@@ -31,7 +31,9 @@ const RankHeader = ({ item, score }) => {
       }
     >
       <tr className={""}>
-        <th className={"w-24 rounded-l-2xl"}>순위</th>
+        <th className={"w-24 rounded-l-2xl mobile:w-12 text-nowrap"}>
+          순위
+        </th>
         <th className={"text-start pl-4"}>{item}</th>
         <th className={"text-nowrap rounded-r-2xl"}>{score}</th>
       </tr>
