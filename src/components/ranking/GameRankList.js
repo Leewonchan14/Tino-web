@@ -58,7 +58,14 @@ const GameRankList = () => {
 };
 
 const GameRankOptionList = ({ select, setSortMenu }) => {
-  return <GameSortMenu sortMenu={select} setSortMenu={setSortMenu} />;
+  return (
+    <GameSortMenu
+      sortMenu={select}
+      setSortMenu={setSortMenu}
+      className={"mt-4"}
+      itemClassName={"!p-2 !px-4 !w-auto"}
+    />
+  );
 };
 
 export default GameRankList;
