@@ -14,13 +14,17 @@ const GameCard = ({ game, className }) => {
   return (
     <article
       onClick={onClick}
-      className={`border-2 border-gray-100 relative overflow-clip w-full rounded-2xl cursor-pointer bg-gray-50 flex-col 
+      className={`border-2 border-gray-100 relative w-full rounded-2xl cursor-pointer bg-gray-50 flex-col 
         ${className}`}
     >
-      <picture className={"block h-44 w-full"}>
+      <picture
+        className={"flex items-center rounded-t-2xl h-44 w-full"}
+      >
         <img
           draggable={"false"}
-          className={"bg-gray-100 h-full w-full object-cover"}
+          className={
+            "bg-gray-100 w-full object-cover max-h-44 rounded-t-2xl transition-all duration-500 hover:absolute hover:scale-105 hover:rounded-xl hover:z-10 hover:max-h-96"
+          }
           src={game.gameImage}
           alt=""
         />
