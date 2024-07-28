@@ -10,16 +10,22 @@ const ExistOwnLog = ({ ownLogState }) => {
         "mobile:h-full mobile:flex-row mobile:w-full mobile:justify-evenly mobile:items-center"
       }
     >
-      <div className={"text-3xl"}>{ownLogState?.ranking}1</div>
-      <div className={"rounded-full border-[1px] border-white overflow-clip"}>
+      <div className={"text-3xl"}>{ownLogState?.ranking}</div>
+      <div
+        className={
+          "rounded-full border-[1px] border-white overflow-clip"
+        }
+      >
         <img
           className={"h-20"}
           src={ownLogState?.user?.profileImageURL || TinoIcon}
           alt=""
         />
       </div>
-      <div className={"font-bold"}>{ownLogState?.user?.nickname}ab</div>
-      <div className={"text-2xl text-center"}>{ownLogState?.gameScore}30</div>
+      <div className={"font-bold"}>{ownLogState?.user?.nickname}</div>
+      <div className={"text-2xl text-center"}>
+        {ownLogState?.gameScore}
+      </div>
     </div>
   );
 };
@@ -34,7 +40,9 @@ export const OwnLogSkeleton = () => {
     >
       <div></div>
       <div
-        className={"rounded-full h-20 border-[1px] border-white overflow-clip"}
+        className={
+          "rounded-full h-20 border-[1px] border-white overflow-clip"
+        }
       >
         <Skeleton containerClassName={"flex h-full"} />
       </div>
