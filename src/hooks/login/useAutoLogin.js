@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { userStore } from "../../stores/userStore";
 import {
@@ -15,6 +15,7 @@ export const USER_ID_LOCAL_KEY = "userId";
 
 const useAutoLogin = () => {
   let navigate = useNavigate();
+  let location = useLocation();
   const { changeIsLogin, changeUserId } = userStore((state) => state);
 
   const [loading, setLoading] = useState(true);
@@ -22,7 +23,7 @@ const useAutoLogin = () => {
   const resetDataAndGoHome = () => {
     removeLocalData();
     setLoading(false);
-    navigate(HOME_PATH);
+    navigate(location.href);
   };
 
   const autoLogin = async () => {
