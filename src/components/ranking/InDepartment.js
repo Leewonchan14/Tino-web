@@ -126,7 +126,7 @@ const InDepartmentRankOptionItem = ({
           "mobile:hover:bg-transparent mobile:hover:text-primary-600 mobile:bg-transparent mobile:w-full" +
           " " +
           (major.value === selectMajor.value
-            ? "bg-primary-600 text-white font-bold mobile:text-primary-600 mobile:border-primary-600"
+            ? "!bg-primary-600 mobile:!bg-transparent text-white font-bold mobile:text-primary-600 mobile:border-primary-600"
             : "")
         }
       >
