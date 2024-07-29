@@ -1,9 +1,10 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export const AccordionWrapper = ({
   children,
   isOpen,
   duration = 500,
+  className,
 }) => {
   const heightRef = useRef(null);
   return (
@@ -15,7 +16,7 @@ export const AccordionWrapper = ({
           : "0px",
         transitionDuration: `${duration}ms`,
       }}
-      className={"mb-4 transition-all delay-0 overflow-clip"}
+      className={`mb-4 transition-all delay-0 overflow-clip ${className}`}
     >
       {children}
     </div>
