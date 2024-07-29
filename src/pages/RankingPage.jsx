@@ -61,52 +61,36 @@ const renderTabItems = () => {
 };
 
 const UserRankToolTip = ({ children }) => {
-  const TOOLTIP_TEXT = [
-    {
-      upTitle: "게임마다 1등 부터 10등까지 20의 배수로 증가 (10명)",
-      downTitle: "(1등)450점 ~ (10등)270점",
-    },
-    {
-      upTitle: "게임마다 11등부터 50등까지 5의 배수로 증가 (40명)",
-      downTitle: "(11등)250점 ~ (50등)55점",
-    },
-    {
-      upTitle: "게임마다 51등부터 100등까지는 (50명)",
-      downTitle: "(51등)50점 ~ (100등)1점",
-    },
-  ];
-
   return (
     <Tooltip
-      overlayClassName={"max-w-full"}
+      trigger={["click"]}
+      color={"rgb(37, 99, 235, 0.9)"}
+      overlayClassName={"max-w-full font-bold"}
+      overlayInnerStyle={{
+        color: "white",
+        boxShadow: "0 0 20px 4px #000",
+      }}
       title={
         <ul
           className={
-            "font-G_MARKET flex flex-col gap-1 w-full break-keep"
+            "font-G_MARKET px-4 flex flex-col gap-1 w-full break-keep !font-black"
           }
         >
           <li className={"text-xl mb-2"}>유저 랭크 점수 산출 방식</li>
-          <li className={"text-lg mb-1"}>
+          <li className={"my-1"}>
             각 Game마다 1~100등까지 결과들에 점수를 매겨 전체 게임
             유저 랭킹을 설정
           </li>
-          {TOOLTIP_TEXT.map((text, index) => (
-            <Text key={index} {...text} />
-          ))}
+          <ol className={"list-disc pl-4"}>
+            <li>1 ~ 10등 => 450점 ~ 270점</li>
+            <li>11 ~ 50등 => 250점 ~ 55점</li>
+            <li>51 ~ 100등 => 50점 ~ 1점</li>
+          </ol>
         </ul>
       }
     >
       {children}
     </Tooltip>
-  );
-};
-
-const Text = ({ upTitle, downTitle }) => {
-  return (
-    <li>
-      {upTitle} <br />
-      <span className={"text-[0.7rem]"}>{downTitle}</span>
-    </li>
   );
 };
 
