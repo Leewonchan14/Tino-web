@@ -115,7 +115,7 @@ const InDepartmentRankOptionItem = ({
       >
         <img
           className={
-            "w-9 h-9 mr-1 overflow-clip rounded-full border-[1px] border-gray-400 object-cover"
+            "w-9 h-9 mr-1 overflow-clip rounded-full border-[1px] border-gray-300 object-cover"
           }
           src={major.url}
           alt=""
