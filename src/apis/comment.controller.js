@@ -31,8 +31,11 @@ class comment_controller extends Api {
   };
 
   // 댓글 수정
-  updateComment = async ({ reviewId, reviewContent }) => {
-    return await this.put(`/review/${reviewId}`, { reviewContent });
+  updateComment = async ({ reviewId, reviewContent, star }) => {
+    return await this.put(`/review/${reviewId}`, {
+      reviewContent,
+      star,
+    });
   };
 }
 
