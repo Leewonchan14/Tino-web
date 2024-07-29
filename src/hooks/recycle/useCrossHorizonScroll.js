@@ -1,13 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
-const useCrossHorizonScroll = () => {
-  const horizonScrollRef = useRef();
+const useCrossHorizonScroll = (scrollContainer) => {
   useEffect(() => {
-    const scrollContainer = horizonScrollRef.current;
-
-    if (!scrollContainer) {
-      return;
-    }
+    if (!scrollContainer) return;
 
     const onWheel = (event) => {
       // event.deltaY를 사용하여 좌우 스크롤
@@ -23,8 +18,6 @@ const useCrossHorizonScroll = () => {
     return () => {
       scrollContainer.removeEventListener("wheel", onWheel);
     };
-  }, []);
-
-  return { horizonScrollRef };
+  }, [scrollContainer]);
 };
 export default useCrossHorizonScroll;

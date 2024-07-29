@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { MAJOR } from "../../constants/Major";
 import { RankCardTable } from "./RankCardTable";
 import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfiniteScroll";
@@ -7,6 +7,7 @@ import LoadingSpinner from "../common/spinner/LoadingSpinner";
 import { useGetInDepartmentRankQuery } from "../../hooks/queries/rank/useGetInDepartmentRankQuery";
 import { AccordionWrapper } from "../common/wrapper/AccordionWrapper";
 import useCrossHorizonScroll from "../../hooks/recycle/useCrossHorizonScroll";
+import Scrollbars from "react-custom-scrollbars-2";
 
 const InDepartment = () => {
   const {
@@ -50,7 +51,8 @@ const InDepartment = () => {
 };
 
 function InDepartmentRankOption({ selectMajor, onChange }) {
-  let { horizonScrollRef } = useCrossHorizonScroll();
+  const scrollRef = useRef(null);
+  useCrossHorizonScroll(scrollRef.current?.container.children[0]);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -61,17 +63,28 @@ function InDepartmentRankOption({ selectMajor, onChange }) {
 
   return (
     <>
+      <Scrollbars
+        ref={scrollRef}
+        universal
+        autoHeight
+        className={"mobile:hidden mb-4"}
+      >
+        <div className={"whitespace-pre py-4 mb-4"}>
+          {MAJOR.map((major, index) => (
+            <InDepartmentRankOptionItem
+              key={major.value}
+              {...{ onClick, major, selectMajor, index }}
+            />
+          ))}
+        </div>
+      </Scrollbars>
       <AccordionWrapper
-        isOpen={
-          document.querySelector("#root").scrollWidth >= 640 || isOpen
-        }
+        isOpen={isOpen}
+        className={"hidden mobile:block"}
       >
         <div
-          ref={horizonScrollRef}
           className={
-            "whitespace-pre gap-4 overflow-x-auto py-4 mb-6" +
-            " " +
-            "mobile:relative mobile:p-0 mobile:m-0 mobile:flex mobile:flex-col"
+            "whitespace-pre flex flex-col relative w-full py-4 mb-6 "
           }
         >
           {MAJOR.map((major, index) => (
@@ -127,10 +140,10 @@ const InDepartmentRankOptionItem = ({
         <p className={"whitespace-nowrap"}> {major.value}</p>
       </button>
       {Math.floor(MAJOR.length / 2) === index && (
-        <>
+        <span className={"mobile:hidden"}>
           <br />
           <br />
-        </>
+        </span>
       )}
     </>
   );
