@@ -67,7 +67,6 @@ const UserRankToolTip = ({ children }) => {
 
   return (
     <Tooltip
-      defaultOpen
       overlayClassName={"max-w-full"}
       title={
         <ul
