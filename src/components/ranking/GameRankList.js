@@ -3,7 +3,11 @@ import LoadingSpinner from "../common/spinner/LoadingSpinner";
 import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfiniteScroll";
 import useGetGameRankInfiniteQuery from "../../hooks/queries/rank/useGetGameRankInfiniteQuery";
 import { RankCardTable } from "./RankCardTable";
-import { GAME_SORT_MENU, REVIEW_COUNT } from "../../constants/Game";
+import {
+  GAME_SORT_MENU,
+  RECENT,
+  REVIEW_COUNT,
+} from "../../constants/Game";
 import GameSortMenu from "../game/GameSortMenu";
 import { timeToYearMonthDay } from "../../utils/timeConverter";
 import useGetQueryString from "../../hooks/recycle/useGetQueryString";
@@ -42,7 +46,7 @@ const GameRankList = () => {
         states={gameState}
         getKey={(state) => state["gameId"]}
         getScore={(state) => {
-          if (selectedRankOption.value === REVIEW_COUNT) {
+          if (selectedRankOption.value === RECENT) {
             return timeToYearMonthDay(
               state[selectedRankOption.score]
             );

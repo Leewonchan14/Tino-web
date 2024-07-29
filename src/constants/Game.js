@@ -1,4 +1,5 @@
 export const REVIEW_COUNT = "REVIEW_COUNT";
+export const RECENT = "RECENT";
 
 export const GAME_SORT_MENU = [
   {
@@ -15,13 +16,13 @@ export const GAME_SORT_MENU = [
   },
   {
     name: "댓글순",
-    value: "RECENT",
+    value: REVIEW_COUNT,
     text: "댓글수",
     score: "reviewCount",
   },
   {
     name: "최신순",
-    value: REVIEW_COUNT,
+    value: RECENT,
     text: "등록 일자",
     score: "createdAt",
   },
