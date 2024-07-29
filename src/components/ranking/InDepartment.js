@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { MAJOR } from "../../constants/Major";
 import { RankCardTable } from "./RankCardTable";
 import useReactQueryInfiniteScroll from "../../hooks/recycle/useReactQueryInfiniteScroll";
@@ -6,6 +6,7 @@ import default_image from "../../assets/default_image.jpg";
 import LoadingSpinner from "../common/spinner/LoadingSpinner";
 import { useGetInDepartmentRankQuery } from "../../hooks/queries/rank/useGetInDepartmentRankQuery";
 import { AccordionWrapper } from "../common/wrapper/AccordionWrapper";
+import useCrossHorizonScroll from "../../hooks/recycle/useCrossHorizonScroll";
 
 const InDepartment = () => {
   const {
@@ -49,6 +50,8 @@ const InDepartment = () => {
 };
 
 function InDepartmentRankOption({ selectMajor, onChange }) {
+  let { horizonScrollRef } = useCrossHorizonScroll();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const onClick = (name) => {
@@ -64,6 +67,7 @@ function InDepartmentRankOption({ selectMajor, onChange }) {
         }
       >
         <div
+          ref={horizonScrollRef}
           className={
             "whitespace-pre gap-4 overflow-x-auto py-4 mb-6" +
             " " +
