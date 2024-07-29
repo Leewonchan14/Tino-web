@@ -63,7 +63,7 @@ const GameRankOptionList = ({ select, setSortMenu }) => {
       sortMenu={select}
       setSortMenu={setSortMenu}
       className={"mt-4"}
-      itemClassName={"!p-2 !px-4 !w-auto"}
+      itemClassName={"!p-2 !px-4 !w-auto !rounded-2xl"}
     />
   );
 };

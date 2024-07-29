@@ -9,7 +9,12 @@ export const RANKING_PATH = "/rank";
 const RankingPage = ({ ...rest }) => {
   return (
     <div className={"pb-20"}>
-      <Tabs centered size={"small"} items={renderTabItems()} />
+      <Tabs
+        tabBarStyle={{ paddingLeft: "16px" }}
+        size={"large"}
+        items={renderTabItems()}
+        rootClassName={""}
+      />
     </div>
   );
 };
