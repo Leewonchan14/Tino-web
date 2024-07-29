@@ -18,13 +18,15 @@ const GameCard = ({ game, className }) => {
         ${className}`}
     >
       <picture
-        className={"flex items-center rounded-t-2xl h-44 w-full"}
+        className={
+          "flex items-center rounded-t-2xl h-44 w-full overflow-clip"
+        }
       >
         <img
           draggable={"false"}
           className={
             "bg-gray-100 w-full object-cover max-h-44 rounded-t-2xl transition-all duration-500 " +
-            "hover:absolute hover:scale-105 hover:rounded-xl hover:z-10 hover:max-h-96 hover:shadow-[0_20px_30px_10px_rgba(0,0,0,0.7)]"
+            "hover:scale-110"
           }
           src={game.gameImage}
           alt=""
