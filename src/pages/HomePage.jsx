@@ -4,13 +4,17 @@ import GameGrid from "../components/game/GameGrid";
 import GameSortMenu from "../components/game/GameSortMenu";
 import { GAME_SORT_MENU } from "../constants/Game";
 import useGetGamesInfiniteQuery from "../hooks/queries/game/useGetGamesInfiniteQuery";
+import useGetQueryString from "../hooks/recycle/useGetQueryString";
 
 const HOME_PATH = "/";
 export const GAME_CARD_FETCH_SIZE = 8;
 
 function HomePage(props) {
+  const [_, __, gameSortValue] = useGetQueryString("gameSortValue");
+
   let [selectedGameSortMenu, setSelectedGameSortMenu] = useState(
-    GAME_SORT_MENU[0]
+    GAME_SORT_MENU.find((menu) => menu.value === gameSortValue) ||
+      GAME_SORT_MENU[0]
   );
 
   return (

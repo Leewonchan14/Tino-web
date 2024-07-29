@@ -14,8 +14,6 @@ export const REFRESH_TOKEN_LOCAL_KEY = "refreshToken";
 export const USER_ID_LOCAL_KEY = "userId";
 
 const useAutoLogin = () => {
-  let navigate = useNavigate();
-  let location = useLocation();
   const { changeIsLogin, changeUserId } = userStore((state) => state);
 
   const [loading, setLoading] = useState(true);
@@ -23,7 +21,6 @@ const useAutoLogin = () => {
   const resetDataAndGoHome = () => {
     removeLocalData();
     setLoading(false);
-    navigate(location.href);
   };
 
   const autoLogin = async () => {

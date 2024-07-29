@@ -1,17 +1,28 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Tabs, Tooltip } from "antd";
 import UserRankList from "../components/ranking/UserRankList";
 import DepartmentRankList from "../components/ranking/DepartmentRankList";
 import InDepartment from "../components/ranking/InDepartment";
 import GameRankList from "../components/ranking/GameRankList";
+import useGetQueryString from "../hooks/recycle/useGetQueryString";
 
 export const RANKING_PATH = "/rank";
 const RankingPage = ({ ...rest }) => {
+  const [_, setQuery, tabKey] = useGetQueryString("tabKey");
+  const [currentTabKey, setCurrentTabKey] = useState(
+    Number(tabKey) || 0
+  );
+
   return (
     <div className={"pb-20"}>
       <Tabs
-        tabBarStyle={{ paddingLeft: "16px" }}
-        size={"large"}
+        type={"card"}
+        activeKey={currentTabKey}
+        onTabClick={(key, e) => {
+          setCurrentTabKey(key);
+          setQuery(key);
+        }}
+        size={"small"}
         items={renderTabItems()}
         rootClassName={""}
       />

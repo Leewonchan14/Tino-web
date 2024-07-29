@@ -1,5 +1,6 @@
 import React from "react";
 import { GAME_SORT_MENU } from "../../constants/Game";
+import useGetQueryString from "../../hooks/recycle/useGetQueryString";
 
 export const GameSortMenu = ({
   sortMenu,
@@ -7,7 +8,9 @@ export const GameSortMenu = ({
   className,
   itemClassName,
 }) => {
+  const [_, setQuery] = useGetQueryString("gameSortValue");
   const onMenuClick = (menu) => {
+    setQuery(menu.value);
     setSortMenu(menu);
   };
 

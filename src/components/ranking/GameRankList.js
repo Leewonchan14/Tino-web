@@ -6,10 +6,13 @@ import { RankCardTable } from "./RankCardTable";
 import { GAME_SORT_MENU, REVIEW_COUNT } from "../../constants/Game";
 import GameSortMenu from "../game/GameSortMenu";
 import { timeToYearMonthDay } from "../../utils/timeConverter";
+import useGetQueryString from "../../hooks/recycle/useGetQueryString";
 
 const GameRankList = () => {
+  const [_, __, gameSortValue] = useGetQueryString("gameSortValue");
   const [selectedRankOption, setSelectedRankOption] = useState(
-    GAME_SORT_MENU[0]
+    GAME_SORT_MENU.find((menu) => menu.value === gameSortValue) ||
+      GAME_SORT_MENU[0]
   );
 
   let {

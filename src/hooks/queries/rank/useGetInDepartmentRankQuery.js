@@ -4,13 +4,18 @@ import RankController from "../../../apis/rank.controller";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { MINUTE } from "../../../utils/timeConverter";
 import { delayFetch } from "../../../utils/delay";
+import useGetQueryString from "../../recycle/useGetQueryString";
 
 const PAGE_SIZE = 10;
 
 export const useGetInDepartmentRankQuery = () => {
-  const [selectMajor, setSelectMajor] = useState(MAJOR[0]);
+  const [_, setQuery, majorName] = useGetQueryString("majorName");
+  const [selectMajor, setSelectMajor] = useState(
+    MAJOR.find((maj) => maj.name === majorName) || MAJOR[0]
+  );
 
   const onChange = (name) => {
+    setQuery(name);
     setSelectMajor(MAJOR.find((major) => major.name === name));
   };
 
