@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import GameCard, { GameCardSkeleton } from "./GameCard";
+import GameCard, { AddComp, GameCardSkeleton } from "./GameCard";
 import { range } from "../../utils/range";
 import { uuid } from "../../utils/uuid";
 import LoadingSpinner from "../common/spinner/LoadingSpinner";
@@ -13,7 +13,7 @@ const GameGrid = ({ hooks, args = [], withAds = false }) => {
     return gameState.pages.flat().map((game, index) => (
       <Fragment key={game.gameId}>
         <GameCard game={game} />
-        {withAds && index % 4 === 3 && <GameCardSkeleton />}
+        {withAds && index % 4 === 3 && <AddComp />}
       </Fragment>
     ));
   };
