@@ -10,8 +10,14 @@ const GameIframe = ({ gameState, isFetching }) => {
   const [isGameStart, setIsGameStart] = useState(false);
   const [anchorScrollTop, setAnchorScrollTop] = useState(0);
   const anchor = useRef(null);
+
   useEffect(() => {
-    console.log(anchor.current.getBoundingClientRect().top);
+    return async () => {
+      await onGameEnd();
+    };
+  }, []);
+
+  useEffect(() => {
     setAnchorScrollTop(anchor.current.getBoundingClientRect().top);
   }, [anchor.current]);
 
