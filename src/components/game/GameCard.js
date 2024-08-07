@@ -24,8 +24,8 @@ const GameCard = ({ game, className }) => {
         <img
           draggable={"false"}
           className={
-            "bg-gray-100 w-full object-cover max-h-44 rounded-t-2xl transition-all duration-500 " +
-            "hover:rounded-xl hover:max-h-80 hover:shadow-[0_10px_30px_2px_rgba(0,0,0,0.5)] hover:scale-100"
+            "bg-gray-100 w-full object-cover max-h-44 rounded-t-2xl transition-all duration-100 " +
+            "hover:rounded-xl hover:max-h-60 hover:shadow-[0_10px_30px_2px_rgba(0,0,0,0.3)] hover:scale-100"
           }
           src={game.gameImage}
           alt=""
