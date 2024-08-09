@@ -1,39 +1,37 @@
-import { useEffect, useState } from "react";
 import LogController from "../../apis/log.controller";
 import { userStore } from "../../stores/userStore";
 import { delayFetch } from "../../utils/delay";
+import { useQuery } from "@tanstack/react-query";
+import { MINUTE } from "../../utils/timeConverter";
 
 export const useGetOwnLog = ({ gameId }) => {
   const { isLogin, userId } = userStore((state) => state);
-  const [ownLogState, setOwnLogState] = useState({});
-  const [isExist, setIsExist] = useState(false);
-  const [isFetching, setIsFetching] = useState(false);
-  const findBestLogByGameId = async () => {
-    setIsFetching(true);
-
-    let response;
-
-    try {
-      response = await delayFetch({
+  const {
+    isFetching,
+    data: ownLogState,
+    isSuccess,
+  } = useQuery({
+    queryKey: ["logs", { gameId, userId }],
+    queryFn: async () => {
+      console.log({ gameId, userId });
+      let response = await delayFetch({
         fetcherPromise: LogController.findBestLogByGameId({
           gameId,
           userId,
         }),
         milliseconds: 1000,
       });
-    } catch (err) {
-      setIsExist(false);
-      return;
-    } finally {
-      setIsFetching(false);
-    }
-    setIsExist(true);
-    setOwnLogState(response.data);
-  };
+      return response.data;
+    },
+    retry: false,
+    enabled: isLogin,
+    staleTime: 5 * MINUTE,
+  });
 
-  useEffect(() => {
-    if (!isLogin) return;
-    findBestLogByGameId();
-  }, [isLogin]);
-  return { ownLogState, setOwnLogState, isExist, isFetching, isLogin };
+  return {
+    ownLogState,
+    isExist: isSuccess && !isFetching,
+    isFetching,
+    isLogin,
+  };
 };

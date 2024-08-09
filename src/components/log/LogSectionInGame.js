@@ -1,11 +1,25 @@
 import OwnLog from "./OwnLog";
 import React from "react";
 import LogList from "./LogList";
+import RefreshIcon from "../../assets/refresh_icon.png";
+import { useQueryClient } from "@tanstack/react-query";
 
 const LogSectionInGame = ({ gameId }) => {
+  let queryClient = useQueryClient();
   return (
     <>
-      <h2 className={"mt-10 text-3xl mb-4"}>게임 기록</h2>
+      <div className={"flex text-3xl mb-4 mt-10 items-center"}>
+        <div className={"mr-4"}>게임 기록</div>
+        <img
+          onClick={async () => {
+            await queryClient.invalidateQueries({
+              queryKey: ["logs"],
+            });
+          }}
+          className={"w-8 cursor-pointer"}
+          src={RefreshIcon}
+        />
+      </div>
 
       <section
         className={

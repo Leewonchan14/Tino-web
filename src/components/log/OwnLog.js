@@ -5,8 +5,6 @@ import ExistOwnLog, { OwnLogSkeleton } from "./atoms/ExistOwnLog";
 import TinoIcon from "../../assets/tino_icon.png";
 
 const OwnLog = ({ gameId }) => {
-  let { ownLogState, isExist, isFetching, isLogin } = useGetOwnLog({ gameId });
-
   return (
     <div
       className={
@@ -14,17 +12,16 @@ const OwnLog = ({ gameId }) => {
         "mobile:border-r-0 mobile:border-b-2 mobile:w-full mobile:h-20"
       }
     >
-      <SwitchLogComp
-        isFetching={isFetching}
-        ownLogState={ownLogState}
-        isExist={isExist}
-        isLogin={isLogin}
-      />
+      <SwitchLogComp gameId={gameId} />
     </div>
   );
 };
 
-const SwitchLogComp = ({ ownLogState, isFetching, isLogin, isExist }) => {
+const SwitchLogComp = ({ gameId }) => {
+  let { ownLogState, isExist, isFetching, isLogin } = useGetOwnLog({
+    gameId,
+  });
+
   if (!isLogin) {
     return <BlurOwnLog text={"로그인이 필요합니다."} />;
   }
@@ -50,7 +47,11 @@ const BlurOwnLog = ({ text }) => {
         }
       >
         <div className={"text-3xl"}>{1}</div>
-        <div className={"rounded-full border-[1px] border-white overflow-clip"}>
+        <div
+          className={
+            "rounded-full border-[1px] border-white overflow-clip"
+          }
+        >
           <img className={"h-20"} src={TinoIcon} alt="" />
         </div>
         <div className={"font-bold"}>티노</div>
