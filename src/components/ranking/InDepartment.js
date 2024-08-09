@@ -38,7 +38,7 @@ const InDepartment = () => {
         scoreName={"점수"}
         states={inDepartmentState}
         getKey={(state) => state.rankId}
-        getPicture={(state) => default_image}
+        getPicture={(state) => state.user.profileImageURL}
         getScore={(state) => state.rankWeight}
         getText={(state) => state.user.nickname}
       />
