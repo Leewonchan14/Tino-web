@@ -3,8 +3,10 @@ import React from "react";
 import LogList from "./LogList";
 import RefreshIcon from "../../assets/refresh_icon.png";
 import { useQueryClient } from "@tanstack/react-query";
+import { useGetOwnLog } from "../../hooks/log/useGetOwnLog";
 
 const LogSectionInGame = ({ gameId }) => {
+  let { isFetching } = useGetOwnLog({ gameId });
   let queryClient = useQueryClient();
   return (
     <>
@@ -12,6 +14,7 @@ const LogSectionInGame = ({ gameId }) => {
         <div className={"mr-4"}>게임 기록</div>
         <img
           onClick={async () => {
+            if (isFetching) return;
             await queryClient.resetQueries({
               queryKey: ["logs", { gameId }],
             });
