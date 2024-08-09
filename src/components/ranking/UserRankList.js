@@ -28,7 +28,7 @@ const UserRankList = () => {
         scoreName={"점수"}
         states={userState}
         getText={(state) => state.user.nickname}
-        getPicture={(state) => default_image}
+        getPicture={(state) => state.user.profileImageURL}
         getScore={(state) => state.rankWeight}
         getKey={(state) => state.rankId}
       />
