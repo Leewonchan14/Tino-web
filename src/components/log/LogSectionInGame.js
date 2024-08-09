@@ -12,8 +12,8 @@ const LogSectionInGame = ({ gameId }) => {
         <div className={"mr-4"}>게임 기록</div>
         <img
           onClick={async () => {
-            await queryClient.invalidateQueries({
-              queryKey: ["logs"],
+            await queryClient.resetQueries({
+              queryKey: ["logs", { gameId }],
             });
           }}
           className={"w-8 cursor-pointer"}
