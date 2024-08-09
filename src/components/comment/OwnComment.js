@@ -19,7 +19,7 @@ const OwnComment = ({ gameId, isPending, isOpen, toggleIsOpen }) => {
   }
 
   if (!comment) {
-    console.error(error);
+    toggleIsOpen(true);
     return <NotExistOwnComment />;
   }
 
