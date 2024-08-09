@@ -118,11 +118,14 @@ export const AddComp = () => {
           />
         )}
         {!isFetching && (
-          <img
-            className={"h-full w-full object-cover"}
-            src={addState.thumbnail}
-            alt=""
-          />
+          <div className={"w-full h-full relative"}>
+            <img
+              className={"h-full w-full object-cover"}
+              src={addState.thumbnail}
+              alt=""
+            />
+            <AddMark />
+          </div>
         )}
       </div>
 
@@ -142,6 +145,18 @@ export const AddComp = () => {
         )}
       </section>
     </article>
+  );
+};
+
+const AddMark = () => {
+  return (
+    <div
+      className={
+        "bg-yellow-200 rounded-xl p-2 absolute right-2 top-2 text-black font-bold flex justify-center items-center"
+      }
+    >
+      AD
+    </div>
   );
 };
 
