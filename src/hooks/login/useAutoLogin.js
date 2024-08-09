@@ -32,7 +32,6 @@ const useAutoLogin = () => {
     );
 
     if (!isAllDataExist) {
-      console.log("자동 로그인 실패: 데이터가 없습니다.");
       resetDataAndGoHome();
       return;
     }
@@ -61,7 +60,6 @@ const useAutoLogin = () => {
   };
 
   useEffect(() => {
-    console.log("자동 로그인 시도");
     autoLogin();
   }, []);
 

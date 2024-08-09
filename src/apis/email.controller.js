@@ -4,7 +4,6 @@ class email_controller extends Api {
   // 인증코드 이메일 요청
   requestAuthCode = async (email) => {
     let body = { email };
-    console.log(body);
     return await this.post(`/email`, body);
   };
 }

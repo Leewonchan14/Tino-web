@@ -13,7 +13,6 @@ export const useGetOwnLog = ({ gameId }) => {
   } = useQuery({
     queryKey: ["logs", { gameId, userId }],
     queryFn: async () => {
-      console.log({ gameId, userId });
       let response = await delayFetch({
         fetcherPromise: LogController.findBestLogByGameId({
           gameId,
