@@ -104,7 +104,9 @@ export const AddComp = () => {
   }, []);
 
   return (
-    <article
+    <a
+      target="_blank"
+      href={addState.link}
       className={
         "border-2 border-gray-100 relative overflow-clip w-full rounded-2xl cursor-pointer bg-gray-50"
       }
@@ -144,7 +146,7 @@ export const AddComp = () => {
           </span>
         )}
       </section>
-    </article>
+    </a>
   );
 };
 
