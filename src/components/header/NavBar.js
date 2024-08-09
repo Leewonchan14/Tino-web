@@ -72,16 +72,18 @@ const HeaderProfile = () => {
 
   return (
     <div
-      className={"flex items-center gap-4 cursor-pointer"}
+      className={
+        "flex items-center gap-4 cursor-pointer mobile:flex-col"
+      }
       onClick={goMyPage}
     >
-      <ProfileNickname
-        isFetching={isFetching}
-        nickname={user?.nickname}
-      />
       <ProfileImage
         isFetching={isFetching}
         profileImageURL={user?.profileImageURL}
+      />
+      <ProfileNickname
+        isFetching={isFetching}
+        nickname={user?.nickname}
       />
     </div>
   );
