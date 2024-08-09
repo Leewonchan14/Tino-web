@@ -17,7 +17,7 @@ const ExistOwnLog = ({ ownLogState }) => {
         }
       >
         <img
-          className={"h-20"}
+          className={"h-20 w-20"}
           src={ownLogState?.user?.profileImageURL || TinoIcon}
           alt=""
         />
