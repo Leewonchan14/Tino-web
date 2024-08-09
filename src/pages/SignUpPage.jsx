@@ -37,6 +37,7 @@ function SignUpPage(props) {
       >
         {SIGN_UP_FORM_INPUT_LIST.map(
           ({ name, placeholder, type }, index) => {
+            if (name === "major") return;
             return (
               <p key={name}>
                 <InputComp
@@ -55,6 +56,7 @@ function SignUpPage(props) {
           }
         )}
         <ComboBox
+          name={"major"}
           value={signupFormState.major}
           onChange={onChange}
           options={MAJOR}

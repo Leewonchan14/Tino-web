@@ -62,6 +62,12 @@ export const useSignUp = () => {
       ],
       placeholder: "이름을 입력하세요",
     },
+    {
+      name: "major",
+      inputShould: [NOT_EMPTY],
+      placeholder: "학과를 선택하세요",
+      type: "select",
+    },
   ];
   const [errorMessage, setErrorMessage] = useState({
     email: "",
@@ -70,6 +76,7 @@ export const useSignUp = () => {
     rePassword: "",
     nickname: "",
     total: "",
+    major: "",
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isValid, setIsValid] = useState({
@@ -78,6 +85,7 @@ export const useSignUp = () => {
     password: true,
     rePassword: true,
     nickname: true,
+    major: true,
   });
 
   const checkValid = () => {
