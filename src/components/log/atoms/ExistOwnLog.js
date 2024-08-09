@@ -13,11 +13,11 @@ const ExistOwnLog = ({ ownLogState }) => {
       <div className={"text-3xl"}>{ownLogState?.ranking}</div>
       <div
         className={
-          "rounded-full border-[1px] border-white overflow-clip"
+          "w-20 h-20 rounded-full border-[1px] border-white overflow-clip "
         }
       >
         <img
-          className={"h-20 w-20"}
+          className={"object-cover w-full h-full"}
           src={ownLogState?.user?.profileImageURL || TinoIcon}
           alt=""
         />
