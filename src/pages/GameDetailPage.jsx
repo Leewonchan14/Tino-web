@@ -14,12 +14,15 @@ function GameDetailPage(props) {
   let { gameState, isFetching } = useGetOneGame({ gameId });
 
   return (
-    <div className={"pb-20"}>
+    <div className={"w-full pb-20"}>
       {/*게임 화면*/}
       <GameIframe gameState={gameState} isFetching={isFetching} />
 
       {/*게임 설명*/}
-      <GameDescription gameState={gameState} isFetching={isFetching} />
+      <GameDescription
+        gameState={gameState}
+        isFetching={isFetching}
+      />
 
       {/*게임 기록*/}
       <LogSectionInGame gameId={gameId} />
