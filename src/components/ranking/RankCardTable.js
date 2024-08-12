@@ -95,7 +95,7 @@ const RankCard = ({
           onClick={() => {
             toGo();
           }}
-          className={`flex items-center text-nowrap ${query["tabKey"] === "0" && "cursor-pointer"}`}
+          className={`flex items-center text-nowrap ${(query["tabKey"] === "0" || !query["tabKey"]) && "cursor-pointer"}`}
         >
           <picture
             className={
