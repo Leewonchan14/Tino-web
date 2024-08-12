@@ -11,6 +11,7 @@ import {
 import GameSortMenu from "../game/GameSortMenu";
 import { timeToYearMonthDay } from "../../utils/timeConverter";
 import useGetQueryString from "../../hooks/recycle/useGetQueryString";
+import { useNavigate } from "react-router-dom";
 
 const GameRankList = () => {
   const [_, __, gameSortValue] = useGetQueryString("gameSortValue");
@@ -32,6 +33,8 @@ const GameRankList = () => {
     hasNextPage,
     fetchData: fetchNextPage,
   });
+
+  let navigate = useNavigate();
 
   return (
     <>
@@ -55,6 +58,7 @@ const GameRankList = () => {
         }}
         getText={(state) => state["gameName"]}
         getPicture={(state) => state["gameImage"]}
+        toGo={(state) => () => navigate(`/games/${state["gameId"]}`)}
       />
       <LoadingSpinner
         loadingComp={loadingComp}

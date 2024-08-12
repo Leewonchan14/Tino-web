@@ -1,5 +1,6 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
+import useGetQueryString from "../../hooks/recycle/useGetQueryString";
 
 export const RankCardTable = ({
   isSuccess,
@@ -11,13 +12,14 @@ export const RankCardTable = ({
   getPicture,
   getScore,
   getText,
+  toGo,
 }) => {
   return (
     <table className={"w-full"}>
       <RankHeader score={scoreName} item={item} />
       <RankingCardList
         {...{ isSuccess, isFetching, states }}
-        {...{ getKey, getPicture, getScore, getText }}
+        {...{ getKey, getPicture, getScore, getText, toGo }}
       />
     </table>
   );
@@ -51,6 +53,7 @@ const RankingCardList = ({
   getPicture,
   getScore,
   getText,
+  toGo = () => {},
 }) => {
   return (
     <tbody>
@@ -63,6 +66,7 @@ const RankingCardList = ({
               score={getScore(state)}
               text={getText(state)}
               picture={getPicture(state)}
+              toGo={toGo(state)}
             />
           ))
         )}
@@ -74,12 +78,25 @@ const RankingCardList = ({
   );
 };
 
-const RankCard = ({ rank, picture, score, text }) => {
+const RankCard = ({
+  rank,
+  picture,
+  score,
+  text,
+  toGo = () => {},
+}) => {
+  let [query] = useGetQueryString();
+
   return (
     <tr className={"w-full h-24 border-b border-gray-200"}>
       <td className={"text-center"}>{rank}</td>
       <td className={""}>
-        <div className={"flex items-center text-nowrap"}>
+        <div
+          onClick={() => {
+            toGo();
+          }}
+          className={`flex items-center text-nowrap ${query["tabKey"] === "0" && "cursor-pointer"}`}
+        >
           <picture
             className={
               "flex h-16 w-16 mr-4 rounded-full border-2 bg-white overflow-clip"
