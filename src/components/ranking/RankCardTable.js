@@ -1,6 +1,7 @@
 import React from "react";
 import Skeleton from "react-loading-skeleton";
 import useGetQueryString from "../../hooks/recycle/useGetQueryString";
+import { RANKING_MENU_LIST } from "../../pages/RankingPage";
 
 export const RankCardTable = ({
   isSuccess,
@@ -85,7 +86,7 @@ const RankCard = ({
   text,
   toGo = () => {},
 }) => {
-  let [query] = useGetQueryString();
+  let [, , value] = useGetQueryString("tabKey");
 
   return (
     <tr className={"w-full h-24 border-b border-gray-200"}>
@@ -95,7 +96,7 @@ const RankCard = ({
           onClick={() => {
             toGo();
           }}
-          className={`flex items-center text-nowrap ${(query["tabKey"] === "0" || !query["tabKey"]) && "cursor-pointer"}`}
+          className={`flex items-center text-nowrap ${value === RANKING_MENU_LIST[0].name && "cursor-pointer"}`}
         >
           <picture
             className={
