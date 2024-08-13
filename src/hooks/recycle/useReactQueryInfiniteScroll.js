@@ -19,7 +19,8 @@ const useReactQueryInfiniteScroll = ({
     };
 
     const observer = new IntersectionObserver(handleObserver, {
-      threshold: 0,
+      root: loadingComp?.current?.parentElement,
+      rootMargin: "400px",
     });
 
     const observerTarget = loadingComp.current;
